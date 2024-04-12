@@ -16,7 +16,7 @@ export default function Card({
           src={imgSrc}
           alt="Vaccine"
           fill={true}
-          className="object-cover round-t-lg"
+          className="object-cover rounded-t-lg"
         />
         
       </div>

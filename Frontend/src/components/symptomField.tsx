@@ -29,14 +29,14 @@ export default function SymptomField({
         type="text"
         name="symptom"
         label="Symptom"
-        className="rounded ring-2 ring-inset ring-grey-400 text-md leading-6 indent-2 placeholder:text-grey-400"
+        className="rounded mt-3 ring-2 ring-inset ring-grey-400 text-md leading-6 indent-2 placeholder:text-grey-400"
         onChange={(e) => {
           dispatch(changeSymptom(e.target.value));
         }}  
       />
       <button
         className="block rounded-md bg-sky-600 hover:bg-indigo-600 px-3 py-2
-            shadow-sm text-white my-10"
+            shadow-sm text-white my-5"
         onClick={() => {
           if (!symptom) alert('Please type in your symptom');
           else
