@@ -149,12 +149,12 @@ exports.addBooking = async (req, res, next) => {
 //@access   Private
 exports.updateBooking = async (req, res, next) => {
   try {
-    let booking = await Booking.findById(req.params.id);
+    let booking = await Booking.findById(req.params.bookingId);
 
     if (!booking) {
       return res.status(404).json({
         success: false,
-        message: `No booking with the id of ${req.params.id}`,
+        message: `No booking with the id of ${req.params.bookingId}`,
       });
     }
 
@@ -166,7 +166,7 @@ exports.updateBooking = async (req, res, next) => {
       });
     }
 
-    booking = await Booking.findByIdAndUpdate(req.params.id, req.body, {
+    booking = await Booking.findByIdAndUpdate(req.params.bookingId, req.body, {
       new: true,
       runValidators: true,
     });
@@ -185,12 +185,12 @@ exports.updateBooking = async (req, res, next) => {
 //@access   Private
 exports.deleteBooking = async (req, res, next) => {
   try {
-    const booking = await Booking.findById(req.params.id);
+    const booking = await Booking.findById(req.params.bookingId);
 
     if (!booking) {
       return res.status(404).json({
         success: false,
-        message: `No booking with the id of ${req.params.id}`,
+        message: `No booking with the id of ${req.params.bookingId}`,
       });
     }
 
