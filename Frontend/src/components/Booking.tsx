@@ -57,15 +57,16 @@ export default function Booking({
         ) : (
           <div className="flex flex-row gap-x-3 py-2">
             <button
-              className="block rounded-md bg-sky-600 hover:bg-indigo-600 px-3 py-2 shadow-sm text-white mx-3"
+              className="block rounded-md bg-sky-600 hover:bg-sky-700 px-3 py-2 shadow-sm text-white mx-3"
               onClick={() => setEditing(!editing)}>
               Edit your symptom
             </button>
             <button
-              className="block rounded-md bg-sky-600 hover:bg-indigo-600 px-3 py-2
+              className="block rounded-md bg-red-600 hover:bg-red-700 px-3 py-2
                         shadow-sm text-white mx-3"
               onClick={() => {
-                onDeleteBooking(bookingItem._id);
+                const cf = confirm("Are you sure you want to delete this booking?");
+                if(cf) onDeleteBooking(bookingItem._id);
               }}>
               Remove Booking
             </button>

@@ -10,7 +10,7 @@ export default async function DentistDetailPage({
   params: { id: string };
 }) {
   const dentistDetail = await getDentist(params.id);
-
+  console.log(dentistDetail);
   async function handleCreateBooking(
     token: string,
     user: string,
