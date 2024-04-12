@@ -6,7 +6,8 @@ export default async function createBooking(
   user: string,
   dentistId: string,
   bookingDate: string,
-  symptom: string
+  symptom: string,
+  reqType: string
 ) {
   const response = await fetch(
     `${process.env.BACKEND_URL}/api/v1/dentists/${dentistId}/bookings`,
@@ -20,6 +21,7 @@ export default async function createBooking(
         user: user,
         bookingDate: bookingDate,
         symptom: symptom,
+        reqType: reqType
       }),
     }
   );
