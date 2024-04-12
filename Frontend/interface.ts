@@ -2,7 +2,7 @@ interface DentistItem {
   id: string;
   name: string;
   picture: string;
-  experience: string;
+  experience: number;
   expertise: string;
   bookings: BookingItem[];
 }
