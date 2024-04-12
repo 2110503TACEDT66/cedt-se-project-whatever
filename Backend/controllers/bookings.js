@@ -7,7 +7,7 @@ const Dentist = require('../models/Dentist');
 exports.getBookings = async (req, res, next) => {
   let query;
   //General users can see only their bookings!
-  if (req.user.role !== 'admin') {
+  if (req.user.role === 'user') {
     query = Booking.find({ user: req.user.id })
       .populate({
         path: 'dentist',
@@ -62,7 +62,7 @@ exports.getBookings = async (req, res, next) => {
 //@access   Public
 exports.getBooking = async (req, res, next) => {
   try {
-    const booking = await Booking.findById(req.params.id)
+    const booking = await Booking.findById(req.params.bookingId)
       .populate({
         path: 'dentist',
         select: 'name experience expertise picture',
@@ -75,7 +75,7 @@ exports.getBooking = async (req, res, next) => {
     if (!booking) {
       return res.status(404).json({
         success: false,
-        message: `No booking with the id of ${req.params.id}`,
+        message: `No booking with the id of ${req.params.bookingId}`,
       });
     }
 
@@ -107,20 +107,32 @@ exports.addBooking = async (req, res, next) => {
       });
     }
 
-    //add user Id to req.body
-    req.body.user = req.user.id;
+    //User creates check up booking
+    if (req.user.role === 'user') {
+      req.body.type = 'checkup';
+      //add user Id to req.body
+      req.body.user = req.user.id;
 
-    //Check for existed booking
-    const existedBooking = await Booking.find({ user: req.user.id });
-
-    //If the user is not an admin , they can only create 1 booking.
-    if (existedBooking.length >= 1 && req.user.role != 'admin') {
-      return res.status(400).json({
-        success: false,
-        message: `The user with ID ${req.user.id} has already booked`,
+      //Check for existed booking
+      const existedBooking = await Booking.find({
+        user: req.user.id,
+        status: { $ne: 'finish' },
       });
-    }
 
+      //If the user is not an admin , they can only create 1 booking.
+      if (existedBooking.length >= 1) {
+        return res.status(400).json({
+          success: false,
+          message: `The user with ID ${req.user.id} has already booked`,
+        });
+      }
+    } else if (req.user.role === 'receptionist') {
+      req.body.type = 'cure';
+
+      const checkupBooking = await Booking.findById(req.params.bookingId);
+      req.body.user = checkupBooking.user;
+      req.body.dentist = checkupBooking.dentist;
+    }
     const booking = await Booking.create(req.body);
 
     res.status(200).json({
@@ -137,12 +149,12 @@ exports.addBooking = async (req, res, next) => {
 //@access   Private
 exports.updateBooking = async (req, res, next) => {
   try {
-    let booking = await Booking.findById(req.params.id);
+    let booking = await Booking.findById(req.params.bookingId);
 
     if (!booking) {
       return res.status(404).json({
         success: false,
-        message: `No booking with the id of ${req.params.id}`,
+        message: `No booking with the id of ${req.params.bookingId}`,
       });
     }
 
@@ -154,7 +166,7 @@ exports.updateBooking = async (req, res, next) => {
       });
     }
 
-    booking = await Booking.findByIdAndUpdate(req.params.id, req.body, {
+    booking = await Booking.findByIdAndUpdate(req.params.bookingId, req.body, {
       new: true,
       runValidators: true,
     });
@@ -173,12 +185,12 @@ exports.updateBooking = async (req, res, next) => {
 //@access   Private
 exports.deleteBooking = async (req, res, next) => {
   try {
-    const booking = await Booking.findById(req.params.id);
+    const booking = await Booking.findById(req.params.bookingId);
 
     if (!booking) {
       return res.status(404).json({
         success: false,
-        message: `No booking with the id of ${req.params.id}`,
+        message: `No booking with the id of ${req.params.bookingId}`,
       });
     }
 

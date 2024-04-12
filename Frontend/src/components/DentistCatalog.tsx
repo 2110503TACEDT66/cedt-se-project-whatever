@@ -17,9 +17,27 @@ export default function DentistCatalog({dentistsJson,date}:{dentistsJson:Dentist
                 dentistJsonReady.data.map((dentistItem:DentistItem)=>(
                     
                     dentistItem.bookings?.some((bookdate:BookingItem)=>{
-                        let dd = bookdate.bookingDate ;
-                        console.log(date+"\n"+dd);
-                        return new Date(date).toISOString()==dd.toString();
+                        let occupiedDate = new Date(bookdate.bookingDate) ;
+                        let selectedDate = new Date(date);
+                        console.log(
+                            selectedDate.getFullYear()+" "+
+                            selectedDate.getMonth()+" "+
+                            selectedDate.getDate()+" "+
+                            selectedDate.getHours()+" \n"+
+                            occupiedDate.getFullYear()+" "+
+                            occupiedDate.getMonth()+" "+
+                            occupiedDate.getDate()+" "+
+                            occupiedDate.getHours()+" "
+                        )
+                        if(selectedDate.getFullYear()==occupiedDate.getFullYear()&&selectedDate.getMonth()==occupiedDate.getMonth()&&selectedDate.getDate()==occupiedDate.getDate()){
+                            let hourMin = occupiedDate.getHours();
+                            let hourMax = hourMin+2;
+                            if(selectedDate.getHours()>=hourMin&&selectedDate.getHours()<=hourMax){
+                                return true;
+                            }
+                            return false;
+                        }
+                        return false;
                     })
                     ?
                     null
