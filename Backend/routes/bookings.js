@@ -12,14 +12,12 @@ const router = express.Router({ mergeParams: true });
 
 const { protect, authorize } = require('../middleware/auth');
 
+router.route('/').get(protect, getBookings).post(protect, addBooking);
 router
-  .route('/')
-  .get(protect, getBookings)
-  .post(protect, authorize('admin', 'user'), addBooking);
-router
-  .route('/:id')
-  .get(protect, getBooking)
-  .put(protect, authorize('admin', 'user'), updateBooking)
-  .delete(protect, authorize('admin', 'user'), deleteBooking);
+  .route('/:bookingId')
+  .get(protect, authorize('admin', 'receptionist'), getBooking)
+  .post(protect, authorize('admin', 'receptionist'), addBooking)
+  .put(protect, updateBooking)
+  .delete(protect, deleteBooking);
 
 module.exports = router;
