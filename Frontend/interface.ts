@@ -17,7 +17,8 @@ interface BookingItem {
   _id: string;
   user: { name: string };
   dentist: DentistItem;
-  bookingDate: Date;
+  startDate: Date;
+  endDate: Date;
   symptom: string;
   createAt: Date;
   __v: number;
