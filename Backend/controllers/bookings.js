@@ -96,20 +96,20 @@ exports.getBooking = async (req, res, next) => {
 //@access   Private
 exports.addBooking = async (req, res, next) => {
   try {
-    req.body.dentist = req.params.dentistId;
-
-    const dentist = await Dentist.findById(req.params.dentistId);
-
-    if (!dentist) {
-      return res.status(404).json({
-        success: false,
-        message: `No dentist with the id of ${req.params.dentistId}`,
-      });
-    }
-
     //User creates check up booking
     if (req.user.role === 'user') {
-      req.body.type = 'checkup';
+      req.body.dentist = req.params.dentistId;
+
+      const dentist = await Dentist.findById(req.params.dentistId);
+
+      if (!dentist) {
+        return res.status(404).json({
+          success: false,
+          message: `No dentist with the id of ${req.params.dentistId}`,
+        });
+      }
+
+      req.body.reqType = 'checkup';
       //add user Id to req.body
       req.body.user = req.user.id;
 
@@ -119,7 +119,7 @@ exports.addBooking = async (req, res, next) => {
         status: { $ne: 'finish' },
       });
 
-      //If the user is not an admin , they can only create 1 booking.
+      //The user can only create 1 booking.
       if (existedBooking.length >= 1) {
         return res.status(400).json({
           success: false,
@@ -127,7 +127,7 @@ exports.addBooking = async (req, res, next) => {
         });
       }
     } else if (req.user.role === 'receptionist') {
-      req.body.type = 'cure';
+      req.body.reqType = 'cure';
 
       const checkupBooking = await Booking.findById(req.params.bookingId);
       req.body.user = checkupBooking.user;
@@ -159,7 +159,7 @@ exports.updateBooking = async (req, res, next) => {
     }
 
     //Make sure user is the booking owner
-    if (booking.user.toString() !== req.user.id && req.user.role !== 'admin') {
+    if (booking.user.toString() !== req.user.id && req.user.role === 'user') {
       return res.status(401).json({
         success: false,
         message: `User ${req.user.id} is not authorized to update this booking session`,
