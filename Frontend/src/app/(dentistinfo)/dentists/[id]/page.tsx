@@ -21,6 +21,8 @@ export default async function DentistDetailPage({
     reqType: string
   ) {
     'use server';
+    console.log(startDate) ;
+    console.log(endDate) ;
     await createBooking(token, user, dentist, startDate, endDate, symptom);
     redirect('/mybookings');
   }
