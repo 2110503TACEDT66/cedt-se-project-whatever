@@ -22,7 +22,8 @@ const BookingSchema = new mongoose.Schema({
   reqType: {
     type: String,
     enum: ['checkup', 'cure'],
-    required: true
+    required: true,
+    default: 'checkup'
   },
   createdAt: {
     type: Date,
