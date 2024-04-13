@@ -28,7 +28,7 @@ export default function Booking({
         <div className="text-sm">Patient : {bookingItem.user.name}</div>
         <div className="text-sm">Dentist : {bookingItem.dentist.name}</div>
         <div className="text-sm">
-          Booking date : {bookingItem.bookingDate.toString()}
+          Booking date : {(new Date(bookingItem.bookingDate)).toUTCString()}
         </div>
         <div className="text-sm">Symptom : {bookingItem.symptom}</div>
         {editing ? (
