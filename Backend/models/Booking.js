@@ -1,7 +1,11 @@
 const mongoose = require('mongoose');
 
 const BookingSchema = new mongoose.Schema({
-  bookingDate: {
+  startDate: {
+    type: Date,
+    required: true,
+  },
+  endDate: {
     type: Date,
     required: true,
   },
@@ -22,7 +26,7 @@ const BookingSchema = new mongoose.Schema({
   reqType: {
     type: String,
     enum: ['checkup', 'cure'],
-    required: true
+    required: true,
   },
   createdAt: {
     type: Date,

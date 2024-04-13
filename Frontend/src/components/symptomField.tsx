@@ -22,6 +22,17 @@ export default function SymptomField({
   const { data: session, status } = useSession();
   if (!session || !session.user.token) return null;
 
+  function getDateString(date: string): string {
+    return new Date(date).toISOString();
+  }
+
+  function addOneHour(date: string): string {
+    const oneHour = 60 * 60 * 1000;
+    let dateObject = new Date(date);
+    dateObject.setTime(dateObject.getTime() + oneHour);
+    return dateObject.toISOString();
+  }
+
   return (
     <div>
       <TextField
@@ -32,7 +43,7 @@ export default function SymptomField({
         className="rounded mt-3 ring-2 ring-inset ring-grey-400 text-md leading-6 indent-2 placeholder:text-grey-400"
         onChange={(e) => {
           dispatch(changeSymptom(e.target.value));
-        }}  
+        }}
       />
       <button
         className="block rounded-md bg-sky-600 hover:bg-indigo-600 px-3 py-2
@@ -44,7 +55,8 @@ export default function SymptomField({
               session.user.token,
               session?.user._id,
               dentist,
-              new Date(date).toISOString(),
+              getDateString(date),
+              addOneHour(date),
               symptom
             );
         }}>

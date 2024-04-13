@@ -15,11 +15,13 @@ export default async function DentistDetailPage({
     token: string,
     user: string,
     dentist: string,
-    date: string,
-    symptom: string
+    startDate: string,
+    endDate: string,
+    symptom: string,
+    reqType: string
   ) {
     'use server';
-    await createBooking(token, user, dentist, date, symptom);
+    await createBooking(token, user, dentist, startDate, endDate, symptom);
     redirect('/mybookings');
   }
 

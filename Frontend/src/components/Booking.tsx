@@ -28,7 +28,7 @@ export default function Booking({
         <div className="text-sm">Patient : {bookingItem.user.name}</div>
         <div className="text-sm">Dentist : {bookingItem.dentist.name}</div>
         <div className="text-sm">
-          Booking date : {(new Date(bookingItem.bookingDate)).toUTCString()}
+          Booking date : {new Date(bookingItem.startDate).toUTCString()}
         </div>
         <div className="text-sm">Symptom : {bookingItem.symptom}</div>
         {editing ? (
@@ -65,8 +65,10 @@ export default function Booking({
               className="block rounded-md bg-red-600 hover:bg-red-700 px-3 py-2
                         shadow-sm text-white mx-3"
               onClick={() => {
-                const cf = confirm("Are you sure you want to delete this booking?");
-                if(cf) onDeleteBooking(bookingItem._id);
+                const cf = confirm(
+                  'Are you sure you want to delete this booking?'
+                );
+                if (cf) onDeleteBooking(bookingItem._id);
               }}>
               Remove Booking
             </button>
