@@ -10,6 +10,25 @@ export default async function RecepBookingList() {
 
   const bookingItems = await getBookings(session.user.token);
 
+  const createCureBooking = async (bookingId: string) => {
+    'use server';
+    const response = await fetch(
+      `http://localhost:5000/api/v1/bookings/${bookingId}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: `Bearer ${session.user.token}`,
+        },
+        body: JSON.stringify({}),
+      }
+    );
+    if (!response.ok) {
+      throw new Error('Failed to create booking');
+    }
+    return await response.json();
+  };
+
   async function deleteBooking(id: string) {
     'use server';
     const response = await fetch(

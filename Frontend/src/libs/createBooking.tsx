@@ -22,6 +22,7 @@ export default async function createBooking(
         startDate: startDate,
         endDate: endDate,
         symptom: symptom,
+        status: 'pending',
       }),
     }
   );
