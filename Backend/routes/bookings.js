@@ -18,6 +18,6 @@ router
   .get(protect, authorize('admin', 'receptionist'), getBooking)
   .post(protect, authorize('admin', 'receptionist'), addBooking)
   .put(protect, updateBooking)
-  .delete(protect, deleteBooking);
+  .delete(protect, authorize('admin', 'receptionist'), deleteBooking);
 
 module.exports = router;
