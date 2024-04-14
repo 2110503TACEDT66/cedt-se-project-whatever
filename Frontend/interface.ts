@@ -22,5 +22,6 @@ interface BookingItem {
   symptom: string;
   status: string;
   createAt: Date;
+  reqType : string ;
   __v: number;
 }
