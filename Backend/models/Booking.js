@@ -23,6 +23,12 @@ const BookingSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  status: {
+    type: String,
+    enum: ['pending', 'finish'],
+    required: true,
+    default: 'pending',
+  },
   reqType: {
     type: String,
     enum: ['checkup', 'cure'],
