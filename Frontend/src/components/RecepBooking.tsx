@@ -3,6 +3,7 @@ import { Backdrop, CircularProgress, TextField } from '@mui/material';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { useState } from 'react';
+import Link from 'next/link';
 
 export default function RecepBooking({
   bookingItem,
@@ -100,17 +101,20 @@ export default function RecepBooking({
               onClick={() => setEditing(!editing)}>
               Edit your symptom
             </button>
+            <Link href={`mybookings/${bookingItem._id}`}>
             <button
               className="block rounded-md bg-red-600 hover:bg-red-700 px-3 py-2
                     shadow-sm text-white mx-3"
-              onClick={() => {
-                const cf = confirm(
-                  'Are you sure you want to cancel this booking?'
-                );
-                if (cf) onDeleteBooking(bookingItem._id);
-              }}>
+              // onClick={() => {
+              //   const cf = confirm(
+              //     'Are you sure you want to cancel this booking?'
+              //   );
+              //   if (cf) onDeleteBooking(bookingItem._id);
+              // }}
+              >
               Cancel Booking
             </button>
+            </Link>
           </div>
         )}
       </div>
