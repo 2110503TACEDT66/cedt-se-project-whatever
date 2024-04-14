@@ -10,7 +10,8 @@ export default async function MyBooking() {
   return (
     <main>
       {session.user.role === 'receptionist' ? (
-        <RecepBookingList />
+        // <RecepBookingList />
+        <BookingList />
       ) : (
         <BookingList />
       )}

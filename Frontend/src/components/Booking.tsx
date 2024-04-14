@@ -2,6 +2,7 @@
 import { Backdrop, CircularProgress, TextField } from '@mui/material';
 import Image from 'next/image';
 import { useState } from 'react';
+import Link from 'next/link';
 
 export default function Booking({
   bookingItem,
@@ -61,17 +62,20 @@ export default function Booking({
               onClick={() => setEditing(!editing)}>
               Edit your symptom
             </button>
-            <button
-              className="block rounded-md bg-red-600 hover:bg-red-700 px-3 py-2
-                        shadow-sm text-white mx-3"
-              onClick={() => {
-                const cf = confirm(
-                  'Are you sure you want to delete this booking?'
-                );
-                if (cf) onDeleteBooking(bookingItem._id);
-              }}>
-              Remove Booking
-            </button>
+            <Link href={`mybookings/${bookingItem._id}`}>
+              <button
+                className="block rounded-md bg-red-600 hover:bg-red-700 px-3 py-2
+                          shadow-sm text-white mx-3"
+                // onClick={() => {
+                //   const cf = confirm(
+                //     'Are you sure you want to delete this booking?'
+                //   );
+                //   if (cf) onDeleteBooking(bookingItem._id);
+                // }}
+                >
+                Remove Booking
+              </button>
+            </Link>
           </div>
         )}
       </div>
