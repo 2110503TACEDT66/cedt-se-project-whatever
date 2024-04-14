@@ -6,7 +6,7 @@ import getUserProfile from '@/libs/getUserProfile';
 
 export default async function MyBooking() {
   const session = await getServerSession(authOptions);
-  if (!session || !session.user.token) return null
+  if (!session || !session.user.token) return null;
 
   const info = await getUserProfile(session?.user.token);
 
@@ -15,9 +15,9 @@ export default async function MyBooking() {
   return (
     <main>
       {info.data.role === 'receptionist' ? (
-        <RecepBookingList/>
+        <RecepBookingList />
       ) : (
-        '<BookingList/>'
+        <BookingList />
       )}
     </main>
   );
