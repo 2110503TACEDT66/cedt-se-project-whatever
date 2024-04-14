@@ -17,8 +17,7 @@ export default async function DentistDetailPage({
     dentist: string,
     startDate: string,
     endDate: string,
-    symptom: string,
-    reqType: string
+    symptom: string
   ) {
     'use server';
     console.log(startDate) ;

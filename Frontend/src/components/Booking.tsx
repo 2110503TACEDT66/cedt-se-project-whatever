@@ -1,5 +1,6 @@
 'use client';
 import { Backdrop, CircularProgress, TextField } from '@mui/material';
+import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { useState } from 'react';
 import Link from 'next/link';
@@ -13,6 +14,9 @@ export default function Booking({
   onDeleteBooking: Function;
   onUpdateBooking: Function;
 }) {
+  const { data: session } = useSession();
+  if (!session || !session.user.token) return null;
+
   const [editing, setEditing] = useState<boolean>(false);
   const [newSymptom, setNewSymptom] = useState<String | null>(null);
 
@@ -50,7 +54,11 @@ export default function Booking({
               className="block rounded-md bg-sky-600 hover:bg-indigo-600 px-3 py-2 shadow-sm text-white mx-3"
               onClick={() => {
                 setEditing(!editing);
-                onUpdateBooking(bookingItem._id, newSymptom);
+                onUpdateBooking(
+                  bookingItem._id,
+                  newSymptom,
+                  session.user.token
+                );
               }}>
               Confirm editing
             </button>

@@ -69,7 +69,8 @@ exports.getBooking = async (req, res, next) => {
       })
       .populate({
         path: 'user',
-        select: 'name',
+        select: ['name', 'tel', 'email'],
+
       });
 
     if (!booking) {
