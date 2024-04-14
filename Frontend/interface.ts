@@ -20,6 +20,7 @@ interface BookingItem {
   startDate: Date;
   endDate: Date;
   symptom: string;
+  status: string;
   createAt: Date;
   __v: number;
 }
