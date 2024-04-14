@@ -77,6 +77,7 @@ export default async function RecepBookingList() {
           bookingItem={bookingItem}
           onDeleteBooking={deleteBooking}
           onUpdateBooking={updateBooking}
+          onCreateCureBooking={createCureBooking}
             />
       ))}
     </div>

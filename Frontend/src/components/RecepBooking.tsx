@@ -7,10 +7,12 @@ import { useState } from 'react';
   bookingItem,
   onDeleteBooking,
   onUpdateBooking,
+  onCreateCureBooking,
 }: {
   bookingItem: BookingItem;
   onDeleteBooking: Function;
   onUpdateBooking: Function;
+  onCreateCureBooking:Function;
 }) {
 
   const [editing, setEditing] = useState<boolean>(false);
@@ -63,7 +65,8 @@ import { useState } from 'react';
       (
         <div className="flex flex-row gap-x-3 py-2">
         <button
-          className="block rounded-md bg-green-600 hover:bg-green-700 px-3 py-2 shadow-sm text-white mx-3">
+          className="block rounded-md bg-green-600 hover:bg-green-700 px-3 py-2 shadow-sm text-white mx-3"
+          onClick={ ()=> {onCreateCureBooking(bookingItem._id)}}>
           Create cure booking
         </button>
         <button
