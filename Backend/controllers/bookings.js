@@ -97,9 +97,8 @@ exports.getBooking = async (req, res, next) => {
 exports.addBooking = async (req, res, next) => {
   try {
     //User creates check up booking
+    req.body.dentist = req.params.dentistId;
     if (req.user.role === 'user') {
-      req.body.dentist = req.params.dentistId;
-
       const dentist = await Dentist.findById(req.params.dentistId);
 
       if (!dentist) {

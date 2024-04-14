@@ -55,7 +55,7 @@ export default function SymptomField({
               session.user.token,
               session?.user._id,
               dentist,
-              getDateString(date),
+              date,
               addOneHour(date),
               symptom
             );
