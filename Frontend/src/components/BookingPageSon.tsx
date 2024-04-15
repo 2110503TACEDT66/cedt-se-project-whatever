@@ -11,6 +11,7 @@ import DateReserve from "@/components/DateReserve"
 import {Select,MenuItem} from "@mui/material"
 import SortDropDown from "./SortDropDown";
 import SortExpDropDown from "./SortExpDropDown"
+import QuantityInput from './SortExpDropDown';
 
 
 
@@ -29,7 +30,7 @@ export default function BookingPagSon({dentistJson}:{dentistJson:DentistJson}){
            </div>
            <div  className="m-5 text-xl font-bold font-serif ">Sort by Experience</div> 
            <div>
-                <SortExpDropDown experience={experience} setExperience={setExperience}/>
+                <QuantityInput experience={experience} setExperience={setExperience}/>
             </div></div>
             <h1 className='text-xl font-medium mb-4'>Available Dentist</h1>
             <Suspense fallback={<p>Loading...<LinearProgress/></p>}>
