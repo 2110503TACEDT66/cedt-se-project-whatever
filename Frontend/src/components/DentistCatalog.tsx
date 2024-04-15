@@ -7,13 +7,16 @@ import { useEffect, useState } from 'react';
 export default function DentistCatalog({
   dentistsJson,
   date,
+  expertise,
+  experience,
 }: {
   dentistsJson: DentistJson;
   date: string;
+  expertise: string;
+  experience: number;
 }) {
   const dentistJsonReady = dentistsJson;
-  const [expertise, setExpertise] = useState<string>('');
-  const [experience, setExperience] = useState<number>(0);
+  
   return (
     <div>
       <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
