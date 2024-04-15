@@ -2,7 +2,12 @@
 import deleteBooking from "@/libs/deleteBooking";
 import Link from "next/link";
 
-export default function CancelButton({userToken, bookingId} : {userToken:string, bookingId:string}) {
+export default function CancelButton({userToken, bookingId, emailSender,role} : {userToken:string, bookingId:string, emailSender:Function, role:string}) {
+
+    const send = async () => {
+        console.log("helloWorld") ;
+        await emailSender(); // Call the emailSender function
+    }
 
     return (
         <div className="text-center items-center">
@@ -13,7 +18,13 @@ export default function CancelButton({userToken, bookingId} : {userToken:string,
                   const cf = confirm(
                     'Are you sure you want to delete this booking?'
                   );
-                  if (cf) await deleteBooking(bookingId, userToken);
+                  if (cf) {
+                    if (role == "receptionist") {
+                        send();
+                    }
+                    
+                    await deleteBooking(bookingId, userToken);
+                    }
                 }}
                 >
                     Request Cancelation
