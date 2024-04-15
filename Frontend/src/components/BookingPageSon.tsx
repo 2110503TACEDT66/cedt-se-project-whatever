@@ -1,10 +1,10 @@
-'use client'
-import dayjs, { Dayjs } from "dayjs";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { AppDispatch,useAppSelector } from "@/redux/store"
-import { changeBookingDate } from "@/redux/features/dateSlice";
-import DentistCatalog from '@/components/DentistCatalog'
+'use client';
+import dayjs, { Dayjs } from 'dayjs';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { AppDispatch, useAppSelector } from '@/redux/store';
+import { changeBookingDate } from '@/redux/features/dateSlice';
+import DentistCatalog from '@/components/DentistCatalog';
 import { Suspense } from 'react';
 import { LinearProgress } from '@mui/material';
 import DateReserve from "@/components/DateReserve"

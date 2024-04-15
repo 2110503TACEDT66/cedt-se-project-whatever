@@ -1,7 +1,9 @@
 'use client';
 import { Backdrop, CircularProgress, TextField } from '@mui/material';
+import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { useState } from 'react';
+import Link from 'next/link';
 
 export default function Booking({
   bookingItem,
@@ -12,6 +14,9 @@ export default function Booking({
   onDeleteBooking: Function;
   onUpdateBooking: Function;
 }) {
+  const { data: session } = useSession();
+  if (!session || !session.user.token) return null;
+
   const [editing, setEditing] = useState<boolean>(false);
   const [newSymptom, setNewSymptom] = useState<String | null>(null);
 
@@ -31,6 +36,7 @@ export default function Booking({
           Booking date : {new Date(bookingItem.startDate).toUTCString()}
         </div>
         <div className="text-sm">Symptom : {bookingItem.symptom}</div>
+        <div className="text-sm">Status : {bookingItem.status}</div>
         {editing ? (
           <div className="flex flex-row gap-x-3 py-2">
             <TextField
@@ -49,7 +55,11 @@ export default function Booking({
               className="block rounded-md bg-sky-600 hover:bg-indigo-600 px-3 py-2 shadow-sm text-white mx-3"
               onClick={() => {
                 setEditing(!editing);
-                onUpdateBooking(bookingItem._id, newSymptom);
+                onUpdateBooking(
+                  bookingItem._id,
+                  newSymptom,
+                  session.user.token
+                );
               }}>
               Confirm editing
             </button>
@@ -61,17 +71,20 @@ export default function Booking({
               onClick={() => setEditing(!editing)}>
               Edit your symptom
             </button>
-            <button
-              className="block rounded-md bg-red-600 hover:bg-red-700 px-3 py-2
-                        shadow-sm text-white mx-3"
-              onClick={() => {
-                const cf = confirm(
-                  'Are you sure you want to delete this booking?'
-                );
-                if (cf) onDeleteBooking(bookingItem._id);
-              }}>
-              Remove Booking
-            </button>
+            <Link href={`mybookings/${bookingItem._id}`}>
+              <button
+                className="block rounded-md bg-red-600 hover:bg-red-700 px-3 py-2
+                          shadow-sm text-white mx-3"
+                // onClick={() => {
+                //   const cf = confirm(
+                //     'Are you sure you want to delete this booking?'
+                //   );
+                //   if (cf) onDeleteBooking(bookingItem._id);
+                // }}
+                >
+                Remove Booking
+              </button>
+            </Link>
           </div>
         )}
       </div>

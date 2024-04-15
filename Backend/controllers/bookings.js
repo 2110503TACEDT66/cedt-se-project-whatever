@@ -69,7 +69,8 @@ exports.getBooking = async (req, res, next) => {
       })
       .populate({
         path: 'user',
-        select: 'name',
+        select: ['name', 'tel', 'email'],
+
       });
 
     if (!booking) {
@@ -97,9 +98,8 @@ exports.getBooking = async (req, res, next) => {
 exports.addBooking = async (req, res, next) => {
   try {
     //User creates check up booking
+    req.body.dentist = req.params.dentistId;
     if (req.user.role === 'user') {
-      req.body.dentist = req.params.dentistId;
-
       const dentist = await Dentist.findById(req.params.dentistId);
 
       if (!dentist) {
@@ -195,7 +195,7 @@ exports.deleteBooking = async (req, res, next) => {
     }
 
     //Make sure user is the booking owner
-    if (booking.user.toString() !== req.user.id && req.user.role !== 'admin') {
+    if (booking.user.toString() !== req.user.id && req.user.role !== 'admin' && req.user.role !== 'receptionist') {
       return res.status(401).json({
         success: false,
         message: `User ${req.user.id} is not authorized to delete this booking`,

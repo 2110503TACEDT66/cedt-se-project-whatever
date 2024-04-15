@@ -15,11 +15,17 @@ interface DentistJson {
 }
 interface BookingItem {
   _id: string;
-  user: { name: string };
+  user: { 
+    name: string,
+    tel: string,
+    email: string
+  };
   dentist: DentistItem;
   startDate: Date;
   endDate: Date;
   symptom: string;
+  status: string;
   createAt: Date;
+  reqType : string ;
   __v: number;
 }

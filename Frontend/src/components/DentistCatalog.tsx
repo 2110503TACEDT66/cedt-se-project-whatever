@@ -25,23 +25,23 @@ export default function DentistCatalog({
               dentistItem.bookings?.some((bookdate: BookingItem) => {
                 let occupiedDate = new Date(bookdate.bookingDate);
                 let selectedDate = new Date(date);
-                console.log(
-                  selectedDate.getFullYear() +
-                    ' ' +
-                    selectedDate.getMonth() +
-                    ' ' +
-                    selectedDate.getDate() +
-                    ' ' +
-                    selectedDate.getHours() +
-                    ' \n' +
-                    occupiedDate.getFullYear() +
-                    ' ' +
-                    occupiedDate.getMonth() +
-                    ' ' +
-                    occupiedDate.getDate() +
-                    ' ' +
-                    occupiedDate.getHours() +
-                    ' '
+                console.log(date
+                  // selectedDate.getFullYear() +
+                  //   ' ' +
+                  //   selectedDate.getMonth() +
+                  //   ' ' +
+                  //   selectedDate.getDate() +
+                  //   ' ' +
+                  //   selectedDate.getHours() +
+                  //   ' \n' +
+                  //   occupiedDate.getFullYear() +
+                  //   ' ' +
+                  //   occupiedDate.getMonth() +
+                  //   ' ' +
+                  //   occupiedDate.getDate() +
+                  //   ' ' +
+                  //   occupiedDate.getHours() +
+                  //   ' '
                 );
                 if (
                   selectedDate.getFullYear() == occupiedDate.getFullYear() &&
