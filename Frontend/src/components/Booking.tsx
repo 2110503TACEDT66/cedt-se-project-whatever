@@ -36,6 +36,7 @@ export default function Booking({
           Booking date : {new Date(bookingItem.startDate).toUTCString()}
         </div>
         <div className="text-sm">Symptom : {bookingItem.symptom}</div>
+        <div className="text-sm">Status : {bookingItem.status}</div>
         {editing ? (
           <div className="flex flex-row gap-x-3 py-2">
             <TextField
