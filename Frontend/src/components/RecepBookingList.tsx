@@ -13,7 +13,7 @@ export default async function RecepBookingList() {
   const bookingItems = await getBookings(session.user.token);
 
   return (
-    <div>
+    <div className='mt-20'>
       {bookingItems.map((bookingItem: BookingItem) => (
         <RecepBooking
           key={bookingItem._id}

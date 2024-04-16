@@ -25,23 +25,40 @@ export default function RecepBooking({
   console.log(bookingItem.reqType);
 
   return (
-    <div className="bg-slate-200 rounded px-5 py-2 my-2 flex flex-row h-1/5 text-black">
-      <Image
-        src={bookingItem.dentist.picture}
-        alt="dentist"
-        width={0}
-        height={0}
-        sizes="100vh"
-        className="h-[125px] w-auto object-cover px-4"></Image>
-      <div>
-        <div className="text-sm">Patient : {bookingItem.user.name}</div>
-        <div className="text-sm">Dentist : {bookingItem.dentist.name}</div>
-        <div className="text-sm">
-          Booking date : {new Date(bookingItem.startDate).toUTCString()}
+    <div className='flex flex-col bg-slate-200 rounded-lg mx-4'>
+      <div className="px-5 pt-2 flex flex-row text-black">
+        <Image
+          src={bookingItem.dentist.picture}
+          alt="dentist"
+          width={0}
+          height={0}
+          sizes="100vh"
+          className="h-36 w-auto object-cover mr-4 my-4 rounded-lg"></Image>
+        <div className='my-4'>
+          <div>
+            <span className="text-xl font-bold font-mono text-cyan-900">Patient: </span>
+            <span className="text-lg">{bookingItem.user.name}</span>
+          </div>
+          <div>
+            <span className="text-xl font-bold font-mono text-cyan-900">Dentist: </span>
+            <span className="text-lg">{bookingItem.dentist.name}</span>
+          </div>
+          <div>
+            <span className="text-xl font-bold font-mono text-cyan-900">Booking date: </span>
+            <span className="text-lg">{new Date(bookingItem.startDate).toUTCString()}</span>
+          </div>
+          <div>
+            <span className="text-xl font-bold font-mono text-cyan-900">Symptom: </span>
+            <span className="text-lg">{bookingItem.symptom}</span>
+          </div>
+          <div>
+            <span className="text-xl font-bold font-mono text-cyan-900">Status: </span>
+            <span className="text-lg">{bookingItem.status}</span>
+          </div>
         </div>
-        <div className="text-sm">Symptom : {bookingItem.symptom}</div>
-        <div className="text-sm">Status : {bookingItem.status}</div>
-        {editing ? (
+      </div>
+      <div className='px-2 pb-4 flex flex-row'>
+      {editing ? (
           <div className="flex flex-row gap-x-3 py-2">
             <TextField
               variant="standard"
@@ -86,14 +103,7 @@ export default function RecepBooking({
             <Link href={`mybookings/${bookingItem._id}`}>
             <button
               className="block rounded-md bg-red-600 hover:bg-red-700 px-3 py-2
-                    shadow-sm text-white mx-3"
-              // onClick={() => {
-              //   const cf = confirm(
-              //     'Are you sure you want to cancel this booking?'
-              //   );
-              //   if (cf) onDeleteBooking(bookingItem._id, session.user.token);
-              // }}
-              >
+                    shadow-sm text-white mx-3">
               Cancel Booking
             </button>
             </Link>
@@ -108,14 +118,7 @@ export default function RecepBooking({
             <Link href={`mybookings/${bookingItem._id}`}>
             <button
               className="block rounded-md bg-red-600 hover:bg-red-700 px-3 py-2
-                    shadow-sm text-white mx-3"
-              // onClick={() => {
-              //   const cf = confirm(
-              //     'Are you sure you want to cancel this booking?'
-              //   );
-              //   if (cf) onDeleteBooking(bookingItem._id);
-              // }}
-              >
+                    shadow-sm text-white mx-3">
               Cancel Booking
             </button>
             </Link>
