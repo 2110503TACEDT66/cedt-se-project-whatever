@@ -62,7 +62,8 @@ export default function DentistCatalog({
               }) ? null : (dentistItem.expertise == expertise ||
                   expertise == '') &&
                 (dentistItem.experience >= experience || experience == 0) ? (
-                <Link href={`/dentists/${dentistItem.id}`}>
+                <Link href={`/dentists/${dentistItem.id}`} className='rounded-md overflow-hidden shadow-md 
+                hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1'>
                   <Card
                     dentistName={dentistItem.name}
                     imgSrc={dentistItem.picture}

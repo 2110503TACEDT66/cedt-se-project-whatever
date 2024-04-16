@@ -35,7 +35,6 @@ export default async function RootLayout({
               fill={true}
               className="object-cover absolute top-0 left-0 w-full h-full -z-10 opacity-50"/>
             {children}
-            {nextAuthSession ? <div className='fixed left-0 bottom-0 ml-2 text-sky-600 text-lg'><span className='font-semibold'>User:</span> {nextAuthSession.user.name}</div>: null}
           </NextAuthProvider>
         </ReduxProvider>
         
