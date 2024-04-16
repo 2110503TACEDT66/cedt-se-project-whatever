@@ -4,6 +4,7 @@ import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { useState } from 'react';
 import Link from 'next/link';
+import confirmStatusBooking from '@/libs/comfirmStatusBooking';
 
 export default function RecepBooking({
   bookingItem,
@@ -25,7 +26,7 @@ export default function RecepBooking({
   console.log(bookingItem.reqType);
 
   return (
-    <div className='flex flex-col bg-slate-200 rounded-lg mx-4'>
+    <div className="flex flex-col bg-slate-200 rounded-lg mx-4">
       <div className="px-5 pt-2 flex flex-row text-black">
         <Image
           src={bookingItem.dentist.picture}
@@ -34,31 +35,43 @@ export default function RecepBooking({
           height={0}
           sizes="100vh"
           className="h-36 w-auto object-cover mr-4 my-4 rounded-lg"></Image>
-        <div className='my-4'>
+        <div className="my-4">
           <div>
-            <span className="text-xl font-bold font-mono text-cyan-900">Patient: </span>
+            <span className="text-xl font-bold font-mono text-cyan-900">
+              Patient:{' '}
+            </span>
             <span className="text-lg">{bookingItem.user.name}</span>
           </div>
           <div>
-            <span className="text-xl font-bold font-mono text-cyan-900">Dentist: </span>
+            <span className="text-xl font-bold font-mono text-cyan-900">
+              Dentist:{' '}
+            </span>
             <span className="text-lg">{bookingItem.dentist.name}</span>
           </div>
           <div>
-            <span className="text-xl font-bold font-mono text-cyan-900">Booking date: </span>
-            <span className="text-lg">{new Date(bookingItem.startDate).toUTCString()}</span>
+            <span className="text-xl font-bold font-mono text-cyan-900">
+              Booking date:{' '}
+            </span>
+            <span className="text-lg">
+              {new Date(bookingItem.startDate).toUTCString()}
+            </span>
           </div>
           <div>
-            <span className="text-xl font-bold font-mono text-cyan-900">Symptom: </span>
+            <span className="text-xl font-bold font-mono text-cyan-900">
+              Symptom:{' '}
+            </span>
             <span className="text-lg">{bookingItem.symptom}</span>
           </div>
           <div>
-            <span className="text-xl font-bold font-mono text-cyan-900">Status: </span>
+            <span className="text-xl font-bold font-mono text-cyan-900">
+              Status:{' '}
+            </span>
             <span className="text-lg">{bookingItem.status}</span>
           </div>
         </div>
       </div>
-      <div className='px-2 pb-4 flex flex-row'>
-      {editing ? (
+      <div className="px-2 pb-4 flex flex-row">
+        {editing ? (
           <div className="flex flex-row gap-x-3 py-2">
             <TextField
               variant="standard"
@@ -85,27 +98,36 @@ export default function RecepBooking({
               Confirm editing
             </button>
           </div>
-        ) : bookingItem.reqType == 'checkup' &&
-          bookingItem.status == 'finish' ? (
+        ) : bookingItem.reqType === 'checkup' ? (
           <div className="flex flex-row gap-x-3 py-2">
-            <button
-              className="block rounded-md bg-green-600 hover:bg-green-700 px-3 py-2 shadow-sm text-white mx-3"
-              onClick={() => {
-                onCreateCureBooking(bookingItem._id);
-              }}>
-              Create cure booking
-            </button>
+            {bookingItem.status === 'finish' ? (
+              <button
+                className="block rounded-md bg-green-600 hover:bg-green-700 px-3 py-2 shadow-sm text-white mx-3"
+                onClick={() => {
+                  onCreateCureBooking(bookingItem._id);
+                }}>
+                Create cure booking
+              </button>
+            ) : (
+              <button
+                className="block rounded-md bg-green-600 hover:bg-green-700 px-3 py-2 shadow-sm text-white mx-3"
+                onClick={() => {
+                  confirmStatusBooking(session.user.token, bookingItem._id);
+                }}>
+                Finish checkup
+              </button>
+            )}
             <button
               className="block rounded-md bg-sky-600 hover:bg-sky-700 px-3 py-2 shadow-sm text-white mx-3"
               onClick={() => setEditing(!editing)}>
               Edit your symptom
             </button>
             <Link href={`mybookings/${bookingItem._id}`}>
-            <button
-              className="block rounded-md bg-red-600 hover:bg-red-700 px-3 py-2
+              <button
+                className="block rounded-md bg-red-600 hover:bg-red-700 px-3 py-2
                     shadow-sm text-white mx-3">
-              Cancel Booking
-            </button>
+                Cancel Booking
+              </button>
             </Link>
           </div>
         ) : (
@@ -116,11 +138,11 @@ export default function RecepBooking({
               Edit your symptom
             </button>
             <Link href={`mybookings/${bookingItem._id}`}>
-            <button
-              className="block rounded-md bg-red-600 hover:bg-red-700 px-3 py-2
+              <button
+                className="block rounded-md bg-red-600 hover:bg-red-700 px-3 py-2
                     shadow-sm text-white mx-3">
-              Cancel Booking
-            </button>
+                Cancel Booking
+              </button>
             </Link>
           </div>
         )}
