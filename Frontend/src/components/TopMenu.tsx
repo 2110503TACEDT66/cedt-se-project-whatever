@@ -7,14 +7,19 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 export default async function TopMenu() {
   const session = await getServerSession(authOptions);
   return (
-    <div className="h-[50px] bg-fuchsia-700 flex flex-row fixed top-0 left-0 right-0 border-y-[1px] border-solid border-gray-500 z-30">
+    <div className="h-16 bg-white flex flex-row fixed top-0 left-0 right-0 border-b-[1px] border-solid border-gray-500 z-30 bg-opacity-80">
       <Image
-        src={'/img/DentistLogo.png'}
+        src={'/img/DentistLogo2.jpg'}
         className="h-full w-auto"
         alt="logo"
         width={0}
         height={0}
         sizes="100vh"
+      />
+      <TopMenuItem
+        title="Home"
+        imgSrc="/img/homelogo.png"
+        pageRef="/"
       />
       <TopMenuItem
         title="Add new booking"
@@ -33,13 +38,12 @@ export default async function TopMenu() {
           pageRef="/api/auth/register"
         />
       ) : null}
-      <div className="absolute right-0 flex flex-column h-full">
+      <div className="absolute right-3 top-3 flex flex-column h-full">
         {session ? (
-          <Link href="/api/auth/signout">
-            <div
-              className="flex items-center h-full
-                px-2 text-cyan-600 text-sm text-white">
-              Sign-Out of {session.user?.name}
+          <Link href="/api/auth/signout" style={{textDecoration:'none', fontSize:'20px'}} className='flex items-center h-10 border-2 rounded-lg border-cyan-600 w-28 shadow-lg
+          text-center justify-center text-sky-600 hover:bg-cyan-600 hover:text-white'>
+            <div>
+              Sign-Out
             </div>
           </Link>
         ) : (
