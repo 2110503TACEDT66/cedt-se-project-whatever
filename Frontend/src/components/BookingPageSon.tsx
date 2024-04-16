@@ -28,7 +28,7 @@ export default function BookingPagSon({dentistJson}:{dentistJson:DentistJson}){
              <div>
              <SortDropDown  expertise={expertise} setExpertise={setExpertise}/>
            </div>
-           <div  className="m-5 text-xl font-bold font-serif text-cyan-500">Sort by Years of Experience (More than): </div> 
+           <div  className="m-5 text-xl font-bold font-serif text-cyan-500">Sort by Years of Experience (More than or equal): </div> 
            <div>
                 <QuantityInput experience={experience} setExperience={setExperience}/>
             </div></div>
