@@ -12,7 +12,7 @@ export default function CancelButton({userToken, bookingId, emailSender,role} : 
     return (
         <div className="text-center items-center">
             <Link href={"/"} className="text-center items-center">
-                <button name="Book Vaccine" className=" rounded-xl bg-cyan-600 
+                <button name="Book Vaccine" className=" rounded-xl bg-cyan-500 
                 hover:bg-cyan-700 px-6 py-3 text-white font-semibold shadow-lg text-xl mt-12"
                 onClick={async () => {
                   const cf = confirm(

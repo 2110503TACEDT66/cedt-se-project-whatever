@@ -40,15 +40,15 @@ export default async function TopMenu() {
       ) : null}
       <div className="absolute right-3 top-3 flex flex-column h-full">
         {session ? (
-          <Link href="/api/auth/signout" style={{textDecoration:'none', fontSize:'20px'}} className='flex items-center h-10 border-2 rounded-lg border-cyan-600 w-28 shadow-lg
-          text-center justify-center text-sky-600 hover:bg-cyan-600 hover:text-white'>
+          <Link href="/api/auth/signout" style={{textDecoration:'none', fontSize:'20px'}} className='flex items-center h-10 border-2 rounded-lg border-cyan-500 w-28 shadow-lg
+          text-center justify-center text-cyan-500 hover:bg-cyan-500 hover:text-white'>
             <div>
               Sign-Out
             </div>
           </Link>
         ) : (
-          <Link href="/api/auth/signin" style={{textDecoration:'none', fontSize:'20px'}} className='flex items-center h-10 border-2 rounded-lg border-cyan-600 w-28 shadow-lg
-          text-center justify-center text-sky-600 hover:bg-cyan-600 hover:text-white'>
+          <Link href="/api/auth/signin" style={{textDecoration:'none', fontSize:'20px'}} className='flex items-center h-10 border-2 rounded-lg border-cyan-500 w-28 shadow-lg
+          text-center justify-center text-cyan-500 hover:bg-cyan-500 hover:text-white'>
             <div>
               Sign-In
             </div>

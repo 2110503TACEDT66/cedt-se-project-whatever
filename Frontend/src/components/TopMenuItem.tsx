@@ -23,7 +23,7 @@ export default function TopMenuItem({
                 alt={title} 
                 width={0}
                 height={0}/>
-              <div className='m-2 font-serif font-medium text-cyan-600 text-lg'>{title}</div>
+              <div className='m-2 font-serif font-medium text-cyan-500 text-lg'>{title}</div>
           </div>
     </Link>
   );

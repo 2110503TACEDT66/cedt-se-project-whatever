@@ -12,7 +12,7 @@ export default async function Dentist() {
   const profile = await getUserProfile(session.user.token);
 
   const booking = (await getBookings(session.user.token)) as BookingItem[];
-  console.log(profile.data.role);
+  //console.log(profile.data.role);
   if (profile.data.role == 'admin' || booking.length == 0) {
     const dentists = await getDentists();
     return (
@@ -21,6 +21,6 @@ export default async function Dentist() {
       </main>
     );
   } else {
-    return <h1 className="text-center p-5 text-6xl font-serif font-lg text-cyan-600 mt-24">You have already booked</h1>;
+    return <h1 className="text-center p-5 text-6xl font-serif font-lg text-cyan-500 mt-24">You have already booked</h1>;
   }
 }

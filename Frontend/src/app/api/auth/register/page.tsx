@@ -2,6 +2,7 @@ import User from '@/db/models/User';
 import { dbConnect } from '@/db/dbConnect';
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
+import { TextField } from '@mui/material';
 
 export default async function registerPage() {
   const registerUser = async (registerUserForm: FormData) => {
@@ -33,58 +34,68 @@ export default async function registerPage() {
 
   return (
     <div>
-      <Image
-        src="/img/cover.jpg"
-        alt="cover"
-        fill={true}
-        className="object-cover"
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-        }}
-      />
       <div className="flex justify-center items-center h-screen ">
-        <div className="absolute border border-4 rounded-xl p-10 backdrop-blur-xl ">
-          <h1 className="text-center text-3xl font-serif text-white m-5 font-bold">
+        <div className="absolute border border-4 border-cyan-500 rounded-xl p-10 backdrop-blur-xl ">
+          <h1 className="text-center text-3xl font-serif text-cyan-500 mb-10 font-bold">
             Registration
           </h1>
-          <form action={handleSubmit}>
-            <input
-              type="text"
-              name="username"
-              placeholder="Username"
-              className="rounded-2xl m-3 p-3 w-[400px] "
-            />
-            <br />
-            <input
-              type="text"
-              name="tel"
-              placeholder="Tel"
-              className="rounded-2xl m-3 p-3 w-[400px]"
-            />
-            <br />
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              className="rounded-2xl m-3 p-3 w-[400px]"
-            />
-            <br />
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              className="rounded-2xl m-3 p-3 w-[400px]"
-              minLength={6}
-            />
-            <br />
+          <form action={handleSubmit} className='flex flex-col'>
+            <TextField id="username" name="username" label="Username" type="text" required className='pl-3 pb-3'
+                placeholder="John Smith" InputProps={{
+                  style: {
+                    borderRadius: "16px",
+                    width: "400px",
+                    height: "52px",
+                    background: "white"
+                  }
+                }} InputLabelProps={{
+                  style: {
+                    padding: "0 0 0 12px"
+                  }
+                }}/>
+            <TextField id="tel" name="tel" label="Tel" className="pl-3 pb-3" type="text" required
+                placeholder="012-345-6789" InputProps={{
+                  style: {
+                    borderRadius: "16px",
+                    width: "400px",
+                    height: "52px",
+                    background: "white"
+                  }
+                }} InputLabelProps={{
+                  style: {
+                    padding: "0 0 0 12px"
+                  }
+                }}/>
+            <TextField id="email" name="email" label="Email" className="pl-3 pb-3" type='email' required
+                placeholder="Email@XXX.com" InputProps={{
+                  style: {
+                    borderRadius: "16px",
+                    width: "400px",
+                    height: "52px",
+                    background: "white"
+                  }
+                }} InputLabelProps={{
+                  style: {
+                    padding: "0 0 0 12px"
+                  }
+                }}/>
+            <TextField id="password" name="password" label="Password" className="pl-3 pb-3" type="password" required 
+                placeholder="password" InputProps={{
+                  style: {
+                    borderRadius: "16px",
+                    width: "400px",
+                    height: "52px",
+                    background: "white"
+                  }
+                }} InputLabelProps={{
+                  style: {
+                    padding: "0 0 0 12px"
+                  }
+                }}/>
             <button
               type="submit"
-              className="bg-white hover:bg-fuchsia-900 hover:text-white text-black p-2 m-3 rounded-lg font-serif font-bold ">
-              Create
+              className="bg-cyan-500 hover:bg-cyan-600 text-white p-2 m-3 rounded-lg font-serif font-bold ">
+              Register
             </button>
           </form>
         </div>

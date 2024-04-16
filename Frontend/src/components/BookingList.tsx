@@ -25,7 +25,7 @@ export default async function BookingList() {
           />
         ))
       ) : (
-        <h1 className="text-center text-4xl font-serif my-5 font-lg">
+        <h1 className="text-center text-6xl font-serif my-5 text-cyan-500 mt-24">
           No Dentist Booking
         </h1>
       )}

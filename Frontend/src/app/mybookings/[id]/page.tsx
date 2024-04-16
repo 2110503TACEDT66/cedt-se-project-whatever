@@ -37,7 +37,7 @@ export default async function CancelPage({params} : {params : {id:string}}) {
 
     return (
         <main className="flex flex-col items-center space-y-8 mt-20">
-            <div className="text-6xl text-center font-serif text-cyan-600 mb-8 mt-6">Cancel Booking</div>
+            <div className="text-6xl text-center font-serif text-cyan-500 mb-8 mt-6">Cancel Booking</div>
             <div className="bg-slate-200 rounded-3xl p-24">
             <div className="flex flex-col">
             <div className="text-2xl text-center font-bold text-cyan-900 mb-8">Are you sure you want to cancel this booking?<br></br>This can't be undone</div>
