@@ -16,11 +16,11 @@ export default async function Dentist() {
   if (profile.data.role == 'admin' || booking.length == 0) {
     const dentists = await getDentists();
     return (
-      <main className="text-center p-5">
+      <main className="text-center p-5 mt-20">
         <BookingPagSon dentistJson={dentists} />
       </main>
     );
   } else {
-    return <h1 className="text-center p-5 text-6xl font-serif font-lg text-cyan-600 mt-6">You have already booked</h1>;
+    return <h1 className="text-center p-5 text-6xl font-serif font-lg text-cyan-600 mt-24">You have already booked</h1>;
   }
 }

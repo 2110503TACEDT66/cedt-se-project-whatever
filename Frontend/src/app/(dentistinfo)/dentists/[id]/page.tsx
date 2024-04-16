@@ -27,8 +27,8 @@ export default async function DentistDetailPage({
   }
 
   return (
-    <main className="text-center p-5">
-      <div className="flex flex-row my-5">
+    <main className="text-center p-5 mt-16">
+      <div className="flex flex-row">
         <Image
           src={dentistDetail.data.picture}
           alt="Dentist Picture"
@@ -37,13 +37,18 @@ export default async function DentistDetailPage({
           sizes="100vw"
           className="rounded-lg w-[30%] bg-black"
         />
-        <div className="mx-5 my-5 text-left">
-          <div className="text-xl">Name : {dentistDetail.data.name}</div>
-          <div className="text-md">
-            Years of Experience : {dentistDetail.data.experience}
+        <div className="mx-5 text-left">
+          <div>
+            <span className='text-2xl font-bold font-mono text-cyan-900'>Name: </span>
+            <span className='text-xl text-black'>{dentistDetail.data.name}</span>
           </div>
-          <div className="text-md">
-            Area of Expertise : {dentistDetail.data.expertise}
+          <div>
+            <span className='text-2xl font-bold font-mono text-cyan-900'>Years of Experience: </span>
+            <span className='text-xl text-black'>{dentistDetail.data.experience}</span>
+          </div>
+          <div>
+            <span className='text-2xl font-bold font-mono text-cyan-900'>Area of expertise: </span>
+            <span className='text-xl text-black'>{dentistDetail.data.expertise}</span>
           </div>
           <SymptomField
             dentist={params.id}

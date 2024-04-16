@@ -47,10 +47,9 @@ export default async function TopMenu() {
             </div>
           </Link>
         ) : (
-          <Link href="/api/auth/signin">
-            <div
-              className="flex items-center h-full
-              px-2 text-cyan-600 text-sm text-white">
+          <Link href="/api/auth/signin" style={{textDecoration:'none', fontSize:'20px'}} className='flex items-center h-10 border-2 rounded-lg border-cyan-600 w-28 shadow-lg
+          text-center justify-center text-sky-600 hover:bg-cyan-600 hover:text-white'>
+            <div>
               Sign-In
             </div>
           </Link>
