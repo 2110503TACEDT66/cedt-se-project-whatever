@@ -30,11 +30,12 @@ export default async function RootLayout({
           <NextAuthProvider session={nextAuthSession}>
             <TopMenu/>
             <Image
-              src="/img/cover.jpg"
+              src="/img/dentistbg.jpg"
               alt="cover"
               fill={true}
-              className="object-cover absolute top-0 left-0 w-full h-full -z-10"/>
+              className="object-cover absolute top-0 left-0 w-full h-full -z-10 mt-[64px] opacity-50"/>
             {children}
+            {nextAuthSession ? <div className='fixed left-0 bottom-0 ml-2 text-sky-600 text-lg'>user: {nextAuthSession.user.name}</div>: null}
           </NextAuthProvider>
         </ReduxProvider>
         

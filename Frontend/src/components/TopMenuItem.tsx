@@ -15,15 +15,15 @@ export default function TopMenuItem({
       href={pageRef}>
          <div
               className="flex items-center h-full
-                px-2 text-cyan-600 text-sm ml-3"
+                px-2 text-sm ml-3"
                 data-testid={title}>
               <Image 
-                className="h-[23px] w-[23px] "
+                className="h-6 w-6"
                 src={imgSrc} 
                 alt={title} 
                 width={0}
                 height={0}/>
-              <div className='m-2 font-serif font-medium text-white'>{title}</div>
+              <div className='m-2 font-serif font-medium text-cyan-600 text-lg'>{title}</div>
           </div>
     </Link>
   );
