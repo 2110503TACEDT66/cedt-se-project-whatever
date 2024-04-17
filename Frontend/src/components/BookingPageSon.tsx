@@ -28,11 +28,11 @@ export default function BookingPagSon({dentistJson}:{dentistJson:DentistJson}){
              <div>
              <SortDropDown  expertise={expertise} setExpertise={setExpertise}/>
            </div>
-           <div  className="m-5 text-xl font-bold font-serif text-cyan-500">Sort by Experience</div> 
+           <div  className="m-5 text-xl font-bold font-serif text-cyan-500">Sort by Years of Experience (More than or equal): </div> 
            <div>
                 <QuantityInput experience={experience} setExperience={setExperience}/>
             </div></div>
-            <h1 className='text-4xl font-serif font-semibold mb-4 text-cyan-500 mb-6'>Available Dentist</h1>
+            <h1 className='text-4xl font-serif font-semibold mb-4 text-cyan-500 mb-6 block'>Available Dentist</h1>
             <Suspense fallback={<p>Loading...<LinearProgress/></p>}>
                 <DentistCatalog dentistsJson={dentistJson} date={bookingDate} expertise={expertise} experience={experience}/>
             </Suspense>

@@ -45,15 +45,15 @@ export default async function CancelPage({params} : {params : {id:string}}) {
             {session.user.role === 'receptionist' ? 
                 <div className="flex flex-row space-x-6 items-center text-center">
                     <div className="flex flex-col items-center space-y-8">
-                        <div className="text-2xl font-semibold w-80 text-center h-auto">Patient Tel. Number</div>
-                        <div className="text-2xl font-semibold w-80 text-center h-auto">Patient Email</div>
+                        <div className="text-2xl font-semibold w-80 text-center h-auto text-cyan-900">Patient Tel. Number</div>
+                        <div className="text-2xl font-semibold w-80 text-center h-auto text-cyan-900">Patient Email</div>
                     </div>
                     <div className="flex flex-col items-center space-y-4">
-                        <div className="w-[448px] max-w-md bg-gray-200 text-center
-                            px-6 py-3 text-black font-semibold text-xl">{uTel}
+                        <div className="w-[448px] max-w-md bg-cyan-500 text-center
+                            px-6 py-3 text-white font-semibold text-xl">{uTel}
                         </div>
-                        <div className="w-[448px] max-w-md bg-gray-200 text-center
-                            px-6 py-3 text-black font-semibold text-xl">{uEmail}
+                        <div className="w-[448px] max-w-md bg-cyan-500 text-center
+                            px-6 py-3 text-white font-semibold text-xl">{uEmail}
                         </div>
                     </div>
                 </div>

@@ -23,7 +23,7 @@ export default function RecepBooking({
   const [editing, setEditing] = useState<boolean>(false);
   const [newSymptom, setNewSymptom] = useState<String | null>(null);
 
-  console.log(bookingItem.reqType);
+  //console.log(bookingItem.reqType);
 
   return (
     <div className="flex flex-col bg-slate-200 rounded-lg mx-4">
