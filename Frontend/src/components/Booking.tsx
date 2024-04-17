@@ -42,6 +42,8 @@ export default function Booking({
           <div>
             <span className="text-xl font-bold font-mono text-cyan-900">Booking date: </span>
             <span className="text-lg">{new Date(bookingItem.startDate).toUTCString()}</span>
+            <span className="text-lg">{' - '}</span>
+            <span className="text-lg">{new Date(bookingItem.endDate).toUTCString()}</span>
           </div>
           <div>
             <span className="text-xl font-bold font-mono text-cyan-900">Symptom: </span>

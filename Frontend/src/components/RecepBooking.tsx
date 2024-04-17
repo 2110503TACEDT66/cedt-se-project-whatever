@@ -5,6 +5,9 @@ import Image from 'next/image';
 import { useState } from 'react';
 import Link from 'next/link';
 import confirmStatusBooking from '@/libs/comfirmStatusBooking';
+import { DatePicker } from '@mui/x-date-pickers';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 export default function RecepBooking({
   bookingItem,
@@ -22,10 +25,14 @@ export default function RecepBooking({
 
   const [editing, setEditing] = useState<boolean>(false);
   const [newSymptom, setNewSymptom] = useState<String | null>(null);
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
+  const [creatingCureBooking, setCreatingCureBooking] = useState<boolean>(false);
 
   //console.log(bookingItem.reqType);
 
   return (
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
     <div className="flex flex-col bg-slate-200 rounded-lg mx-4">
       <div className="px-5 pt-2 flex flex-row text-black">
         <Image
@@ -54,6 +61,10 @@ export default function RecepBooking({
             </span>
             <span className="text-lg">
               {new Date(bookingItem.startDate).toUTCString()}
+            </span>
+            <span className="text-lg">{' - '}</span>
+            <span className="text-lg">
+            {new Date(bookingItem.endDate).toUTCString()}
             </span>
           </div>
           <div>
@@ -91,6 +102,8 @@ export default function RecepBooking({
                 setEditing(!editing);
                 onUpdateBooking(
                   bookingItem._id,
+                  bookingItem.startDate,
+                  bookingItem.endDate,
                   newSymptom,
                   session.user.token
                 );
@@ -98,23 +111,53 @@ export default function RecepBooking({
               Confirm editing
             </button>
           </div>
-        ) : bookingItem.reqType === 'checkup' ? (
+        ) : creatingCureBooking ? (
+          <div className="flex flex-row gap-x-3 py-2">
+            <DatePicker
+              value={startDate}
+              onChange={(date) => setStartDate(date)}
+              className="block rounded-md px-3 py-2 shadow-sm mx-3"
+            />
+            <DatePicker
+              value={endDate}
+              onChange={(date) => setEndDate(date)}
+              className="block rounded-md px-3 py-2 shadow-sm mx-3"
+            />
+            <button
+              className="block rounded-md bg-sky-600 hover:bg-indigo-600 px-3 py-2 shadow-sm text-white mx-3"
+              onClick={() => setCreatingCureBooking(!creatingCureBooking)}>
+              Cancel editing
+            </button>
+            <button
+              className="block rounded-md bg-sky-600 hover:bg-indigo-600 px-3 py-2 shadow-sm text-white mx-3"
+              onClick={() => {
+                setCreatingCureBooking(!creatingCureBooking);
+                onUpdateBooking(
+                  bookingItem._id,
+                  startDate,
+                  endDate,
+                  bookingItem.symptom,
+                  session.user.token
+                );
+              }}>
+              Confirm editing
+            </button>
+          </div>
+          ) : bookingItem.reqType === 'checkup' ? (
           <div className="flex flex-row gap-x-3 py-2">
             {bookingItem.status === 'finish' ? (
-              <button
-                className="block rounded-md bg-green-600 hover:bg-green-700 px-3 py-2 shadow-sm text-white mx-3"
-                onClick={() => {
-                  onCreateCureBooking(bookingItem._id);
-                }}>
-                Create cure booking
-              </button>
-            ) : (
+            <button
+              className="block rounded-md bg-green-600 hover:bg-green-700 px-3 py-2 shadow-sm text-white mx-3"
+              onClick={() => setCreatingCureBooking(true)}>
+              Create cure booking
+            </button>
+              ) : (
               <button
                 className="block rounded-md bg-green-600 hover:bg-green-700 px-3 py-2 shadow-sm text-white mx-3"
                 onClick={() => {
                   confirmStatusBooking(session.user.token, bookingItem._id);
                 }}>
-                Finish checkup
+              Finish checkup
               </button>
             )}
             <button
@@ -148,5 +191,6 @@ export default function RecepBooking({
         )}
       </div>
     </div>
+    </LocalizationProvider>
   );
 }
