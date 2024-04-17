@@ -12,7 +12,10 @@ export default function DateReserve({onDateChange}:{onDateChange:Function}){
     return(
         <div className='bg-slate-100 rounded-xl space-x-5 space-y-2 w-fit flex flex-row justify-center'>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DateTimePicker views={['year','day', 'hours']} className='bg-slate-100'
+                <DateTimePicker 
+                views={['year','day', 'hours']} 
+                className='bg-slate-100'
+                disablePast
                 value={bookingDate}
                 onChange={(value)=>{setBookingDate(value); onDateChange(value)}}/>
             </LocalizationProvider>
