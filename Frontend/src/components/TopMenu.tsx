@@ -29,7 +29,7 @@ export default async function TopMenu() {
       />
       }
       <TopMenuItem
-        title="My Booking"
+        title={session?.user.role == "receptionist" ? "Bookings" : "My Booking"}
         imgSrc="/img/bookingIcon.png"
         pageRef="/mybookings"
       />
