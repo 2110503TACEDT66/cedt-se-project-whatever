@@ -25,12 +25,12 @@ export default function CancelButton({userToken, bookingId, emailSender,role} : 
                         }
 
                         await deleteBooking(bookingId, userToken);
-                        // Swal.fire({
-                        // title: 'Success',
-                        // text: 'Delete Booking Success',
-                        // icon: 'success',
-                        // confirmButtonText: 'OK'
-                        // })
+                        Swal.fire({
+                        title: 'Success',
+                        text: 'Delete Booking Success',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                        })
                     }
                 }}
                 >
