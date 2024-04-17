@@ -23,26 +23,26 @@ export default function DentistCatalog({
         {date != ''
           ? dentistJsonReady.data.map((dentistItem: DentistItem) =>
               dentistItem.bookings?.some((bookdate: BookingItem) => {
-                let occupiedDate = new Date(bookdate.bookingDate);
+                let occupiedDate = new Date(bookdate.startDate);
                 let selectedDate = new Date(date);
-                console.log(date
-                  // selectedDate.getFullYear() +
-                  //   ' ' +
-                  //   selectedDate.getMonth() +
-                  //   ' ' +
-                  //   selectedDate.getDate() +
-                  //   ' ' +
-                  //   selectedDate.getHours() +
-                  //   ' \n' +
-                  //   occupiedDate.getFullYear() +
-                  //   ' ' +
-                  //   occupiedDate.getMonth() +
-                  //   ' ' +
-                  //   occupiedDate.getDate() +
-                  //   ' ' +
-                  //   occupiedDate.getHours() +
-                  //   ' '
-                );
+                // console.log(date
+                //   selectedDate.getFullYear() +
+                //     ' ' +
+                //     selectedDate.getMonth() +
+                //     ' ' +
+                //     selectedDate.getDate() +
+                //     ' ' +
+                //     selectedDate.getHours() +
+                //     ' \n' +
+                //     occupiedDate.getFullYear() +
+                //     ' ' +
+                //     occupiedDate.getMonth() +
+                //     ' ' +
+                //     occupiedDate.getDate() +
+                //     ' ' +
+                //     occupiedDate.getHours() +
+                //     ' '
+                // );
                 if (
                   selectedDate.getFullYear() == occupiedDate.getFullYear() &&
                   selectedDate.getMonth() == occupiedDate.getMonth() &&
@@ -62,7 +62,8 @@ export default function DentistCatalog({
               }) ? null : (dentistItem.expertise == expertise ||
                   expertise == '') &&
                 (dentistItem.experience >= experience || experience == 0) ? (
-                <Link href={`/dentists/${dentistItem.id}`}>
+                <Link href={`/dentists/${dentistItem.id}`} className='rounded-md overflow-hidden shadow-md 
+                hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1'>
                   <Card
                     dentistName={dentistItem.name}
                     imgSrc={dentistItem.picture}

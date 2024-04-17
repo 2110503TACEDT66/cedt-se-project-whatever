@@ -3,6 +3,8 @@ import { revalidateTag } from 'next/cache';
 
 export default async function updateBooking(
   id: string,
+  startDate : string,
+  endDate : string,
   symptom: string,
   token: string
 ) {
@@ -15,12 +17,15 @@ export default async function updateBooking(
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        symptom: symptom,
+        startDate : startDate,
+        symptom : symptom,
+        endDate : endDate,
       }),
     }
   );
   if (!response.ok) {
     throw new Error('Failed to update booking');
+    console.log(response)
   }
   revalidateTag('booking');
   return await response.json();
