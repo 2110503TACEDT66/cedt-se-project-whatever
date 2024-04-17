@@ -1,15 +1,13 @@
 'use client'
-import deleteBooking from "@/libs/deleteBooking";
+import sendEmail from "@/libs/sendEmail";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
-import Swal from "sweetalert2"
 
-export default function CancelButton({userToken, bookingId, emailSender,role} : {userToken:string, bookingId:string, emailSender:Function, role:string}) {
-
-    const send = async () => {
-        //console.log("helloWorld") ;
-        await emailSender(); // Call the emailSender function
+export default function CancelButton({bookingId}:{bookingId:string}) {
+    const {data:session}=useSession();
+    if (!session || !session.user.token) {
+        return null ;
     }
-
     return (
         <div className="text-center items-center">
             <Link href={"/"} className="text-center items-center">
@@ -20,17 +18,7 @@ export default function CancelButton({userToken, bookingId, emailSender,role} : 
                         'Are you sure you want to delete this booking?'
                     );
                     if (cf) {
-                        if (role == "receptionist") {
-                            send();
-                        }
-
-                        await deleteBooking(bookingId, userToken);
-                        Swal.fire({
-                        title: 'Success',
-                        text: 'Delete Booking Success',
-                        icon: 'success',
-                        confirmButtonText: 'OK'
-                        })
+                        sendEmail(session.user.token,bookingId) ;
                     }
                 }}
                 >
