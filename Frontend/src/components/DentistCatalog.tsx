@@ -23,7 +23,7 @@ export default function DentistCatalog({
         {date != ''
           ? dentistJsonReady.data.map((dentistItem: DentistItem) =>
               dentistItem.bookings?.some((bookdate: BookingItem) => {
-                let occupiedDate = new Date(bookdate.bookingDate);
+                let occupiedDate = new Date(bookdate.startDate);
                 let selectedDate = new Date(date);
                 // console.log(date
                 //   selectedDate.getFullYear() +
