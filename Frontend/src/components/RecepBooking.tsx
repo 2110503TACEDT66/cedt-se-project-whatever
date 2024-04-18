@@ -169,11 +169,11 @@ export default function RecepBooking({
               Finish checkup
               </button>
             )}
-            <button
+            {/* <button
               className="block rounded-md bg-sky-600 hover:bg-sky-700 px-3 py-2 shadow-sm text-white mx-3"
               onClick={() => setEditing(!editing)}>
               Edit your symptom
-            </button>
+            </button> */}
             <Link href={`mybookings/${bookingItem._id}`}>
               <button
                 className="block rounded-md bg-red-600 hover:bg-red-700 px-3 py-2
@@ -184,11 +184,19 @@ export default function RecepBooking({
           </div>
         ) : (
           <div className="flex flex-row gap-x-3 py-2">
-            <button
+            {bookingItem.status == "finish" ? null : <button
+                className="block rounded-md bg-green-600 hover:bg-green-700 px-3 py-2 shadow-sm text-white mx-3"
+                onClick={() => {
+                  confirmStatusBooking(session.user.token, bookingItem._id);
+                }}>
+              Finish checkup
+              </button>}
+            
+            {/* <button
               className="block rounded-md bg-sky-600 hover:bg-sky-700 px-3 py-2 shadow-sm text-white mx-3"
               onClick={() => setEditing(!editing)}>
               Edit your symptom
-            </button>
+            </button> */}
             <Link href={`mybookings/${bookingItem._id}`}>
               <button
                 className="block rounded-md bg-red-600 hover:bg-red-700 px-3 py-2
