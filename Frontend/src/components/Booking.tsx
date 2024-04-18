@@ -1,9 +1,11 @@
 'use client';
-import { Backdrop, CircularProgress, TextField } from '@mui/material';
+import { Backdrop, Button, CircularProgress, TextField } from '@mui/material';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { useState } from 'react';
 import Link from 'next/link';
+import CircleIcon from '@mui/icons-material/Circle';
+import ButtonStatus from './ButtonStatus';
 
 export default function Booking({
   bookingItem,
@@ -49,9 +51,10 @@ export default function Booking({
             <span className="text-xl font-bold font-mono text-cyan-900">Symptom: </span>
             <span className="text-lg">{bookingItem.symptom}</span>
           </div>
-          <div>
+          <div >
             <span className="text-xl font-bold font-mono text-cyan-900">Status: </span>
-            <span className="text-lg">{bookingItem.status}</span>
+            <span className="text-lg">{bookingItem.status} </span>
+            <ButtonStatus status={bookingItem.status} />
           </div>
         </div>
       </div>
