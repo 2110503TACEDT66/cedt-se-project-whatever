@@ -1,13 +1,15 @@
 'use client';
-import { Backdrop, CircularProgress, TextField } from '@mui/material';
+import {TextField } from '@mui/material';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { useState } from 'react';
 import Link from 'next/link';
 import confirmStatusBooking from '@/libs/comfirmStatusBooking';
-import { DatePicker } from '@mui/x-date-pickers';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import createBooking from '@/libs/createCureBooking';
+import { DateTimePicker } from '@mui/x-date-pickers';
+
 
 export default function RecepBooking({
   bookingItem,
@@ -28,6 +30,17 @@ export default function RecepBooking({
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
   const [creatingCureBooking, setCreatingCureBooking] = useState<boolean>(false);
+
+  const handleCreateBooking = () => {
+    if (!startDate || !endDate || !bookingItem) {
+      return }
+    createBooking(
+      session.user.token,
+      startDate.toString(),
+      endDate.toString(),
+      bookingItem._id,
+    );
+  }
 
   //console.log(bookingItem.reqType);
 
@@ -113,12 +126,14 @@ export default function RecepBooking({
           </div>
         ) : creatingCureBooking ? (
           <div className="flex flex-row gap-x-3 py-2">
-            <DatePicker
+            <DateTimePicker
+              disablePast
               value={startDate}
               onChange={(date) => setStartDate(date)}
               className="block rounded-md px-3 py-2 shadow-sm mx-3"
             />
-            <DatePicker
+            <DateTimePicker
+              disablePast
               value={endDate}
               onChange={(date) => setEndDate(date)}
               className="block rounded-md px-3 py-2 shadow-sm mx-3"
@@ -126,21 +141,15 @@ export default function RecepBooking({
             <button
               className="block rounded-md bg-sky-600 hover:bg-indigo-600 px-3 py-2 shadow-sm text-white mx-3"
               onClick={() => setCreatingCureBooking(!creatingCureBooking)}>
-              Cancel editing
+              Cancel create
             </button>
             <button
               className="block rounded-md bg-sky-600 hover:bg-indigo-600 px-3 py-2 shadow-sm text-white mx-3"
               onClick={() => {
                 setCreatingCureBooking(!creatingCureBooking);
-                onUpdateBooking(
-                  bookingItem._id,
-                  startDate,
-                  endDate,
-                  bookingItem.symptom,
-                  session.user.token
-                );
+                handleCreateBooking() ;
               }}>
-              Confirm editing
+              Confirm create
             </button>
           </div>
           ) : bookingItem.reqType === 'checkup' ? (
