@@ -3,14 +3,12 @@ import { revalidateTag } from 'next/cache';
 
 export default async function createBooking(
   token: string,
-  user: string,
-  dentistId: string,
   startDate: string,
   endDate: string,
-  symptom: string
+  bookingId:string,
 ) {
   const response = await fetch(
-    `${process.env.BACKEND_URL}/api/v1/dentists/${dentistId}/bookings`,
+    `${process.env.BACKEND_URL}/api/v1/bookings/${bookingId}`,
     {
       method: 'POST',
       headers: {
@@ -18,11 +16,8 @@ export default async function createBooking(
         authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
-        user: user,
         startDate: startDate,
         endDate: endDate,
-        symptom: symptom,
-        reqType: 'cure',
         status: 'pending',
       }),
     }

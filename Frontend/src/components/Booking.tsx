@@ -66,12 +66,12 @@ export default function Booking({
                 }}
               />
               <button
-                className="block rounded-md bg-sky-600 hover:bg-indigo-600 px-3 py-2 shadow-sm text-white mx-3"
+                className="block rounded-md bg-red-600 hover:bg-red-700 px-3 py-2 shadow-sm text-white mx-3"
                 onClick={() => setEditing(!editing)}>
                 Cancel editing
               </button>
               <button
-                className="block rounded-md bg-sky-600 hover:bg-indigo-600 px-3 py-2 shadow-sm text-white mx-3"
+                className="block rounded-md bg-green-600 hover:bg-green-700 px-3 py-2 shadow-sm text-white mx-3"
                 onClick={() => {
                   setEditing(!editing);
                   onUpdateBooking(
