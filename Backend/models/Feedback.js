@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const feedbackSchema = new mongoose.Schema({
+const FeedbackSchema = new mongoose.Schema({
     dentist: {
         type: mongoose.Schema.ObjectId,
         ref: 'Dentist',
@@ -29,13 +29,13 @@ const feedbackSchema = new mongoose.Schema({
     }]
 });
 
-feedbackSchema.index({ dentist: 1 });
+FeedbackSchema.index({ dentist: 1 });
 
-feedbackSchema.pre('find', function() {
+FeedbackSchema.pre('find', function() {
     this.populate({
         path: 'feedbacks.user',
         select: 'name'
     });
 });
 
-module.exports = mongoose.model('Feedback', feedbackSchema);
+module.exports = mongoose.model('Feedback', FeedbackSchema);
