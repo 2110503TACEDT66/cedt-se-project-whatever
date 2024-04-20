@@ -86,8 +86,9 @@ export default function Booking({
                 Confirm editing
               </button>
             </div>
-          ) : (
-            <div className="flex flex-row gap-x-3 py-2">
+          ) : 
+            bookingItem.status !== 'finish' ? (
+              <div className="flex flex-row gap-x-3 py-2">
               <button
                 className="block rounded-md bg-sky-600 hover:bg-sky-700 px-3 py-2 shadow-sm text-white mx-3"
                 onClick={() => setEditing(!editing)}>
@@ -101,7 +102,8 @@ export default function Booking({
                 </button>
               </Link>
             </div>
-          )}
+            )
+            : null}
       </div>
     </div>
   );

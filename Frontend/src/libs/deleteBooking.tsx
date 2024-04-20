@@ -14,6 +14,6 @@ export default async function deleteBooking(id: string, token: string) {
   if (!response.ok) {
     throw new Error('Failed to delete booking');
   }
-  revalidateTag('booking');
+  //revalidateTag('booking');
   return await response.json();
 }

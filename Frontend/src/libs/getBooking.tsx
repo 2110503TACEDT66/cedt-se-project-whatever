@@ -10,6 +10,6 @@ export default async function getBooking(token: string, bookingId: string) {
     throw new Error('Failed to fetch booking');
   }
   const bookings = await response.json();
-
+  
   return bookings.data;
 }

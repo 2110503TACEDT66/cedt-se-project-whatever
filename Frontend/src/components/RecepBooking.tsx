@@ -161,6 +161,7 @@ export default function RecepBooking({
               Create cure booking
             </button>
               ) : (
+                <div className='flex flex-row'>
               <button
                 className="block rounded-md bg-green-600 hover:bg-green-700 px-3 py-2 shadow-sm text-white mx-3"
                 onClick={() => {
@@ -168,35 +169,28 @@ export default function RecepBooking({
                 }}>
               Finish checkup
               </button>
-            )}
-            {/* <button
-              className="block rounded-md bg-sky-600 hover:bg-sky-700 px-3 py-2 shadow-sm text-white mx-3"
-              onClick={() => setEditing(!editing)}>
-              Edit your symptom
-            </button> */}
-            <Link href={`mybookings/${bookingItem._id}`}>
+              <Link href={`mybookings/${bookingItem._id}`}>
               <button
                 className="block rounded-md bg-red-600 hover:bg-red-700 px-3 py-2
                     shadow-sm text-white mx-3">
                 Cancel Booking
               </button>
             </Link>
+            </div>
+            )}
+            
+        
           </div>
         ) : (
           <div className="flex flex-row gap-x-3 py-2">
-            {bookingItem.status == "finish" ? null : <button
+            {bookingItem.status == "finish" ? null : (<div className='flex flex-row'><button
                 className="block rounded-md bg-green-600 hover:bg-green-700 px-3 py-2 shadow-sm text-white mx-3"
                 onClick={() => {
                   confirmStatusBooking(session.user.token, bookingItem._id);
                 }}>
               Finish checkup
-              </button>}
+              </button>
             
-            {/* <button
-              className="block rounded-md bg-sky-600 hover:bg-sky-700 px-3 py-2 shadow-sm text-white mx-3"
-              onClick={() => setEditing(!editing)}>
-              Edit your symptom
-            </button> */}
             <Link href={`mybookings/${bookingItem._id}`}>
               <button
                 className="block rounded-md bg-red-600 hover:bg-red-700 px-3 py-2
@@ -204,6 +198,7 @@ export default function RecepBooking({
                 Cancel Booking
               </button>
             </Link>
+            </div>)}
           </div>
         )}
       </div>
