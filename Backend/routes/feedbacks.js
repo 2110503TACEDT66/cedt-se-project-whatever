@@ -1,10 +1,15 @@
-const express = require('express');
+const express = require("express");
 
-const { getFeedbacks, getFeedback } = require('../controllers/feedbacks');
+const {
+  getFeedbacks,
+  getFeedback,
+  addFeedback,
+} = require("../controllers/feedbacks");
 
 const router = express.Router({ mergeParams: true });
+const { protect, authorize } = require("../middleware/auth");
 
-router.route('/').get(getFeedbacks);
-router.route('/:feedbackId').get(getFeedback);
+router.route("/").get(getFeedbacks).post(protect, addFeedback);
+router.route("/:feedbackId").get(getFeedback);
 
 module.exports = router;
