@@ -1,4 +1,3 @@
-const Booking = require("../models/Booking");
 const Dentist = require("../models/Dentist");
 const Feedback = require("../models/Feedback");
 
@@ -100,5 +99,82 @@ exports.addFeedback = async (req, res, next) => {
     return res
       .status(500)
       .json({ success: false, message: "Cannot add feedback" });
+  }
+};
+
+//@desc     Update feedback session
+//@route    PUT /api/v1/feedbacks/:id
+//@access   Private
+exports.updateFeedback = async (req, res, next) => {
+  try {
+    let feedback = await Feedback.findById(req.params.feedbackId);
+
+    if (!feedback) {
+      return res.status(404).json({
+        success: false,
+        message: `No feedback with the id of ${req.params.feedbackId}`,
+      });
+    }
+
+    //Make sure user is the feedback owner
+    if (feedback.user.toString() !== req.user.id && req.user.role === "user") {
+      return res.status(401).json({
+        success: false,
+        message: `User ${req.user.id} is not authorized to update this feedback session`,
+      });
+    }
+
+    feedback = await feedback.findByIdAndUpdate(
+      req.params.feedbackId,
+      req.body,
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+
+    res.status(200).json({ success: true, data: feedback });
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .json({ success: false, message: "Cannot update feedback Session" });
+  }
+};
+
+//@desc     Delete feedback session
+//@route    DELETE /api/v1/feedbacks/:id
+//@access   Private
+exports.deletefeedback = async (req, res, next) => {
+  try {
+    const feedback = await feedback.findById(req.params.feedbackId);
+
+    if (!feedback) {
+      return res.status(404).json({
+        success: false,
+        message: `No feedback with the id of ${req.params.feedbackId}`,
+      });
+    }
+
+    //Make sure user is the feedback owner
+    if (
+      feedback.user.toString() !== req.user.id &&
+      req.user.role !== "admin" &&
+      req.user.role !== "receptionist"
+    ) {
+      return res.status(401).json({
+        success: false,
+        message: `User ${req.user.id} is not authorized to delete this feedback`,
+      });
+    }
+
+    await feedback.deleteOne();
+
+    res.status(200).json({ success: true, data: {} });
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(500)
+      .json({ success: false, message: "Cannot delete feedback" });
   }
 };
