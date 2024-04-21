@@ -21,6 +21,7 @@ connectDB();
 const dentists = require('./routes/dentists');
 const auth = require('./routes/auth');
 const bookings = require('./routes/bookings');
+const feedbacks = require('./routes/feedbacks');
 
 const app = express();
 
@@ -77,6 +78,7 @@ app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 app.use('/api/v1/dentists', dentists);
 app.use('/api/v1/auth', auth);
 app.use('/api/v1/bookings', bookings);
+app.use('/api/v1/feedbacks', feedbacks);
 
 const server = app.listen(
   PORT,
