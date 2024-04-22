@@ -1,6 +1,10 @@
+'use client'
 import Rating from '@mui/material/Rating';
+import { useContext } from 'react';
+import {Context} from './Booking'
 
 export default function PopupCommentNRating({visible}:{visible:boolean}){
+    const { popUpBoolean, setPopUpBoolean } = useContext(Context)!
     if(visible)return(
         <div>
             <div className="bg-gray-600 fixed ml-auto mr-auto left-0 right-0 text-center top-0 w-full h-full opacity-50">
@@ -13,7 +17,10 @@ export default function PopupCommentNRating({visible}:{visible:boolean}){
                 </textarea>
                 <Rating name="size-small" defaultValue={2} size="medium" />
                 <button className='bg-sky-600 hover:bg-sky-700 shadow-sm absolute bottom-5 right-5 rounded-lg px-5 py-1'>Submit</button>
-                <button className='bg-sky-600 hover:bg-sky-700 shadow-sm absolute bottom-5 right-32 rounded-lg px-5 py-1'>Cancel</button>
+                <button className='bg-sky-600 hover:bg-sky-700 shadow-sm absolute bottom-5 right-32 rounded-lg px-5 py-1'
+                onClick={()=>{setPopUpBoolean(!popUpBoolean)}}>
+                    Cancel
+                </button>
             </div>            
         </div>
     )

@@ -2,11 +2,17 @@
 import { Backdrop, Button, CircularProgress, TextField } from '@mui/material';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
-import { useState,useContext } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import Link from 'next/link';
 import CircleIcon from '@mui/icons-material/Circle';
 import ButtonStatus from './ButtonStatus';
 import PopupCommentNRating from './PopupCommentNRating';
+
+type ContextValueType = {
+  popUpBoolean: boolean;
+  setPopUpBoolean: React.Dispatch<React.SetStateAction<boolean>>;
+};
+export const Context = createContext<ContextValueType | undefined>(undefined);
 
 export default function Booking({
   bookingItem,
@@ -22,6 +28,11 @@ export default function Booking({
 
   const [editing, setEditing] = useState<boolean>(false);
   const [newSymptom, setNewSymptom] = useState<String | null>(null);
+  const [popUpBoolean, setPopUpBoolean] = useState(false)
+  const contextValue: ContextValueType = {
+    popUpBoolean,
+    setPopUpBoolean,
+  };
 
   return (
     <div className='flex flex-col bg-slate-200 rounded-lg mx-4'>
@@ -103,10 +114,14 @@ export default function Booking({
               </Link>
             </div>
           )}
-      <button className='rounded-md bg-black px-4 shadow-sm text-white mx-3'>
+      <button className='rounded-md bg-black px-4 shadow-sm text-white mx-3'
+      onClick={()=>{setPopUpBoolean(!popUpBoolean)}}>
         Test comment
       </button>
-      <PopupCommentNRating visible={true}></PopupCommentNRating>
+      <Context.Provider value={contextValue}>
+        <PopupCommentNRating visible={popUpBoolean}></PopupCommentNRating>        
+      </Context.Provider>
+
       </div>
     </div>
   );
