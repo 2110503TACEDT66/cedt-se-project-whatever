@@ -1,3 +1,4 @@
+
 import getBookings from '@/libs/getBookings';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
@@ -9,7 +10,7 @@ import updateBooking from '@/libs/updateBooking';
 export default async function BookingList() {
   const session = await getServerSession(authOptions);
   if (!session || !session.user.token) return null;
-
+  
   const bookingItems = await getBookings(session?.user.token);
 
   return (

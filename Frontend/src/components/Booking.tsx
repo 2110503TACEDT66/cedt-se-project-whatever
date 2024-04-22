@@ -2,10 +2,11 @@
 import { Backdrop, Button, CircularProgress, TextField } from '@mui/material';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState,useContext } from 'react';
 import Link from 'next/link';
 import CircleIcon from '@mui/icons-material/Circle';
 import ButtonStatus from './ButtonStatus';
+import PopupCommentNRating from './PopupCommentNRating';
 
 export default function Booking({
   bookingItem,
@@ -102,6 +103,10 @@ export default function Booking({
               </Link>
             </div>
           )}
+      <button className='rounded-md bg-black px-4 shadow-sm text-white mx-3'>
+        Test comment
+      </button>
+      <PopupCommentNRating visible={true}></PopupCommentNRating>
       </div>
     </div>
   );
