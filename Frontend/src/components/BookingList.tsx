@@ -9,7 +9,7 @@ import updateBooking from '@/libs/updateBooking';
 export default async function BookingList() {
   const session = await getServerSession(authOptions);
   if (!session || !session.user.token) return null;
-
+  
   const bookingItems = await getBookings(session?.user.token);
 
   return (

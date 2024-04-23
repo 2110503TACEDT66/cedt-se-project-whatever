@@ -1,6 +1,5 @@
-const Booking = require('../models/Booking');
-const Dentist = require('../models/Dentist');
-const Feedback = require('../models/Feedback');
+const Dentist = require("../models/Dentist");
+const Feedback = require("../models/Feedback");
 
 //@desc     Get all feedbacks
 //@route    GET /api/v1/feedbacks
@@ -22,7 +21,7 @@ exports.getFeedbacks = async (req, res, next) => {
   } catch (err) {
     return res
       .status(500)
-      .json({ success: false, message: 'Cannot find feedbacks' });
+      .json({ success: false, message: "Cannot find feedbacks" });
   }
 };
 
@@ -48,6 +47,6 @@ exports.getFeedback = async (req, res, next) => {
     console.log(error);
     return res
       .status(500)
-      .json({ success: false, message: 'Cannot find feedback' });
+      .json({ success: false, message: "Cannot find feedback" });
   }
 };

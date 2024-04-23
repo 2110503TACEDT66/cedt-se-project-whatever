@@ -22,7 +22,7 @@ export default async function Dentist() {
   if (allowBook) {
     const dentists = await getDentists();
     return (
-      <main className="text-center p-5 mt-20">
+      <main className="text-center p-5 my-20">
         <BookingPagSon dentistJson={dentists} />
       </main>
     );
