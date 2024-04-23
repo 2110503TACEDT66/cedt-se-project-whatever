@@ -22,17 +22,17 @@ export default function BookingPagSon({dentistJson}:{dentistJson:DentistJson}){
     const [expertise, setExpertise] = useState<string>('');
     const [experience, setExperience] = useState<number>(0);
     return(
-        <div className="flex flex-col">
-            <div className="w-[100%] flex flex-row justify-center my-4 items-center"><div className="m-5 text-xl font-bold font-serif text-cyan-500"> Date :</div><DateReserve onDateChange={(value:Dayjs)=>{let vv= dayjs(value).format("YYYY-MM-DDTHH:mm:ss.SSS")+'Z';dispatch(changeBookingDate(vv))}}/><div></div>
-            <div  className="m-5 text-xl font-bold font-serif text-cyan-500">Sort by Expertise:</div>
+        <div className="flex-col">
+            <div className="w-[100%] flex flex-row justify-center my-4 items-center"><div className="m-5 text-xl font-bold  text-cyan-800"> Date :</div><DateReserve onDateChange={(value:Dayjs)=>{let vv= dayjs(value).format("YYYY-MM-DDTHH:mm:ss.SSS")+'Z';dispatch(changeBookingDate(vv))}}/><div></div>
+            <div  className="m-5 text-xl font-bold text-cyan-800">Sort by Expertise:</div>
              <div>
              <SortDropDown  expertise={expertise} setExpertise={setExpertise}/>
            </div>
-           <div  className="m-5 text-xl font-bold font-serif text-cyan-500">Sort by Years of Experience (More than or equal): </div> 
+           <div  className="m-5 text-xl font-bold  text-cyan-800">Sort by Years of Experience (More than or equal): </div> 
            <div>
                 <QuantityInput experience={experience} setExperience={setExperience}/>
             </div></div>
-            <h1 className='text-4xl font-serif font-semibold mb-4 text-cyan-500 mb-6 block'>Available Dentist</h1>
+            <span className='text-4xl  font-semibold text-cyan-800 mb-6 font-serif inline-block bg-slate-100/50 p-3 rounded'>Available Dentist</span>
             <Suspense fallback={<p>Loading...<LinearProgress/></p>}>
                 <DentistCatalog dentistsJson={dentistJson} date={bookingDate} expertise={expertise} experience={experience}/>
             </Suspense>

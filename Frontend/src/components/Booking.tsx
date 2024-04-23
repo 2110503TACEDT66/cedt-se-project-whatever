@@ -23,7 +23,7 @@ export default function Booking({
   const [newSymptom, setNewSymptom] = useState<String | null>(null);
 
   return (
-    <div className='flex flex-col bg-slate-200 rounded-lg mx-4'>
+    <div className='flex flex-col bg-slate-100 rounded-lg mx-4'>
       <div className="px-5 pt-2 flex flex-row text-black">
         <Image
           src={bookingItem.dentist.picture}
@@ -34,26 +34,26 @@ export default function Booking({
           className="h-36 w-auto object-cover mr-4 my-4 rounded-lg"></Image>
         <div className='my-4'>
           <div>
-            <span className="text-xl font-bold font-mono text-cyan-900">Patient: </span>
+            <span className="text-lg font-semibold font-body  text-cyan-900">Patient: </span>
             <span className="text-lg">{bookingItem.user.name}</span>
           </div>
           <div>
-            <span className="text-xl font-bold font-mono text-cyan-900">Dentist: </span>
+            <span className="text-lg font-semibold font-body  text-cyan-900">Dentist: </span>
             <span className="text-lg">{bookingItem.dentist.name}</span>
           </div>
           <div>
-            <span className="text-xl font-bold font-mono text-cyan-900">Booking date: </span>
+            <span className="text-lg font-semibold font-body  text-cyan-900">Booking date: </span>
             <span className="text-lg">{new Date(bookingItem.startDate).toUTCString()}</span>
             <span className="text-lg">{' - '}</span>
             <span className="text-lg">{new Date(bookingItem.endDate).toUTCString()}</span>
           </div>
           <div>
-            <span className="text-xl font-bold font-mono text-cyan-900">Symptom: </span>
+            <span className="text-lg font-semibold font-body text-cyan-900">Symptom: </span>
             <span className="text-lg">{bookingItem.symptom}</span>
           </div>
           <div >
-            <span className="text-xl font-bold font-mono text-cyan-900">Status: </span>
-            <span className="text-lg">{bookingItem.status} </span>
+            <span className="text-lg font-semibold font-body  text-cyan-900">Status: </span>
+            <span className="text-lg italic">{bookingItem.status} </span>
             <ButtonStatus status={bookingItem.status} />
           </div>
         </div>

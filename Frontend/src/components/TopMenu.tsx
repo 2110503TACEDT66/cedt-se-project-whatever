@@ -10,7 +10,7 @@ export default async function TopMenu() {
     <div className="h-16 bg-white flex flex-row fixed top-0 left-0 right-0 border-b-[1px] border-solid border-gray-500 z-30 bg-opacity-80">
       <Image
         src={'/img/DentistLogo2.jpg'}
-        className="h-full w-auto"
+        className="h-full w-auto "
         alt="logo"
         width={0}
         height={0}
@@ -43,14 +43,14 @@ export default async function TopMenu() {
       <div className="absolute right-3 top-3 flex flex-column h-full">
         {session ? (
           <Link href="/api/auth/signout" style={{textDecoration:'none', fontSize:'20px'}} className='flex items-center h-10 border-2 rounded-lg border-cyan-500 w-auto shadow-lg p-2
-          text-center justify-center text-cyan-500 hover:bg-cyan-500 hover:text-white'>
+          text-center justify-center text-cyan-500 transition hover:bg-cyan-500 hover:text-white'>
             <div>
               Sign-Out of {session.user.name}
             </div>
           </Link>
         ) : (
           <Link href="/api/auth/signin" style={{textDecoration:'none', fontSize:'20px'}} className='flex items-center h-10 border-2 rounded-lg border-cyan-500 w-28 shadow-lg
-          text-center justify-center text-cyan-500 hover:bg-cyan-500 hover:text-white'>
+          text-center justify-center text-cyan-500 hover:bg-cyan-500 transition hover:text-white'>
             <div>
               Sign-In
             </div>
