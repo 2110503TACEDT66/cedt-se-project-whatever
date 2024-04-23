@@ -33,6 +33,12 @@ export default async function TopMenu() {
         imgSrc="/img/bookingIcon.png"
         pageRef="/mybookings"
       />
+      {session?.user.role == "receptionist" ? 
+      <TopMenuItem
+      title="Dentists"
+      imgSrc="/img/doctor.png"
+      pageRef="/mydentists"/> : null
+      }
       {!session ? (
         <TopMenuItem
           title="Sign up"
