@@ -28,9 +28,13 @@ export default async function Dentist() {
     );
   } else {
     return (
-      <h1 className="text-center p-5 text-6xl font-serif font-lg text-cyan-500 mt-24">
-        You have already booked
-      </h1>
+      <div className=" top-24 z-20 text-center">
+       
+          <div className="text-center p-5 text-4xl font-body font-lg rounded-lg font-semibold text-cyan-800 mt-24 inline-block ">
+            You have already booked
+          </div>
+        
+      </div>
     );
   }
 }

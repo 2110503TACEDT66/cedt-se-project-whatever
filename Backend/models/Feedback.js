@@ -14,6 +14,7 @@ const FeedbackSchema = new mongoose.Schema({
   comment: {
     type: String,
     required: [true, 'Please add a comment'],
+    maxlength: [200, "Comment cannot be more than 200 characters"],
   },
   rating: {
     type: Number,

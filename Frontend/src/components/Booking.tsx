@@ -35,7 +35,7 @@ export default function Booking({
   };
 
   return (
-    <div className='flex flex-col bg-slate-200 rounded-lg mx-4'>
+    <div className='flex flex-col bg-slate-100 rounded-lg mx-4'>
       <div className="px-5 pt-2 flex flex-row text-black">
         <Image
           src={bookingItem.dentist.picture}
@@ -46,26 +46,26 @@ export default function Booking({
           className="h-36 w-auto object-cover mr-4 my-4 rounded-lg"></Image>
         <div className='my-4'>
           <div>
-            <span className="text-xl font-bold font-mono text-cyan-900">Patient: </span>
+            <span className="text-lg font-semibold font-body  text-cyan-900">Patient: </span>
             <span className="text-lg">{bookingItem.user.name}</span>
           </div>
           <div>
-            <span className="text-xl font-bold font-mono text-cyan-900">Dentist: </span>
+            <span className="text-lg font-semibold font-body  text-cyan-900">Dentist: </span>
             <span className="text-lg">{bookingItem.dentist.name}</span>
           </div>
           <div>
-            <span className="text-xl font-bold font-mono text-cyan-900">Booking date: </span>
+            <span className="text-lg font-semibold font-body  text-cyan-900">Booking date: </span>
             <span className="text-lg">{new Date(bookingItem.startDate).toUTCString()}</span>
             <span className="text-lg">{' - '}</span>
             <span className="text-lg">{new Date(bookingItem.endDate).toUTCString()}</span>
           </div>
           <div>
-            <span className="text-xl font-bold font-mono text-cyan-900">Symptom: </span>
+            <span className="text-lg font-semibold font-body text-cyan-900">Symptom: </span>
             <span className="text-lg">{bookingItem.symptom}</span>
           </div>
           <div >
-            <span className="text-xl font-bold font-mono text-cyan-900">Status: </span>
-            <span className="text-lg">{bookingItem.status} </span>
+            <span className="text-lg font-semibold font-body  text-cyan-900">Status: </span>
+            <span className="text-lg italic">{bookingItem.status} </span>
             <ButtonStatus status={bookingItem.status} />
           </div>
         </div>
@@ -81,12 +81,12 @@ export default function Booking({
                 }}
               />
               <button
-                className="block rounded-md bg-red-600 hover:bg-red-700 px-3 py-2 shadow-sm text-white mx-3"
+                className="block rounded-md bg-red-600 hover:bg-red-700 transition px-3 py-2 shadow-sm text-white mx-3"
                 onClick={() => setEditing(!editing)}>
-                Cancel editing
+                Cancel Editing
               </button>
               <button
-                className="block rounded-md bg-green-600 hover:bg-green-700 px-3 py-2 shadow-sm text-white mx-3"
+                className="block rounded-md bg-green-600 hover:bg-green-700 transition px-3 py-2 shadow-sm text-white mx-3"
                 onClick={() => {
                   setEditing(!editing);
                   onUpdateBooking(
@@ -95,33 +95,33 @@ export default function Booking({
                     session.user.token
                   );
                 }}>
-                Confirm editing
+                Confirm Editing
               </button>
             </div>
           ) : (
             <div className="flex flex-row gap-x-3 py-2">
               <button
-                className="block rounded-md bg-sky-600 hover:bg-sky-700 px-3 py-2 shadow-sm text-white mx-3"
+                className="block rounded-md bg-sky-600 hover:bg-sky-700 px-3 py-2 transition shadow-sm text-white mx-3"
                 onClick={() => setEditing(!editing)}>
                 Edit your symptom
               </button>
               <Link href={`mybookings/${bookingItem._id}`}>
                 <button
-                  className="block rounded-md bg-red-600 hover:bg-red-700 px-3 py-2
+                  className="block rounded-md bg-red-600 hover:bg-red-700 transition px-3 py-2
                             shadow-sm text-white mx-3">
                   Remove Booking
                 </button>
               </Link>
+              <button className='rounded-md bg-black px-4 hover:bg-gray-700 transition shadow-sm text-white mx-3'
+                onClick={()=>{setPopUpBoolean(!popUpBoolean)}}>
+                Test comment
+              </button>
+              <Context.Provider value={contextValue}>
+              <PopupCommentNRating visible={popUpBoolean}></PopupCommentNRating>        
+              </Context.Provider>
             </div>
           )}
-      <button className='rounded-md bg-black px-4 shadow-sm text-white mx-3'
-      onClick={()=>{setPopUpBoolean(!popUpBoolean)}}>
-        Test comment
-      </button>
-      <Context.Provider value={contextValue}>
-        <PopupCommentNRating visible={popUpBoolean}></PopupCommentNRating>        
-      </Context.Provider>
-
+      
       </div>
     </div>
   );
