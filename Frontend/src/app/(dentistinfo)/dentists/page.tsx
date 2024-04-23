@@ -30,7 +30,7 @@ export default async function Dentist() {
     return (
       <div className=" top-24 z-20 text-center">
        
-          <div className="text-center p-5 text-4xl font-body font-lg rounded-lg font-semibold text-cyan-800 mt-24 inline-block bg-white/50">
+          <div className="text-center p-5 text-4xl font-body font-lg rounded-lg font-semibold text-cyan-800 mt-24 inline-block ">
             You have already booked
           </div>
         
