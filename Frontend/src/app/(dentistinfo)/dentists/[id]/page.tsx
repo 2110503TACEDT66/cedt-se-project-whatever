@@ -27,35 +27,44 @@ export default async function DentistDetailPage({
   }
 
   return (
-    <main className="text-center p-5 mt-16">
-      <div className="flex flex-row">
-        <Image
-          src={dentistDetail.data.picture}
-          alt="Dentist Picture"
-          width={0}
-          height={0}
-          sizes="100vw"
-          className="rounded-lg w-[30%] bg-black"
-        />
-        <div className="mx-5 text-left">
-          <div>
-            <span className='text-2xl font-bold font-mono text-cyan-900'>Name: </span>
-            <span className='text-xl text-black'>{dentistDetail.data.name}</span>
-          </div>
-          <div>
-            <span className='text-2xl font-bold font-mono text-cyan-900'>Years of Experience: </span>
-            <span className='text-xl text-black'>{dentistDetail.data.experience}</span>
-          </div>
-          <div>
-            <span className='text-2xl font-bold font-mono text-cyan-900'>Area of expertise: </span>
-            <span className='text-xl text-black'>{dentistDetail.data.expertise}</span>
-          </div>
-          <SymptomField
-            dentist={params.id}
-            onCreateBooking={handleCreateBooking}
-          />
-        </div>
+    <main className="mt-16 flex flex-row">
+    <div className="flex flex-col space-y-8 px-32 py-8">
+      <div className="w-64 h-64 flex-0 relative">
+      <Image
+        src={dentistDetail.data.picture}
+        alt="Dentist Picture"
+        fill
+        className="rounded-full bg-black object-cover"
+      />
+    </div>
+    <div className="mx-5 text-left">
+      <div>
+        <span className='text-2xl font-bold font-mono text-cyan-900'>Name: </span>
+        <span className='text-xl text-black'>{dentistDetail.data.name}</span>
       </div>
-    </main>
+      <div>
+        <span className='text-2xl font-bold font-mono text-cyan-900'>Experience: </span>
+        <span className='text-xl text-black'>{dentistDetail.data.experience}</span>
+        <span className='text-xl text-black'> years</span>
+      </div>
+      <div>
+        <span className='text-2xl font-bold font-mono text-cyan-900'>Expertise: </span>
+        <span className='text-xl text-black'>{dentistDetail.data.expertise}</span>
+      </div>
+      <SymptomField
+        dentist={params.id}
+        onCreateBooking={handleCreateBooking}
+      />
+    </div>
+  </div>
+  <div className="flex flex-col w-full p-16">
+    <div className='p-5 bg-white'>
+      <div className='bg-gray-200 p-5'>
+      </div>
+    </div>
+  </div>
+</main>
+
+
   );
 }
