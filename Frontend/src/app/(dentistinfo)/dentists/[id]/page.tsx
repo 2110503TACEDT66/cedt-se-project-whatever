@@ -3,6 +3,7 @@ import getDentist from '@/libs/getDentist';
 import SymptomField from '@/components/symptomField';
 import createBooking from '@/libs/createBooking';
 import { redirect } from 'next/navigation';
+import { Rating } from '@mui/material';
 
 export default async function DentistDetailPage({
   params,
@@ -25,38 +26,68 @@ export default async function DentistDetailPage({
     await createBooking(token, user, dentist, startDate, endDate, symptom);
     redirect('/mybookings');
   }
+  const mockUserName = "LieMaiRaiGard"
+    const mockStar = 5
+    const mockComment = "ให้บริการดีมากเลยครัฟ อาหารอร่อย ห้องน้ำสะอาดสุดๆ ที่จอดรถกว้างมาก"
 
   return (
-    <main className="text-center bg-slate-100/50 p-5 mt-16">
-      <div className="flex flex-row">
-        
-        <div className="mx-5 text-left">
-        <Image
-          src={dentistDetail.data.picture}
-          alt="Dentist Picture"
-          width={0}
-          height={0}
-          sizes="100vw"
-          className="rounded-lg w-[30%] m-5 bg-black"
-        />
-          <div>
-            <span className='text-xl font-bold py-3 font-body text-slate-900'>Name: </span>
-            <span className='text-xl text-black'>{dentistDetail.data.name}</span>
+    <main className="p-16 mt-16 flex flex-row space-x-16 items-start">
+        <div className="flex flex-col space-y-8">
+          <div className='w-96 h-96 flex-0 relative'>
+            <Image
+              src={dentistDetail.data.picture}
+              alt="Dentist Picture"
+              fill           
+              className="rounded-full bg-black object-cover"
+            />
           </div>
-          <div>
-            <span className='text-xl font-bold font-body text-slate-900'>Years of Experience: </span>
-            <span className='text-xl text-black'>{dentistDetail.data.experience}</span>
+          
+          <div className="mx-5 text-left">
+            <div>
+              <span className='text-4xl font-bold font-mono text-cyan-900'>Name:</span>
+              <span className='text-3xl text-black'>{dentistDetail.data.name}</span>
+            </div>
+            <div>
+              <span className='text-4xl font-bold font-mono text-cyan-900'>Experience:</span>
+              <span className='text-3xl text-black'>{dentistDetail.data.experience}</span>
+              <span className='text-3xl text-black'> years</span>
+            </div>
+            <div>
+              <span className='text-4xl font-bold font-mono text-cyan-900'>Expertise:</span>
+              <span className='text-3xl text-black'>{dentistDetail.data.expertise}</span>
+            </div>
           </div>
-          <div>
-            <span className='text-xl font-bold font-body text-slate-900'>Area of Expertise: </span>
-            <span className='text-xl text-black'>{dentistDetail.data.expertise}</span>
-          </div>
-          <SymptomField
-            dentist={params.id}
-            onCreateBooking={handleCreateBooking}
-          />
         </div>
-      </div>
-    </main>
+        
+        <div className="flex flex-col shrink space-y-4 bg-white w-full p-6">
+
+          <div className='bg-slate-200 flex flex-col w-full a rounded-lg p-4'>
+            <div className='font-bold text-xl text-black items-center flex gap-2'>
+              {mockUserName}: 
+              <Rating
+                name="simple-controlled"
+                value={mockStar}
+                readOnly
+                className='text-center items-center'
+              />
+            </div>
+            <div className='text-black text-lg pl-8 pt-6'>{mockComment}</div>
+          </div>
+
+          <div className='bg-slate-200 flex flex-col w-full a rounded-lg p-4'>
+            <div className='font-bold text-xl text-black items-center flex gap-2'>
+              {mockUserName}: 
+              <Rating
+                name="simple-controlled"
+                value={mockStar}
+                readOnly
+                className='text-center items-center'
+              />
+            </div>
+            <div className='text-black text-lg pl-8 pt-6'>{mockComment}</div>
+          </div>
+
+        </div>
+      </main>
   );
 }
