@@ -27,7 +27,7 @@ export default async function DentistDetailPage({
   }
 
   return (
-    <main className="text-center p-5 mt-16">
+    <main className="text-center bg-slate-100/50 p-5 mt-16">
       <div className="flex flex-row">
         
         <div className="mx-5 text-left">
@@ -37,7 +37,7 @@ export default async function DentistDetailPage({
           width={0}
           height={0}
           sizes="100vw"
-          className="rounded-lg w-[30%] m-3 bg-black"
+          className="rounded-lg w-[30%] m-5 bg-black"
         />
           <div>
             <span className='text-xl font-bold py-3 font-body text-slate-900'>Name: </span>
