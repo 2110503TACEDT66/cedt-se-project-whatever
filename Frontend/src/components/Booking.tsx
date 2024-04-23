@@ -121,7 +121,6 @@ export default function Booking({
       <Context.Provider value={contextValue}>
         <PopupCommentNRating visible={popUpBoolean}></PopupCommentNRating>        
       </Context.Provider>
-
       </div>
     </div>
   );
