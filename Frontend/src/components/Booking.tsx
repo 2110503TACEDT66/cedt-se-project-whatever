@@ -81,12 +81,12 @@ export default function Booking({
                 }}
               />
               <button
-                className="block rounded-md bg-red-600 hover:bg-red-700 px-3 py-2 shadow-sm text-white mx-3"
+                className="block rounded-md bg-red-600 hover:bg-red-700 transition px-3 py-2 shadow-sm text-white mx-3"
                 onClick={() => setEditing(!editing)}>
-                Cancel editing
+                Cancel Editing
               </button>
               <button
-                className="block rounded-md bg-green-600 hover:bg-green-700 px-3 py-2 shadow-sm text-white mx-3"
+                className="block rounded-md bg-green-600 hover:bg-green-700 transition px-3 py-2 shadow-sm text-white mx-3"
                 onClick={() => {
                   setEditing(!editing);
                   onUpdateBooking(
@@ -95,32 +95,33 @@ export default function Booking({
                     session.user.token
                   );
                 }}>
-                Confirm editing
+                Confirm Editing
               </button>
             </div>
           ) : (
             <div className="flex flex-row gap-x-3 py-2">
               <button
-                className="block rounded-md bg-sky-600 hover:bg-sky-700 px-3 py-2 shadow-sm text-white mx-3"
+                className="block rounded-md bg-sky-600 hover:bg-sky-700 px-3 py-2 transition shadow-sm text-white mx-3"
                 onClick={() => setEditing(!editing)}>
                 Edit your symptom
               </button>
               <Link href={`mybookings/${bookingItem._id}`}>
                 <button
-                  className="block rounded-md bg-red-600 hover:bg-red-700 px-3 py-2
+                  className="block rounded-md bg-red-600 hover:bg-red-700 transition px-3 py-2
                             shadow-sm text-white mx-3">
                   Remove Booking
                 </button>
               </Link>
+              <button className='rounded-md bg-black px-4 hover:bg-gray-700 transition shadow-sm text-white mx-3'
+                onClick={()=>{setPopUpBoolean(!popUpBoolean)}}>
+                Test comment
+              </button>
+              <Context.Provider value={contextValue}>
+              <PopupCommentNRating visible={popUpBoolean}></PopupCommentNRating>        
+              </Context.Provider>
             </div>
           )}
-      <button className='rounded-md bg-black px-4 shadow-sm text-white mx-3'
-      onClick={()=>{setPopUpBoolean(!popUpBoolean)}}>
-        Test comment
-      </button>
-      <Context.Provider value={contextValue}>
-        <PopupCommentNRating visible={popUpBoolean}></PopupCommentNRating>        
-      </Context.Provider>
+      
       </div>
     </div>
   );

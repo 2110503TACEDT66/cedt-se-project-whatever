@@ -25,9 +25,12 @@ export default async function BookingList() {
           />
         ))
       ) : (
-        <h1 className="text-center font-semibold text-4xl font-serif my-5 text-cyan-800 mt-24">
-          No Dentist Booking
-        </h1>
+        <div className=" top-24 z-20 text-center">
+       
+          <div className=" p-5 text-4xl font-body font-lg rounded-lg font-semibold text-cyan-800 inline-block bg-white/25">
+          No Dentist Booked
+        </div>
+        </div>
       )}
     </div>
   );
