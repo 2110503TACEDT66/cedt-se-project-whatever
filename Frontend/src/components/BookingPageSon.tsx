@@ -36,7 +36,6 @@ export default function BookingPagSon({dentistJson}:{dentistJson:DentistJson}){
             <Suspense fallback={<p>Loading...<LinearProgress/></p>}>
                 <DentistCatalog dentistsJson={dentistJson} date={bookingDate} expertise={expertise} experience={experience}/>
             </Suspense>
-      
         </div>
     )
 }
