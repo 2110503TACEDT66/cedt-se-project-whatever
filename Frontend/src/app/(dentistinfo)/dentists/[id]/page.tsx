@@ -56,6 +56,10 @@ export default async function DentistDetailPage({
               <span className='text-4xl font-bold font-mono text-cyan-900'>Expertise:</span>
               <span className='text-3xl text-black'>{dentistDetail.data.expertise}</span>
             </div>
+            <SymptomField
+            dentist={params.id}
+            onCreateBooking={handleCreateBooking}
+          />
           </div>
         </div>
         
