@@ -4,6 +4,7 @@ import SymptomField from '@/components/symptomField';
 import createBooking from '@/libs/createBooking';
 import { redirect } from 'next/navigation';
 import { Rating } from '@mui/material';
+import ShowFeedback from '@/components/ShowFeedbacks';
 
 export default async function DentistDetailPage({
   params,
@@ -65,31 +66,7 @@ export default async function DentistDetailPage({
         
         <div className="flex flex-col shrink space-y-4 bg-white w-full p-6">
 
-          <div className='bg-slate-200 flex flex-col w-full a rounded-lg p-4'>
-            <div className='font-bold text-xl text-black items-center flex gap-2'>
-              {mockUserName}: 
-              <Rating
-                name="simple-controlled"
-                value={mockStar}
-                readOnly
-                className='text-center items-center'
-              />
-            </div>
-            <div className='text-black text-lg pl-8 pt-6'>{mockComment}</div>
-          </div>
-
-          <div className='bg-slate-200 flex flex-col w-full a rounded-lg p-4'>
-            <div className='font-bold text-xl text-black items-center flex gap-2'>
-              {mockUserName}: 
-              <Rating
-                name="simple-controlled"
-                value={mockStar}
-                readOnly
-                className='text-center items-center'
-              />
-            </div>
-            <div className='text-black text-lg pl-8 pt-6'>{mockComment}</div>
-          </div>
+          <ShowFeedback dentistId={params.id}/>
 
         </div>
       </main>

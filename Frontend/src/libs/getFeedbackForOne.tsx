@@ -3,6 +3,7 @@ export default async function getFeedbackForOne(dentistId:string) {
     if (!response.ok) {
       throw new Error('Failed to fetch feedbacks');
     }
-    return await response.json();
+    const feedbacks = await response.json();
+    return feedbacks.data;
   }
   

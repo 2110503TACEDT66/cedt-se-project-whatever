@@ -29,3 +29,13 @@ interface BookingItem {
   reqType : string ;
   __v: number;
 }
+
+interface Feedback {
+  _id: string;
+  user: {
+    _id:string,
+    name:string
+  };
+  rating: number;
+  comment: string;
+}
