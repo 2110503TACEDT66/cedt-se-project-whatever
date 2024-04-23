@@ -25,7 +25,7 @@ export default async function RootLayout({
           <NextAuthProvider session={nextAuthSession}>
             <TopMenu/>
             <Image
-              src="/img/dentistbg.jpg"
+              src="/img/dentistbg.png"
               alt="cover"
               fill={true}
               className="object-cover absolute top-0 left-0 w-full h-full -z-10 opacity-50 blur-sm"/>

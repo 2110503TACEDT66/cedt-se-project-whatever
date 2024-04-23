@@ -10,11 +10,11 @@ import { useState } from 'react';
 export default function DateReserve({onDateChange}:{onDateChange:Function}){
     const [bookingDate, setBookingDate] = useState<Dayjs|null>(null)
     return(
-        <div className='bg-slate-100 rounded-xl space-x-5 space-y-2 w-fit flex flex-row justify-center'>
+        <div className='rounded-xl space-x-5 space-y-2 w-fit flex flex-row justify-center'>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DateTimePicker 
                 views={['year','day', 'hours']} 
-                className='bg-slate-100'
+                className='bg-white'
                 disablePast
                 value={bookingDate}
                 onChange={(value)=>{setBookingDate(value); onDateChange(value)}}/>
