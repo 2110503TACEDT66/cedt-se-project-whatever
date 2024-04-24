@@ -37,18 +37,18 @@ export default async function DentistDetailPage({
         className="rounded-full bg-black object-cover"
       />
     </div>
-    <div className="mx-5 text-left">
+    <div className="mx-6 text-left">
       <div>
-        <span className='text-2xl font-bold font-mono text-cyan-900'>Name: </span>
+        <span className='text-xl font-bold py-3 font-body text-slate-900'>Name: </span>
         <span className='text-xl text-black'>{dentistDetail.data.name}</span>
       </div>
       <div>
-        <span className='text-2xl font-bold font-mono text-cyan-900'>Experience: </span>
+        <span className='text-xl font-bold font-body text-slate-900'>Experience: </span>
         <span className='text-xl text-black'>{dentistDetail.data.experience}</span>
         <span className='text-xl text-black'> years</span>
       </div>
       <div>
-        <span className='text-2xl font-bold font-mono text-cyan-900'>Expertise: </span>
+        <span className='text-xl font-bold font-body text-slate-900'>Expertise: </span>
         <span className='text-xl text-black'>{dentistDetail.data.expertise}</span>
       </div>
       <SymptomField
