@@ -10,12 +10,9 @@ export default async function MyDentistId({params} : {params : {id:string}}) {
     const session = await getServerSession(authOptions);
     if (!session || !session.user.token) return null;
 
-    const dentistDetail = await getDentist(params.id);
+    const dentistDetail:OneDentistJson = await getDentist(params.id);
     const feedbackDetail = await getFeedbackForOne(params.id);
-    //console.log(feedbackDetail)
-    const mockUserName = "LieMaiRaiGard"
-    const mockStar = 5
-    const mockComment = "ให้บริการดีมากเลยครัฟ อาหารอร่อย ห้องน้ำสะอาดสุดๆ ที่จอดรถกว้างมาก"
+    console.log(feedbackDetail)
 
     return (
         <main className="p-16 mt-16 flex flex-row space-x-16 items-start">
@@ -48,31 +45,22 @@ export default async function MyDentistId({params} : {params : {id:string}}) {
         
         <div className="flex flex-col shrink space-y-4 bg-white w-full p-6">
 
-          <div className='bg-slate-200 flex flex-col w-full a rounded-lg p-4'>
-            <div className='font-bold text-xl text-black items-center flex gap-2'>
-              {mockUserName}: 
-              <Rating
-                name="simple-controlled"
-                value={mockStar}
-                readOnly
-                className='text-center items-center'
-              />
+          {
+            feedbackDetail.map((feedbackItem:FeedbackItem) => 
+            <div className='bg-slate-200 flex flex-col w-full a rounded-lg p-4' key={feedbackItem._id}>
+              <div className='font-bold text-xl text-black items-center flex gap-2'>
+                {feedbackItem.user.name}: 
+                <Rating
+                  name="simple-controlled"
+                  value={feedbackItem.rating}
+                  readOnly
+                  className='text-center items-center'
+                />
+              </div>
+              <div className='text-black text-lg pl-8 pt-6'>{feedbackItem.comment}</div>
             </div>
-            <div className='text-black text-lg pl-8 pt-6'>{mockComment}</div>
-          </div>
-
-          <div className='bg-slate-200 flex flex-col w-full a rounded-lg p-4'>
-            <div className='font-bold text-xl text-black items-center flex gap-2'>
-              {mockUserName}: 
-              <Rating
-                name="simple-controlled"
-                value={mockStar}
-                readOnly
-                className='text-center items-center'
-              />
-            </div>
-            <div className='text-black text-lg pl-8 pt-6'>{mockComment}</div>
-          </div>
+            )
+          }
 
         </div>
       </main>

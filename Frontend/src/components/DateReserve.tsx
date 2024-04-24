@@ -11,13 +11,14 @@ export default function DateReserve({onDateChange}:{onDateChange:Function}){
     const [bookingDate, setBookingDate] = useState<Dayjs|null>(null)
     return(
         <div className='rounded-xl space-x-5 space-y-2 w-fit flex flex-row justify-center'>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <LocalizationProvider dateAdapter={AdapterDayjs} >
                 <DateTimePicker 
                 views={['year','day', 'hours']} 
                 className='bg-white'
                 disablePast
                 value={bookingDate}
-                onChange={(value)=>{setBookingDate(value); onDateChange(value)}}/>
+                onChange={(value)=>{setBookingDate(value); onDateChange(value)}}
+                slotProps={{ textField: { size: 'small' } }}/>
             </LocalizationProvider>
         </div>
     );
