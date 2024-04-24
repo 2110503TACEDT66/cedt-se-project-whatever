@@ -48,7 +48,7 @@ export default async function DentistDetailPage({
         <span className='text-xl text-black'> years</span>
       </div>
       <div>
-        <span className='text-xl font-bold font-body text-slate-900'>Expertise: </span>
+        <span className='text-xl block font-bold font-body text-slate-900'>Expertise: </span>
         <span className='text-xl text-black'>{dentistDetail.data.expertise}</span>
       </div>
       <SymptomField
