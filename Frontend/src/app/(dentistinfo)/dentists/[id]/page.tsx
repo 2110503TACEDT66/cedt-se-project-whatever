@@ -38,7 +38,7 @@ export default async function DentistDetailPage({
               src={dentistDetail.data.picture}
               alt="Dentist Picture"
               fill           
-              className="rounded-full bg-black object-cover"
+              className="rounded-full bg-black object-cover border border-black"
             />
           </div>
           

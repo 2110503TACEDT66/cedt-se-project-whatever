@@ -22,7 +22,7 @@ export default async function MyDentistId({params} : {params : {id:string}}) {
               src={dentistDetail.data.picture}
               alt="Dentist Picture"
               fill           
-              className="rounded-full bg-black object-cover"
+              className="rounded-full bg-black object-cover border border-black"
             />
           </div>
           
