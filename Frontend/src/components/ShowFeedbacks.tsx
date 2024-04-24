@@ -13,8 +13,8 @@ export default async function ShowFeedback({dentistId}:{dentistId:string}) {
   const feedbacks = await getFeedbackForOne(dentistId) ;
 
   return (
-    <div className='mt-20 space-y-4'>
-      {feedbacks.map((feedback: Feedback) => (
+    <div className='space-y-4'>
+      {feedbacks.map((feedback: FeedbackItem) => (
         <ShowOneFeedback
           key={feedback._id}
           feedback={feedback}

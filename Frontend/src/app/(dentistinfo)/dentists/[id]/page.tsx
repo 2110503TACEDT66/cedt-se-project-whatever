@@ -5,6 +5,7 @@ import createBooking from '@/libs/createBooking';
 import { redirect } from 'next/navigation';
 import { Rating } from '@mui/material';
 import ShowFeedback from '@/components/ShowFeedbacks';
+import getFeedbackForOne from '@/libs/getFeedbackForOne';
 
 export default async function DentistDetailPage({
   params,
@@ -27,9 +28,7 @@ export default async function DentistDetailPage({
     await createBooking(token, user, dentist, startDate, endDate, symptom);
     redirect('/mybookings');
   }
-  const mockUserName = "LieMaiRaiGard"
-    const mockStar = 5
-    const mockComment = "ให้บริการดีมากเลยครัฟ อาหารอร่อย ห้องน้ำสะอาดสุดๆ ที่จอดรถกว้างมาก"
+  const feedbackDetail = await getFeedbackForOne(params.id);
 
   return (
     <main className="p-16 mt-16 flex flex-row space-x-16 items-start">
@@ -64,11 +63,13 @@ export default async function DentistDetailPage({
           </div>
         </div>
         
+        { feedbackDetail.length == 0 ? null :
         <div className="flex flex-col shrink space-y-4 bg-white w-full p-6">
 
           <ShowFeedback dentistId={params.id}/>
 
         </div>
+        }
       </main>
   );
 }

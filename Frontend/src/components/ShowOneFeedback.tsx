@@ -14,7 +14,7 @@ import ButtonStatus from './ButtonStatus';
 export default function ShowOneFeedback({
   feedback,
 }: {
-  feedback: Feedback;
+  feedback: FeedbackItem;
 }) {
 
   //console.log(bookingItem.reqType);

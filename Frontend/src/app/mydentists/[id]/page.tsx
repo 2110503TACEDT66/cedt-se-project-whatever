@@ -12,7 +12,7 @@ export default async function MyDentistId({params} : {params : {id:string}}) {
 
     const dentistDetail:OneDentistJson = await getDentist(params.id);
     const feedbackDetail = await getFeedbackForOne(params.id);
-    console.log(feedbackDetail)
+    //console.log(feedbackDetail.length == 2)
 
     return (
         <main className="p-16 mt-16 flex flex-row space-x-16 items-start">
@@ -43,6 +43,7 @@ export default async function MyDentistId({params} : {params : {id:string}}) {
           </div>
         </div>
         
+        { feedbackDetail.length == 0 ? null :
         <div className="flex flex-col shrink space-y-4 bg-white w-full p-6">
 
           {
@@ -63,6 +64,7 @@ export default async function MyDentistId({params} : {params : {id:string}}) {
           }
 
         </div>
+        }
       </main>
   );
 }
