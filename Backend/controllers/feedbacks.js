@@ -1,27 +1,72 @@
-const Dentist = require("../models/Dentist");
-const Feedback = require("../models/Feedback");
+const Dentist = require('../models/Dentist');
+const Feedback = require('../models/Feedback');
+const mongoose = require('mongoose');
 
 //@desc     Get all feedbacks
 //@route    GET /api/v1/feedbacks
 //@access   Private
 exports.getFeedbacks = async (req, res, next) => {
+  let query;
+  let avgRating; // Declaring avgRating outside the if block
+
+  if (req.params.dentistId) {
+    // Calculate average rating
+    avgRating = await Feedback.aggregate([
+      {
+        $match: { dentist: new mongoose.Types.ObjectId(req.params.dentistId) },
+      },
+      {
+        $group: {
+          _id: null,
+          averageRating: { $avg: '$rating' },
+        },
+      },
+    ]);
+
+    query = Feedback.find({ dentist: req.params.dentistId });
+  } else {
+    query = Feedback.find();
+  }
+
+  // Pagination
+  const page = parseInt(req.query.page, 10) || 1;
+  const limit = parseInt(req.query.limit, 10) || 4;
+  const startIndex = (page - 1) * limit;
+  const endIndex = page * limit;
+
   try {
-    let feedbacks;
-    if (req.params.dentistId) {
-      feedbacks = await Feedback.find({ dentist: req.params.dentistId });
-    } else {
-      feedbacks = await Feedback.find();
+    const total = await Feedback.countDocuments();
+    query = query.skip(startIndex).limit(limit);
+
+    const feedbacks = await query;
+
+    const pagination = {};
+
+    if (endIndex < total) {
+      pagination.next = {
+        page: page + 1,
+        limit,
+      };
+    }
+
+    if (startIndex > 0) {
+      pagination.prev = {
+        page: page - 1,
+        limit,
+      };
     }
 
     res.status(200).json({
       success: true,
       count: feedbacks.length,
+      pagination,
+      averageRating: avgRating ? avgRating[0].averageRating : null, // Conditional check for avgRating
       data: feedbacks,
     });
   } catch (err) {
     return res
       .status(500)
-      .json({ success: false, message: "Cannot find feedbacks" });
+      .json({ success: false, message: 'Cannot find feedbacks' });
   }
 };
 
@@ -47,7 +92,7 @@ exports.getFeedback = async (req, res, next) => {
     console.log(error);
     return res
       .status(500)
-      .json({ success: false, message: "Cannot find feedback" });
+      .json({ success: false, message: 'Cannot find feedback' });
   }
 };
 
@@ -62,7 +107,7 @@ exports.addFeedback = async (req, res, next) => {
       user: req.user.id,
       dentist: req.params.dentistId,
     });
-    if (req.user.role !== "user") {
+    if (req.user.role !== 'user') {
       return res.status(400).json({
         success: false,
         message: `This account cannot add feedback`,
@@ -98,7 +143,7 @@ exports.addFeedback = async (req, res, next) => {
   } catch (error) {
     return res
       .status(500)
-      .json({ success: false, message: "Cannot add feedback" });
+      .json({ success: false, message: 'Cannot add feedback' });
   }
 };
 
@@ -117,7 +162,7 @@ exports.updateFeedback = async (req, res, next) => {
     }
 
     //Make sure user is the feedback owner
-    if (feedback.user.toString() !== req.user.id && req.user.role === "user") {
+    if (feedback.user.toString() !== req.user.id && req.user.role === 'user') {
       return res.status(401).json({
         success: false,
         message: `User ${req.user.id} is not authorized to update this feedback session`,
@@ -138,7 +183,7 @@ exports.updateFeedback = async (req, res, next) => {
     console.log(error);
     res
       .status(500)
-      .json({ success: false, message: "Cannot update feedback Session" });
+      .json({ success: false, message: 'Cannot update feedback Session' });
   }
 };
 
@@ -159,8 +204,8 @@ exports.deletefeedback = async (req, res, next) => {
     //Make sure user is the feedback owner
     if (
       feedback.user.toString() !== req.user.id &&
-      req.user.role !== "admin" &&
-      req.user.role !== "receptionist"
+      req.user.role !== 'admin' &&
+      req.user.role !== 'receptionist'
     ) {
       return res.status(401).json({
         success: false,
@@ -175,6 +220,6 @@ exports.deletefeedback = async (req, res, next) => {
     console.log(error);
     return res
       .status(500)
-      .json({ success: false, message: "Cannot delete feedback" });
+      .json({ success: false, message: 'Cannot delete feedback' });
   }
 };
