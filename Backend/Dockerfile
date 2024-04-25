@@ -5,7 +5,8 @@ FROM node:20.6.0
 WORKDIR /app/Backend
 
 # Copy package.json and package-lock.json for npm install
-COPY . .
+COPY package.json .
+COPY package-lock.json .
 
 # Install dependencies
 RUN npm install

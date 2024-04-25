@@ -5,16 +5,17 @@ FROM node:20.6.0
 WORKDIR /app/Frontend
 
 # Copy package.json and package-lock.json for npm install
-COPY . .
+COPY package.json .
+COPY package-lock.json .
 
 # Install dependencies
 RUN npm install
 
-# Copy rest of the frontend application
+# Copy the rest of the frontend application
 COPY . .
 
-# Expose port 3000
+# Expose port 3000 for the development server
 EXPOSE 3000
 
-# Command to build the frontend assets
-CMD ["npm", "run", "build"]
+# Command to start the development server
+CMD ["npm", "run", "dev"]
