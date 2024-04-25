@@ -10,10 +10,6 @@ COPY . .
 # Install dependencies
 RUN npm install
 
-RUN npm uninstall bcrypt
-
-RUN npm install bcrypt
-
 # Copy rest of the frontend application
 COPY . .
 

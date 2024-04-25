@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import bcrypt from 'bcrypt' ;
+import bcryptjs from "bcryptjs"
 
 const UserSchema = new mongoose.Schema({
     name: {
@@ -41,8 +41,8 @@ const UserSchema = new mongoose.Schema({
 
     //Encrypt password using bcrypt
   UserSchema.pre('save', async function (next) {
-    const salt = await bcrypt.genSalt(10);
-    this.password = await bcrypt.hash(this.password, salt);
+    const salt = await bcryptjs.genSalt(10);
+    this.password = await bcryptjs.hash(this.password, salt);
   });
 
   //Sign JWT and return
