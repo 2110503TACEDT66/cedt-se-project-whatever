@@ -1,15 +1,5 @@
 'use client';
 import {Rating, TextField } from '@mui/material';
-import { useSession } from 'next-auth/react';
-import Image from 'next/image';
-import { useState } from 'react';
-import Link from 'next/link';
-import confirmStatusBooking from '@/libs/comfirmStatusBooking';
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import createBooking from '@/libs/createCureBooking';
-import { DateTimePicker } from '@mui/x-date-pickers';
-import ButtonStatus from './ButtonStatus';
 
 export default function ShowOneFeedback({
   feedback,

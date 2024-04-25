@@ -4,6 +4,7 @@ import getDentist from '@/libs/getDentist';
 import Image from 'next/image';
 import getFeedbackForOne from '@/libs/getFeedbackForOne';
 import Rating from '@mui/material/Rating';
+import FeedbackPagination from '@/components/FeedbackPagination';
 
 export default async function MyDentistId({params} : {params : {id:string}}) {
 
@@ -41,6 +42,7 @@ export default async function MyDentistId({params} : {params : {id:string}}) {
               <span className='text-3xl text-black'>{dentistDetail.data.expertise}</span>
             </div>
           </div>
+          <FeedbackPagination paramsId={params.id}/>
         </div>
         
         { feedbackDetail.length == 0 ? null :

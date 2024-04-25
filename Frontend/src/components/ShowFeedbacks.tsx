@@ -1,10 +1,3 @@
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
-import getBookings from '@/libs/getBookings';
-import RecepBooking from './RecepBooking';
-import deleteBooking from '@/libs/deleteBooking';
-import updateBooking from '@/libs/updateBooking';
-import createCureBooking from '@/libs/createCureBooking';
 import getFeedbackForOne from '@/libs/getFeedbackForOne';
 import ShowOneFeedback from './ShowOneFeedback';
 
