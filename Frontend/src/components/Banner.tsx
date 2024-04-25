@@ -11,7 +11,6 @@ export default function Banner() {
   return (
     <div className="flex-col p-[5px] m-0 w-screen h-[100vh] relative items-center text-center">
       <div className="relative top-24 z-20 text-center">
-        <div className='p-4 inline-block rounded-lg bg-slate-100/50'>
         <h1 className="text-6xl p-4 rounded-lg font-semibold font-body text-cyan-800">Welcome to Dentist Booking</h1>
         <div className="text-xl font-serif italic text-cyan-900 mt-6">Your perfect choice for dentist booking</div>
         <div className='flex mt-10 items-center justify-center'>
@@ -24,7 +23,6 @@ export default function Banner() {
             </div>
           </Link>}
         </div>
-      </div>
 
       </div>
     </div>
