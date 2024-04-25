@@ -28,7 +28,8 @@ export default async function RootLayout({
               src="/img/dentistbg.png"
               alt="cover"
               fill={true}
-              className="object-cover absolute top-0 left-0 w-full h-full -z-10 opacity-50 blur-sm"/>
+              className="object-cover absolute top-0 left-0 w-full h-full -z-10 opacity-50 blur-[6px]"/>
+            {/* <Context.Provider value={contextValue}> */}
               {children}
           </NextAuthProvider>
         </ReduxProvider>
