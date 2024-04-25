@@ -23,7 +23,7 @@ export default function BookingPagSon({dentistJson}:{dentistJson:DentistJson}){
     const [expertise, setExpertise] = useState<string>('');
     const [experience, setExperience] = useState<number>(0);
     return(
-        <div className=" flex-col p-10 bg-white/50 ">
+        <div className="flex-col p-10">
             <div className="w-[100%] flex flex-row justify-center my-4 items-center"><div className="m-5 text-xl font-bold font-body text-cyan-800"> Date :</div><DateReserve onDateChange={(value:Dayjs)=>{let vv= dayjs(value).format("YYYY-MM-DDTHH:mm:ss.SSS")+'Z';dispatch(changeBookingDate(vv))}}/><div></div>
             <div  className="m-5 text-xl font-semibold font-body text-cyan-800">Expertise:</div>
              <div>
