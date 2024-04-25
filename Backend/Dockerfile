@@ -1,11 +1,11 @@
 # Use official Node.js image as base
-FROM node:latest
+FROM node:20-alpine
 
 # Set working directory in the container
-WORKDIR /app/backend
+WORKDIR /app/Backend
 
 # Copy package.json and package-lock.json for npm install
-COPY ./package*.json ./
+COPY . .
 
 # Install dependencies
 RUN npm install
@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 5000
 
 # Command to run the backend server
-CMD ["npm", "start"]
+CMD ["node", "server.js"]

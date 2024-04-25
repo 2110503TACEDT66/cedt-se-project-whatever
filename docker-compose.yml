@@ -3,8 +3,8 @@ version: '3.8'
 services:
   backend:
     build:
-      context: .
-      dockerfile: ./Backend/Dockerfile
+      context: Backend
+      dockerfile: Dockerfile
     ports:
       - "5000:5000"
     environment:
@@ -17,8 +17,8 @@ services:
 
   frontend:
     build:
-      context: .
-      dockerfile: ./Frontend/Dockerfile
+      context: Frontend
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
     environment:
@@ -27,3 +27,4 @@ services:
       - MONGO_URI=mongodb+srv://Konpid:Konpid@konpidmongodb.r4m7yyl.mongodb.net/?retryWrites=true&w=majority&appName=KonpidMongoDB
       - FRONTEND_URL=http://localhost:3000
       - BACKEND_URL=http://localhost:5000
+      - NEXT_PUBLIC_BASE_PATH=/src/app
