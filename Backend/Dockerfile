@@ -1,5 +1,5 @@
 # Use official Node.js image as base
-FROM node:20-alpine
+FROM node:20.6.0
 
 # Set working directory in the container
 WORKDIR /app/Backend
