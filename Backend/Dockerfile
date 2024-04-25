@@ -9,7 +9,8 @@ COPY package.json .
 COPY package-lock.json .
 
 # Install dependencies
-RUN npm install
+RUN cd /app/Backend; \
+    npm install --production
 
 # Copy rest of the backend application
 COPY . .

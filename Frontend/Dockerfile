@@ -9,7 +9,8 @@ COPY package.json .
 COPY package-lock.json .
 
 # Install dependencies
-RUN npm install
+RUN cd /app/Frontend; \
+    npm install --production
 
 # Copy the rest of the frontend application
 COPY . .
