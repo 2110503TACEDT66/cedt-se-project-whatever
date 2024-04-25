@@ -101,26 +101,6 @@ exports.getFeedback = async (req, res, next) => {
 //@access   Private
 exports.addFeedback = async (req, res, next) => {
   try {
-    //Throw error if multiple feedbacks or receptionist.
-    const { comment, rating } = req.body;
-    const existedFeedback = await Feedback.find({
-      user: req.user.id,
-      dentist: req.params.dentistId,
-    });
-    if (req.user.role !== 'user') {
-      return res.status(400).json({
-        success: false,
-        message: `This account cannot add feedback`,
-      });
-    }
-    if (existedFeedback.length >= 1) {
-      return res.status(400).json({
-        success: false,
-        message: `The user with ID ${req.user.id} has already add feedback on the dentist of ID ${req.params.dentistId}`,
-      });
-    }
-
-    //Find dentist Object
     const dentist = await Dentist.findById(req.params.dentistId);
 
     if (!dentist) {
