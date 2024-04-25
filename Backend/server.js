@@ -1,5 +1,6 @@
-const express = require('express');
 const dotenv = require('dotenv');
+dotenv.config({ path: './config/config.env' });
+const express = require('express');
 const cookieParser = require('cookie-parser');
 const connectDB = require('./config/db');
 const mongoSanitize = require('express-mongo-sanitize');
@@ -12,7 +13,7 @@ const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUI = require('swagger-ui-express');
 
 //Load env vars
-dotenv.config({ path: './config/config.env' });
+
 
 //Connect to database
 connectDB();

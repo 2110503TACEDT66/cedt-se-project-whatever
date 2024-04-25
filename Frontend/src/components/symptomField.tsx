@@ -36,11 +36,11 @@ export default function SymptomField({
   return (
     <div>
       <TextField
-        variant="standard"
+        variant="outlined"
         type="text"
         name="symptom"
         label="Symptom"
-        className="rounded-t-xl mt-3 ring-2 ring-inset ring-grey-400 text-md leading-6 indent-2 placeholder:text-grey-400"
+        className="rounded-xl mt-3 ring-inset ring-grey-400 text-md leading-6 indent-2 placeholder:text-grey-400"
         onChange={(e) => {
           dispatch(changeSymptom(e.target.value));
         }}
