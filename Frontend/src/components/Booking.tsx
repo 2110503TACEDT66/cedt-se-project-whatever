@@ -117,7 +117,7 @@ export default function Booking({
                 Test comment
               </button>
               <Context.Provider value={contextValue}>
-              <PopupCommentNRating visible={popUpBoolean}></PopupCommentNRating>        
+              <PopupCommentNRating visible={popUpBoolean} dentistId={bookingItem.dentist.id}></PopupCommentNRating>        
               </Context.Provider>
             </div>
           )}
