@@ -132,6 +132,7 @@ exports.addBooking = async (req, res, next) => {
       req.body.user = checkupBooking.user;
       req.body.dentist = checkupBooking.dentist;
       req.body.symptom = checkupBooking.symptom;
+      req.body.commented = false;
     }
     const booking = await Booking.create(req.body);
 
