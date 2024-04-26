@@ -28,9 +28,9 @@ export default async function DentistDetailPage({
     await createBooking(token, user, dentist, startDate, endDate, symptom);
     redirect('/mybookings');
   }
-  let feedbackDetail = await getFeedbackForOne(params.id,1);
+  const feedbackDetail = await getFeedbackForOne(params.id,1);
   
-  console.log(feedbackDetail) ;
+  // console.log(feedbackDetail) ;
 
   return (
     <main className="p-16 mt-16 flex flex-row space-x-16 items-start">
@@ -65,13 +65,13 @@ export default async function DentistDetailPage({
           </div>
         </div>
         
-        { feedbackDetail.data.length == 0 ? null :
+        {/* { feedbackDetail.count == 0 ? null : */}
         <div className="flex flex-col shrink space-y-4 bg-white w-full p-6">
 
           <ShowFeedback dentistId={params.id}  />
 
         </div>
-        }
+        {/* } */}
       </main>
   );
 }

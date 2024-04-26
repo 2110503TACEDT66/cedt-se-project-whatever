@@ -28,13 +28,15 @@ export default function ShowFeedback({dentistId}:{dentistId:string}) {
         </button>}
         </div>
         
-      
-      {data.map((feedback: FeedbackItem) => (
+      {data.length == 0 ? ( <p className='text-red-400'>No data on this page</p> ) : ( data.map((feedback: FeedbackItem) => (
+        
         <ShowOneFeedback
           key={feedback._id}
           feedback={feedback}
         />
-      ))}
+        
+        )))}
+      
     </div>
     
   );
