@@ -60,7 +60,7 @@ exports.getFeedbacks = async (req, res, next) => {
       success: true,
       count: feedbacks.length,
       pagination,
-      averageRating: avgRating ? avgRating[0].averageRating : null, // Conditional check for avgRating
+      averageRating: avgRating && avgRating[0] ? avgRating[0].averageRating : null, // Conditional check for avgRating
       data: feedbacks,
     });
   } catch (err) {

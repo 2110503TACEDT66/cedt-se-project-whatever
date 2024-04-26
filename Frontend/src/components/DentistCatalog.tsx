@@ -67,6 +67,7 @@ export default function DentistCatalog({
                   <Card
                     dentistName={dentistItem.name}
                     imgSrc={dentistItem.picture}
+                    dentistId={dentistItem.id}
                   />
                 </Link>
               ) : null
