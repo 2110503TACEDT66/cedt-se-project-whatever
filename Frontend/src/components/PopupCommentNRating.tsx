@@ -31,7 +31,7 @@ export default function PopupCommentNRating({ visible, dentistId }: { visible: b
                 </textarea>
                 <Rating name="size-small" defaultValue={0} value={rating} onChange={handleRatingChange} size="medium" />
                 <button className='bg-sky-600 hover:bg-sky-700 shadow-sm absolute bottom-5 right-5 rounded-2xl px-5 py-2'
-                onClick={() => submitFeedback(session.user.token,comment, rating, dentistId)}>
+                onClick={() => submitFeedback(session.user.token, comment, rating, dentistId)}>
                   Submit
                 </button>
                 <button className='bg-sky-600 hover:bg-sky-700 shadow-sm absolute bottom-5 right-32 rounded-2xl px-5 py-2'

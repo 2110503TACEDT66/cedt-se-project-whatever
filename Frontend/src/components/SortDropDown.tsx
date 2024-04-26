@@ -8,7 +8,7 @@ export default function SortDropDown({expertise,setExpertise}:{expertise:string,
         name="expertise" 
         id="expertise" 
         value={expertise} 
-        className="h-[3em] w-[200px] bg-white rounded-lg " 
+        className="h-[40px] w-[200px] bg-white rounded-lg " 
         onChange={(e)=>(setExpertise(e.target.value))}
         >
                 <MenuItem value="">None</MenuItem> 
