@@ -40,23 +40,24 @@ export default async function DentistDetailPage({
               src={dentistDetail.data.picture}
               alt="Dentist Picture"
               fill           
-              className="rounded-full bg-black object-cover border border-black"
+              className="rounded-full object-cover border border-cyan-500"
             />
           </div>
           
           <div className="mx-5 text-left">
             <div>
               <span className='text-4xl font-bold font-mono text-cyan-900'>Name:</span>
-              <span className='text-3xl text-black'>{dentistDetail.data.name}</span>
+              <span className='text-2xl text-black'>{dentistDetail.data.name}</span>
             </div>
             <div>
               <span className='text-4xl font-bold font-mono text-cyan-900'>Experience:</span>
-              <span className='text-3xl text-black'>{dentistDetail.data.experience}</span>
-              <span className='text-3xl text-black'> years</span>
+              <span className='text-2xl text-black'>{dentistDetail.data.experience}</span>
+              <span className='text-2xl text-black'> years</span>
             </div>
             <div>
               <span className='text-4xl font-bold font-mono text-cyan-900'>Expertise:</span>
-              <span className='text-3xl text-black'>{dentistDetail.data.expertise}</span>
+              <br></br>
+              <span className='text-2xl text-black'>{dentistDetail.data.expertise}</span>
             </div>
             <SymptomField
             dentist={params.id}
@@ -66,7 +67,7 @@ export default async function DentistDetailPage({
         </div>
         
         {/* { feedbackDetail.count == 0 ? null : */}
-        <div className="flex flex-col shrink space-y-4 bg-white w-full p-6">
+        <div className="flex flex-col shrink space-y-4 bg-white w-full p-6 shadow-xl">
 
           <ShowFeedback dentistId={params.id}  />
 

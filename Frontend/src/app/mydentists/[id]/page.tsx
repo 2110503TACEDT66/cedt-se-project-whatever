@@ -24,7 +24,7 @@ export default async function MyDentistId({params} : {params : {id:string}}) {
               src={dentistDetail.data.picture}
               alt="Dentist Picture"
               fill           
-              className="rounded-full bg-black object-cover border border-black"
+              className="rounded-full object-cover border border-rose-400"
             />
           </div>
           
@@ -45,7 +45,7 @@ export default async function MyDentistId({params} : {params : {id:string}}) {
           </div>
         </div>
         
-        <div className="flex flex-col shrink space-y-4 bg-white w-full p-6">
+        <div className="flex flex-col shrink space-y-4 bg-white w-full p-6 sahdow-xl">
           <ShowFeedback dentistId={params.id}  />
         </div>
       </main>

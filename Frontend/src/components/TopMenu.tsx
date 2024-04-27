@@ -7,9 +7,9 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 export default async function TopMenu() {
   const session = await getServerSession(authOptions);
   return (
-    <div className="h-16 bg-white flex flex-row fixed top-0 left-0 right-0 border-b-[1px] border-solid border-gray-500 z-30 bg-opacity-80">
+    <div className={`h-16 bg-white flex flex-row fixed top-0 left-0 right-0 border-b-[1px] border-solid ${session?.user.role == "receptionist" ? "border-rose-400":"border-cyan-500"} z-30 bg-opacity-80`}>
       <Image
-        src={'/img/DentistLogo2.jpg'}
+        src={`${session?.user.role == "receptionist" ? "/img/Dentistlogo2.png" : "/img/Dentistlogo.jpg"}`}
         className="h-full w-auto "
         alt="logo"
         width={0}
@@ -18,7 +18,7 @@ export default async function TopMenu() {
       />
       <TopMenuItem
         title="Home"
-        imgSrc="/img/homelogo.png"
+        imgSrc={`${session?.user.role == "receptionist" ? "/img/homelogo2.png" : "/img/homelogo.png"}`}
         pageRef="/"
       />
       {session?.user.role == "receptionist" ? null :
@@ -30,7 +30,7 @@ export default async function TopMenu() {
       }
       <TopMenuItem
         title={session?.user.role == "receptionist" ? "Bookings" : "My Booking"}
-        imgSrc="/img/bookingIcon.png"
+        imgSrc={`${session?.user.role == "receptionist" ? "/img/bookingIcon2.png" : "/img/bookingIcon.png"}`}
         pageRef="/mybookings"
       />
       {session?.user.role == "receptionist" ? 
@@ -48,15 +48,15 @@ export default async function TopMenu() {
       ) : null}
       <div className="absolute right-3 top-3 flex flex-column h-full">
         {session ? (
-          <Link href="/api/auth/signout" style={{textDecoration:'none', fontSize:'20px'}} className='flex items-center h-10 border-2 rounded-lg border-cyan-500 w-auto shadow-lg p-2
-          text-center justify-center text-cyan-500 transition hover:bg-cyan-500 hover:text-white'>
+          <Link href="/api/auth/signout" style={{textDecoration:'none', fontSize:'20px'}} className={`flex items-center h-10 border-2 rounded-lg  w-auto shadow-lg p-2
+          text-center justify-center ${session?.user.role == "receptionist" ? "border-rose-400 text-rose-400 hover:bg-rose-400":"border-cyan-500 text-cyan-500 hover:bg-cyan-500"} transition hover:text-white`}>
             <div>
               Sign-Out of {session.user.name}
             </div>
           </Link>
         ) : (
-          <Link href="/api/auth/signin" style={{textDecoration:'none', fontSize:'20px'}} className='flex items-center h-10 border-2 rounded-lg border-cyan-500 w-28 shadow-lg
-          text-center justify-center text-cyan-500 hover:bg-cyan-500 transition hover:text-white'>
+          <Link href="/api/auth/signin" style={{textDecoration:'none', fontSize:'20px'}} className={`flex items-center h-10 border-2 rounded-lg w-28 shadow-lg
+          text-center justify-center border-cyan-500 text-cyan-500 hover:bg-cyan-500 transition hover:text-white`}>
             <div>
               Sign-In
             </div>

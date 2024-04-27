@@ -11,8 +11,8 @@ export default function Banner() {
   return (
     <div className="flex-col p-[5px] m-0 w-screen h-[100vh] relative items-center text-center">
       <div className="relative top-24 z-20 text-center">
-        <h1 className="text-6xl p-4 rounded-lg font-semibold font-body text-cyan-800">Welcome to Dentist Booking</h1>
-        <div className="text-xl font-serif italic text-cyan-900 mt-6">Your perfect choice for dentist booking</div>
+        <h1 className={`text-6xl p-4 rounded-lg font-semibold font-body ${session?.user.role == "receptionist" ? "text-rose-500":"text-cyan-800"}`}>Welcome to Dentist Booking</h1>
+        <div className={`text-xl font-serif italic ${session?.user.role == "receptionist" ? "text-rose-700":"text-cyan-900"} mt-6`}>Your perfect choice for dentist booking</div>
         <div className='flex mt-10 items-center justify-center'>
         {session?.user.role == "receptionist" ? null : 
         <Link href="/dentists" style={{textDecoration:'none', fontSize:'20px'}} className='flex items-center h-12 border-2 rounded-lg border-cyan-500 w-28 shadow-lg
