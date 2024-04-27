@@ -36,7 +36,7 @@ export default function Card({
           readOnly
           className='p-2 center'
         />
-      <div className='w-full text-left left-5 h-[30%] relative text-black'>{dentistName}</div>
+      <div className='w-full text-center h-[30%] relative text-black'>{dentistName}</div>
       
     </div>
   );

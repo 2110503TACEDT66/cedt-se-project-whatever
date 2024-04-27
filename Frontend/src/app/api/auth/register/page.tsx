@@ -36,7 +36,7 @@ export default async function registerPage() {
     <div>
       <div className="flex justify-center items-center h-screen ">
         <div className="absolute border border-4 border-cyan-500 rounded-xl p-10 backdrop-blur-xl ">
-          <h1 className="text-center text-3xl font-serif text-cyan-500 mb-10 font-bold">
+          <h1 className="text-center text-3xl font-body text-cyan-800 mb-10 font-bold">
             Registration
           </h1>
           <form action={handleSubmit} className='flex flex-col'>
@@ -94,7 +94,7 @@ export default async function registerPage() {
                 }}/>
             <button
               type="submit"
-              className="bg-cyan-500 hover:bg-cyan-600 text-white p-2 m-3 rounded-lg font-serif font-bold ">
+              className="bg-cyan-500 hover:bg-cyan-600 text-white p-2 m-3 rounded-lg font-body font-bold ">
               Register
             </button>
           </form>
