@@ -30,17 +30,17 @@ export default async function MyDentistId({params} : {params : {id:string}}) {
           
           <div className="mx-5 text-left">
             <div>
-              <span className='text-4xl font-bold font-mono text-rose-700'>Name:</span>
-              <span className='text-3xl text-black'>{dentistDetail.data.name}</span>
+              <span className='text-2xl font-bold font-body text-rose-700'>Name: </span>
+              <span className='text-2xl text-black'>{dentistDetail.data.name}</span>
             </div>
             <div>
-              <span className='text-4xl font-bold font-mono text-rose-700'>Experience:</span>
-              <span className='text-3xl text-black'>{dentistDetail.data.experience}</span>
-              <span className='text-3xl text-black'> years</span>
+              <span className='text-2xl font-bold font-body text-rose-700'>Experience: </span>
+              <span className='text-2xl text-black'>{dentistDetail.data.experience}</span>
+              <span className='text-2xl text-black'> years</span>
             </div>
             <div>
-              <span className='text-4xl font-bold font-mono text-rose-700'>Expertise:</span>
-              <span className='text-3xl text-black'>{dentistDetail.data.expertise}</span>
+              <span className='text-2xl font-bold font-body text-rose-700'>Expertise: </span>
+              <span className='text-2xl text-black'>{dentistDetail.data.expertise}</span>
             </div>
           </div>
         </div>

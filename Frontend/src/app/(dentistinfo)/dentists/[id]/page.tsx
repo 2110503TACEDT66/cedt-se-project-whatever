@@ -46,16 +46,16 @@ export default async function DentistDetailPage({
           
           <div className="mx-5 text-left">
             <div>
-              <span className='text-4xl font-bold font-mono text-cyan-900'>Name:</span>
+              <span className='text-2xl font-bold font-body text-cyan-900'>Name: </span>
               <span className='text-2xl text-black'>{dentistDetail.data.name}</span>
             </div>
             <div>
-              <span className='text-4xl font-bold font-mono text-cyan-900'>Experience:</span>
+              <span className='text-2xl font-bold font-body text-cyan-900'>Experience: </span>
               <span className='text-2xl text-black'>{dentistDetail.data.experience}</span>
               <span className='text-2xl text-black'> years</span>
             </div>
             <div>
-              <span className='text-4xl font-bold font-mono text-cyan-900'>Expertise:</span>
+              <span className='text-2xl font-bold font-body text-cyan-900'>Expertise: </span>
               <br></br>
               <span className='text-2xl text-black'>{dentistDetail.data.expertise}</span>
             </div>

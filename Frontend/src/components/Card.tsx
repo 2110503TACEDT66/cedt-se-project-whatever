@@ -34,9 +34,9 @@ export default function Card({
           precision={0.25}
           value={avgRating}
           readOnly
-          className='p-2'
+          className='p-2 center'
         />
-      <div className='w-full h-[30%] relative text-black'>{dentistName}</div>
+      <div className='w-full text-left left-5 h-[30%] relative text-black'>{dentistName}</div>
       
     </div>
   );
