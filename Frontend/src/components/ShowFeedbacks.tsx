@@ -20,7 +20,7 @@ export default function ShowFeedback({dentistId}:{dentistId:string}) {
           Back
         </button>
         }
-        <div className='text-black pl-6 pr-2 text-lg'>page</div>
+        <div className='text-black pl-6 pr-2 text-lg'>Page:</div>
         
         <div className='text-black pl-2 pr-6 text-lg'>{page}</div>
         
