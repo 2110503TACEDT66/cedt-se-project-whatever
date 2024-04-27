@@ -5,6 +5,7 @@ import Image from 'next/image';
 import getFeedbackForOne from '@/libs/getFeedbackForOne';
 import Rating from '@mui/material/Rating';
 import FeedbackPagination from '@/components/FeedbackPagination';
+import ShowFeedback from '@/components/ShowFeedbacks';
 
 export default async function MyDentistId({params} : {params : {id:string}}) {
 
@@ -12,7 +13,7 @@ export default async function MyDentistId({params} : {params : {id:string}}) {
     if (!session || !session.user.token) return null;
 
     const dentistDetail:OneDentistJson = await getDentist(params.id);
-    const feedbackDetail = await getFeedbackForOne(params.id);
+    const feedbackDetail = await getFeedbackForOne(params.id, 1);
     //console.log(feedbackDetail.length == 2)
 
     return (
@@ -42,31 +43,11 @@ export default async function MyDentistId({params} : {params : {id:string}}) {
               <span className='text-3xl text-black'>{dentistDetail.data.expertise}</span>
             </div>
           </div>
-          <FeedbackPagination paramsId={params.id}/>
         </div>
         
-        { feedbackDetail.length == 0 ? null :
         <div className="flex flex-col shrink space-y-4 bg-white w-full p-6">
-
-          {
-            feedbackDetail.map((feedbackItem:FeedbackItem) => 
-            <div className='bg-slate-200 flex flex-col w-full a rounded-lg p-4' key={feedbackItem._id}>
-              <div className='font-bold text-xl text-black items-center flex gap-2'>
-                {feedbackItem.user.name}: 
-                <Rating
-                  name="simple-controlled"
-                  value={feedbackItem.rating}
-                  readOnly
-                  className='text-center items-center'
-                />
-              </div>
-              <div className='text-black text-lg pl-8 pt-6'>{feedbackItem.comment}</div>
-            </div>
-            )
-          }
-
+          <ShowFeedback dentistId={params.id}  />
         </div>
-        }
       </main>
   );
 }
