@@ -35,47 +35,38 @@ router
  *       type: object
  *       required:
  *         - name
- *         - address
+ *         - experience
+ *         - expertise
+ *         - picture
  *       properties:
- *         id:
+ *         _id:
  *           type: string
  *           format: uuid
  *           description: The auto-generated id of the dentist
  *           example: d290f1ee-6c54-4b01-90e6-d701748f0851
- *         ลําดับ:
- *           type: string
- *           description: Ordinal number
  *         name:
  *           type: string
- *           description: Dentist name
- *         address:
+ *           description: Dentist's name
+ *         experience:
+ *           type: number
+ *           description: Dentist's year of experience
+ *         expertise:
  *           type: string
- *           description: House No., Street, Road
- *         district:
+ *           description: Dentist's area of expertise
+ *         picture:
  *           type: string
- *           description: District
- *         province:
- *           type: string
- *           description: province
- *         postalcode:
- *           type: string
- *           description: 5-digit postal code
- *         tel:
- *           type: string
- *           description: telephone number
- *         region:
- *           type: string
- *           description: region
+ *           description: Dentist's picture as a link address
+ *         __v:
+ *           type: number
+ *           description: version
  *       example:
- *         id: 609bda561452242d88d36e37
- *         ลําดับ: 121
+ *         _id: 609bda561452242d88d36e37
  *         name: Happy Dentist
- *         address: 121 ถ.สุขุมวิท
- *         district: บางนา
- *         province: กรุงเทพมหานคร
- *         postalcode: 10110
- *         tel: 02-2187000
- *         region: กรุงเทพมหานคร (Bangkok)
+ *         experience: 10
+ *         expertise: Orthodontics
+ *         picture: https://source.unsplash.com/akPctn2G0jM
+ *         bookings: []
+ *         __v: 0
  */
 /**
  * @swagger
@@ -98,6 +89,8 @@ router
  *               type: array
  *               items:
  *                 $ref: '#/components/schemas/Dentist'
+ *       400:
+ *         description: Some errors occur.
  */
 /**
  * @swagger
@@ -128,21 +121,43 @@ router
  *   post:
  *     summary: Create a new dentist
  *     tags: [Dentists]
+ *     security: [
+ *         {
+ *             bearerAuth: []
+ *         }
+ *     ]
  *     requestBody:
  *       required: true
  *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/Dentist'
+ *         application/json: {
+ *           schema: {
+ *              $ref: '#/components/schemas/Dentist'
+ *           },
+ *           examples: {
+                createDentistRequestBody : {
+                  description : Request body example for createDentist,
+                  value: {
+                    name: Paul Samon,
+                    experience: 6,
+                    expertise: Dental occultion,
+                    picture: https://source.unsplash.com/akPctn2G0jM
+                  }
+                }
+              }
+ *         }
  *     responses:
  *       201:
  *         description: The dentist was successfully created
- *         content:
+ *         contents:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Dentist'
- *       500:
- *         description: Some server error
+ *       400:
+ *         description: Cannot add dentist
+ *       401:
+ *         description: Not authorize to access this route
+ *       403:
+ *         description: The user's role is not authorized to access this route
  */
 /**
  * @swagger
@@ -160,9 +175,20 @@ router
  *     requestBody:
  *       required: true
  *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/Dentist'
+ *         application/json: {
+ *           schema: {
+ *              $ref: '#/components/schemas/Dentist'
+ *           },
+ *           examples: {
+                updateDentistRequestBody : {
+                  description : Request body example for updateDentist,
+                  value: {
+                    name: Paul Samond,
+                    experience: 16,
+                  }
+                }
+              }
+ *         }
  *     responses:
  *       200:
  *         description: The dentist was updated
@@ -170,6 +196,10 @@ router
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Dentist'
+ *       401:
+ *         description: Not authorize to access this route
+ *       403:
+ *         description: The user's role is not authorized to access this route
  *       404:
  *         description: The dentist was not found
  *       500:
@@ -192,6 +222,10 @@ router
  *     responses:
  *       200:
  *         description: The dentist was deleted
+ *       401:
+ *         description: Not authorize to access this route
+ *       403:
+ *         description: The user's role is not authorized to access this route
  *       404:
  *         description: The dentist was not found
  */
