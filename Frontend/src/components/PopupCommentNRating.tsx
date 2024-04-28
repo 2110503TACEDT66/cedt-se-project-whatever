@@ -5,8 +5,10 @@ import {Context} from './Booking'
 import { useState } from 'react';
 import submitFeedback from '@/libs/submitFeedback';
 import { useSession } from 'next-auth/react';
+import updateCommented from '@/libs/updateCommented';
 
-export default function PopupCommentNRating({ visible, dentistId }: { visible: boolean, dentistId: string }){
+
+export default function PopupCommentNRating({ visible, dentistId,bookingItem }: { visible: boolean, dentistId: string,bookingItem: BookingItem; }){
     const { popUpBoolean, setPopUpBoolean } = useContext(Context)!
     const [comment, setComment] = useState('');
     const [rating, setRating] = useState(0);
@@ -18,6 +20,8 @@ export default function PopupCommentNRating({ visible, dentistId }: { visible: b
             setRating(value);
         }
     };
+
+    
 
     if(visible)return(
         <div>
@@ -31,10 +35,16 @@ export default function PopupCommentNRating({ visible, dentistId }: { visible: b
                 </textarea>
                 <Rating name="size-small" defaultValue={0} value={rating} onChange={handleRatingChange} size="medium" />
                 <button className='bg-sky-600 hover:bg-sky-700 shadow-sm absolute bottom-5 right-5 rounded-2xl px-5 py-2'
-                onClick={() => {submitFeedback(session.user.token, comment, rating, dentistId);
-                                setPopUpBoolean(!popUpBoolean);
-                                window.alert('Feedback submitted successfully!');
-                                }}>
+                onClick={() => {
+                    if (comment.trim() === '') {
+                        window.alert('Please enter your feedback before submit.');
+                    } else{
+                        submitFeedback(session.user.token, comment, rating, dentistId);
+                        setPopUpBoolean(!popUpBoolean);
+                        window.alert('Feedback submitted successfully!');
+                        updateCommented(session.user.token,bookingItem._id,true)
+                    }  
+                    }}>
                   Submit
                 </button>
                 <button className='bg-sky-600 hover:bg-sky-700 shadow-sm absolute bottom-5 right-32 rounded-2xl px-5 py-2'

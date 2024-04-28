@@ -7,6 +7,7 @@ import Link from 'next/link';
 import CircleIcon from '@mui/icons-material/Circle';
 import ButtonStatus from './ButtonStatus';
 import PopupCommentNRating from './PopupCommentNRating';
+import updateCommented from '@/libs/updateCommented';
 
 type ContextValueType = {
   popUpBoolean: boolean;
@@ -100,6 +101,8 @@ export default function Booking({
             </div>
           ) : (
             <div className="flex flex-row gap-x-3 py-2">
+              {bookingItem.status === 'pending' ? (
+                <>
               <button
                 className="block rounded-md bg-sky-600 hover:bg-sky-700 px-3 py-2 transition shadow-sm text-white mx-3"
                 onClick={() => setEditing(!editing)}>
@@ -112,12 +115,17 @@ export default function Booking({
                   Remove Booking
                 </button>
               </Link>
-              <button className='rounded-md bg-black px-4 hover:bg-gray-700 transition shadow-sm text-white mx-3'
-                onClick={()=>{setPopUpBoolean(!popUpBoolean)}}>
+              </>
+              ) : bookingItem.status === 'finish' && !bookingItem.commented ? (
+              <button className='block rounded-md bg-black px-3 py-2 hover:bg-gray-700 transition shadow-sm text-white mx-3'
+                onClick={()=>{
+                  setPopUpBoolean(!popUpBoolean)
+                  }}>
                 Test comment
               </button>
+              ) : null}
               <Context.Provider value={contextValue}>
-              <PopupCommentNRating visible={popUpBoolean} dentistId={bookingItem.dentist.id}></PopupCommentNRating>        
+              <PopupCommentNRating visible={popUpBoolean} dentistId={bookingItem.dentist.id} bookingItem={bookingItem}></PopupCommentNRating>        
               </Context.Provider>
             </div>
           )}

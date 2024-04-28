@@ -31,6 +31,7 @@ interface BookingItem {
   endDate: Date;
   symptom: string;
   status: string;
+  commented: boolean;
   createAt: Date;
   reqType : string ;
   __v: number;
