@@ -101,7 +101,7 @@ router
  *     tags: [Feedbacks]
  *     security: [
  *         {
- *             bearerAuth: []
+ *             bearerToken: []
  *         }
  *     ]
  *     parameters:
@@ -131,7 +131,7 @@ router
  *     tags: [Feedbacks]
  *     security: [
  *         {
- *             bearerAuth: []
+ *             bearerToken: []
  *         }
  *     ]
  *     parameters:

@@ -103,7 +103,7 @@ router
  *     tags: [Bookings]
  *     security: [
  *         {
- *             bearerAuth: []
+ *             bearerToken: []
  *         }
  *     ]
  *     responses:
@@ -128,7 +128,7 @@ router
  *     tags: [Bookings]
  *     security: [
  *         {
- *             bearerAuth: []
+ *             bearerToken: []
  *         }
  *     ]
  *     parameters:
@@ -162,7 +162,7 @@ router
  *     tags: [Bookings]
  *     security: [
  *         {
- *             bearerAuth: []
+ *             bearerToken: []
  *         }
  *     ]
  *     parameters:
@@ -217,7 +217,7 @@ router
  *     tags: [Bookings]
  *     security: [
  *         {
- *             bearerAuth: []
+ *             bearerToken: []
  *         }
  *     ]
  *     parameters:

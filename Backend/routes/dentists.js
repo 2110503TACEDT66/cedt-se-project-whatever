@@ -123,7 +123,7 @@ router
  *     tags: [Dentists]
  *     security: [
  *         {
- *             bearerAuth: []
+ *             bearerToken: []
  *         }
  *     ]
  *     requestBody:
@@ -165,6 +165,11 @@ router
  *   put:
  *     summary: Update the dentist by the id for receptionist
  *     tags: [Dentists]
+ *     security: [
+ *         {
+ *             bearerToken: []
+ *         }
+ *     ]
  *     parameters:
  *       - in: path
  *         name: id
@@ -211,6 +216,11 @@ router
  *   delete:
  *     summary: Remove the dentist by id for receptionist
  *     tags: [Dentists]
+ *     security: [
+ *         {
+ *             bearerToken: []
+ *         }
+ *     ]
  *     parameters:
  *       - in: path
  *         name: id
