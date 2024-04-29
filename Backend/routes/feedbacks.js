@@ -1,4 +1,4 @@
-const express = require("express");
+const express = require('express');
 
 const {
   getFeedbacks,
@@ -6,16 +6,16 @@ const {
   addFeedback,
   updateFeedback,
   deletefeedback,
-} = require("../controllers/feedbacks");
+} = require('../controllers/feedbacks');
 
 const router = express.Router({ mergeParams: true });
-const { protect } = require("../middleware/auth");
+const { protect } = require('../middleware/auth');
 
-router.route("/").get(getFeedbacks).post(protect, addFeedback);
+router.route('/').get(getFeedbacks).post(protect, addFeedback);
 router
-  .route("/:feedbackId")
+  .route('/:feedbackId')
   .get(getFeedback)
-  .put(updateFeedback)
+  .put(protect, updateFeedback)
   .delete(deletefeedback);
 /**
  * @swagger
@@ -179,6 +179,11 @@ router
  *   put:
  *     summary: Update the feedback by the id
  *     tags: [Feedbacks]
+ *     security: [
+ *         {
+ *             bearerToken: []
+ *         }
+ *     ]
  *     parameters:
  *       - in: path
  *         name: id
