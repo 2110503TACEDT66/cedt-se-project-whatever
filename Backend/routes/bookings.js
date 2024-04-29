@@ -38,7 +38,7 @@ router
  *         _id:
  *           type: string
  *           format: uuid
- *           description: The auto-generated id of the dentist
+ *           description: The auto-generated id of the booking
  *           example: d290f1ee-6c54-4b01-90e6-d701748f0851
  *         startDate:
  *           type: date
@@ -68,187 +68,263 @@ router
  *         commented:
  *           type: boolean
  *           description: state whether the booking is commented
+ *         createAt:
+ *           type: date
+ *           description: Booking's creation date
  *         __v:
  *           type: number
  *           description: version
  *       example:
- *         _id: 609bda561452242d88d36e37
- *         name: Happy Dentist
- *         experience: 10
- *         expertise: Orthodontics
- *         picture: https://source.unsplash.com/akPctn2G0jM
+ *         _id: 662749820815e7ad98e3849f
+ *         startDate: 2024-04-24T00:00:00.000Z
+ *         endDate: 2024-04-24T01:00:00.000Z
+ *         user: 6618dfc57b33fd268c95c3ac
+ *         dentist: 6620b1a0efbbca938f669b76
+ *         symptom: a
+ *         status: pending
+ *         reqType: checkup
+ *         createdAt: 2024-04-23T05:39:14.907Z
  *         __v: 0
- *         bookings: [{_id: 662749820815e7ad98e3849f,
-                  startDate: 2024-04-24T00:00:00.000Z,
-                  endDate: 2024-04-24T01:00:00.000Z,
-                  user: 6618dfc57b33fd268c95c3ac,
-                  dentist: 6620b1a0efbbca938f669b76,
-                  symptom: a,
-                  status: pending,
-                  reqType: checkup,
-                  createdAt: 2024-04-23T05:39:14.907Z,
-                  __v: 0}]
+ *
  *
  */
 /**
  * @swagger
  * tags:
- *   name: Dentists
- *   description: The dentists managing API
+ *   name: Bookings
+ *   description: The bookings managing API
  */
 /**
  * @swagger
- * /dentists:
+ * /bookings:
  *   get:
- *     summary: Returns the list of all the dentists
- *     tags: [Dentists]
+ *     summary: Returns user's booking or all booking for receptionist
+ *     description: User role can only see their booking while receptionist role can see every booking on server.
+ *     tags: [Bookings]
+ *     security: [
+ *         {
+ *             bearerAuth: []
+ *         }
+ *     ]
  *     responses:
  *       200:
- *         description: The list of the dentists
+ *         description: The list of the bookings
  *         content:
  *           application/json:
  *             schema:
  *               type: array
  *               items:
- *                 $ref: '#/components/schemas/Dentist'
- *       400:
- *         description: Some errors occur.
+ *                 $ref: '#/components/schemas/Booking'
+ *       401:
+ *         description: Not authorize to access this route
+ *       500:
+ *         description: Cannot find Booking.
  */
 /**
  * @swagger
- * /dentists/{id}:
+ * /bookings/{id}:
  *   get:
- *     summary: Get the dentist by id
- *     tags: [Dentists]
+ *     summary: Get the booking by id for receptionist
+ *     tags: [Bookings]
+ *     security: [
+ *         {
+ *             bearerAuth: []
+ *         }
+ *     ]
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: The dentist id
+ *         description: The booking id
  *     responses:
  *       200:
- *         description: The dentist description by id
+ *         description: The booking description by id
  *         contents:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Dentist'
+ *               $ref: '#/components/schemas/Booking'
+ *       401:
+ *         description: Not authorize to access this route
+ *       403:
+ *         description: The user's role is not authorized to access this route
  *       404:
- *         description: The dentist was not found
+ *         description: The booking was not found
+ *       500:
+ *         description: Cannot find booking
  */
 /**
  * @swagger
- * /dentists:
+ * /dentists/{dentistId}/bookings:
  *   post:
- *     summary: Create a new dentist
- *     tags: [Dentists]
+ *     summary: Create a new booking
+ *     tags: [Bookings]
  *     security: [
  *         {
  *             bearerAuth: []
  *         }
  *     ]
+ *     parameters:
+ *       - in: path
+ *         name: dentistId
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The dentist id of the booking
  *     requestBody:
  *       required: true
  *       content:
  *         application/json: {
  *           schema: {
- *              $ref: '#/components/schemas/Dentist'
+ *              $ref: '#/components/schemas/Booking'
  *           },
  *           examples: {
-                createDentistRequestBody : {
-                  description : Request body example for createDentist,
+                createBookingRequestBody : {
+                  description : Request body example for createBooking,
                   value: {
-                    name: Paul Samon,
-                    experience: 6,
-                    expertise: Dental occultion,
-                    picture: https://source.unsplash.com/akPctn2G0jM
+                    user: 6618dfc57b33fd268c95c3ac,
+                    startDate: 2024-04-24T00:00:00.000Z,
+                    endDate: 2024-04-24T01:00:00.000Z,
+                    symptom: a,
+                    status: pending,
+                    reqType: checkup
                   }
                 }
               }
  *         }
  *     responses:
  *       201:
- *         description: The dentist was successfully created
+ *         description: The booking was successfully created
  *         contents:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Dentist'
+ *               $ref: '#/components/schemas/Booking'
  *       400:
- *         description: Cannot add dentist
+ *         description: The user with ID provided has already booked
+ *       401:
+ *         description: Not authorize to access this route
+ *       404:
+ *         description: Cannot find dentist of an Id provided.
+ *       500:
+ *         description: Cannot book.
+ */
+/**
+ * @swagger
+ * /bookings/{id}:
+ *   post:
+ *     summary: Create a new booking for receptionist
+ *     tags: [Bookings]
+ *     security: [
+ *         {
+ *             bearerAuth: []
+ *         }
+ *     ]
+ *     parameters:
+ *       - in: path
+ *         name: Id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The booking id
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json: {
+ *           schema: {
+ *              $ref: '#/components/schemas/Booking'
+ *           },
+ *           examples: {
+                createBookingRequestBody : {
+                  description : Request body example for createBooking,
+                  value: {
+                    startDate: 2024-04-24T00:00:00.000Z,
+                    endDate: 2024-04-24T01:00:00.000Z,
+                    status: pending
+                  }
+                }
+              }
+ *         }
+ *     responses:
+ *       201:
+ *         description: The booking was successfully created
+ *         contents:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Booking'
  *       401:
  *         description: Not authorize to access this route
  *       403:
  *         description: The user's role is not authorized to access this route
+ *       500:
+ *         description: Cannot book.
  */
 /**
  * @swagger
- * /dentists/{id}:
+ * /bookings/{id}:
  *   put:
- *     summary: Update the dentist by the id
- *     tags: [Dentists]
+ *     summary: Update the booking by the id
+ *     tags: [Bookings]
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: The dentist id
+ *         description: The booking id
  *     requestBody:
  *       required: true
  *       content:
  *         application/json: {
  *           schema: {
- *              $ref: '#/components/schemas/Dentist'
+ *              $ref: '#/components/schemas/Booking'
  *           },
  *           examples: {
-                updateDentistRequestBody : {
-                  description : Request body example for updateDentist,
+                updateBookingRequestBody : {
+                  description : Request body example for updateBooking,
                   value: {
-                    name: Paul Samond,
-                    experience: 16,
+                    startDate: 2024-04-24T00:00:00.000Z,
+                    endDate: 2024-04-24T01:00:00.000Z,
                   }
                 }
               }
  *         }
  *     responses:
  *       200:
- *         description: The dentist was updated
+ *         description: The booking was updated
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Dentist'
+ *               $ref: '#/components/schemas/Booking'
  *       401:
  *         description: Not authorize to access this route
- *       403:
- *         description: The user's role is not authorized to access this route
  *       404:
- *         description: The dentist was not found
+ *         description: The booking was not found
  *       500:
  *         description: Some error happened
  */
 /**
  * @swagger
- * /dentists/{id}:
+ * /bookings/{id}:
  *   delete:
- *     summary: Remove the dentist by id
- *     tags: [Dentists]
+ *     summary: Remove the booking by id
+ *     tags: [Bookings]
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: The dentist id
+ *         description: The booking id
  *
  *     responses:
  *       200:
- *         description: The dentist was deleted
+ *         description: The booking was deleted
  *       401:
  *         description: Not authorize to access this route
- *       403:
- *         description: The user's role is not authorized to access this route
  *       404:
- *         description: The dentist was not found
+ *         description: The booking was not found
+ *       500:
+ *         description: Some error occur
  */
 module.exports = router;

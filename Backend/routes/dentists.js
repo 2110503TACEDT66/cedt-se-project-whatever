@@ -119,7 +119,7 @@ router
  * @swagger
  * /dentists:
  *   post:
- *     summary: Create a new dentist
+ *     summary: Create a new dentist for receptionist
  *     tags: [Dentists]
  *     security: [
  *         {
@@ -163,7 +163,7 @@ router
  * @swagger
  * /dentists/{id}:
  *   put:
- *     summary: Update the dentist by the id
+ *     summary: Update the dentist by the id for receptionist
  *     tags: [Dentists]
  *     parameters:
  *       - in: path
@@ -209,7 +209,7 @@ router
  * @swagger
  * /dentists/{id}:
  *   delete:
- *     summary: Remove the dentist by id
+ *     summary: Remove the dentist by id for receptionist
  *     tags: [Dentists]
  *     parameters:
  *       - in: path
@@ -228,6 +228,8 @@ router
  *         description: The user's role is not authorized to access this route
  *       404:
  *         description: The dentist was not found
+ *       500:
+ *         description: Some error occur
  */
 
 module.exports = router;
