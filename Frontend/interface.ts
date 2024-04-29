@@ -21,29 +21,29 @@ interface DentistJson {
 
 interface BookingItem {
   _id: string;
-  user: { 
-    name: string,
-    tel: string,
-    email: string
+  user: {
+    name: string;
+    tel: string;
+    email: string;
   };
   dentist: DentistItem;
   startDate: Date;
   endDate: Date;
   symptom: string;
   status: string;
-  commented: boolean;
   createAt: Date;
-  reqType : string ;
+  reqType: string;
   __v: number;
 }
 
 interface FeedbackItem {
   _id: string;
-  dentist: string,
+  dentist: string;
   user: {
-    _id:string,
-    name:string
+    _id: string;
+    name: string;
   };
+  booking: string;
   rating: number;
   comment: string;
 }
