@@ -31,10 +31,12 @@ export default function DentistCatalog({
                     const selectedDate = new Date(date); // Create a Date object from the selected date
                     const selectedEndDate = new Date(selectedDate); // Create a copy of the selected date
                     selectedEndDate.setHours(selectedEndDate.getHours() + 1); // Set the end time 1 hour after the selected time
+                    const bookingStartDate = new Date(bookdate.startDate);
+                    const bookingEndDate = new Date(bookdate.endDate);
 
                     if (
-                      bookdate.startDate <= selectedDate &&
-                      selectedEndDate <= bookdate.endDate
+                      bookingStartDate <= selectedDate &&
+                      selectedEndDate <= bookingEndDate
                     ) {
                       return true; // If the new booking overlaps with an existing booking, return true
                     }
