@@ -86,6 +86,12 @@ export default function RecepBooking({
             </span>
             <span className="text-lg">{bookingItem.symptom}</span>
           </div>
+            <div>
+              <span className="text-lg font-semibold font-body text-cyan-900">
+                Type:{' '}
+              </span>
+              <span className="text-lg">{bookingItem.reqType}</span>
+            </div>
           <div>
             <span className="text-xl font-bold font-mono text-cyan-900">
               Status:{' '}
