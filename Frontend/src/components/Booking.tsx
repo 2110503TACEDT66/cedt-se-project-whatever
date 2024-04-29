@@ -99,10 +99,9 @@ export default function Booking({
                 Confirm Editing
               </button>
             </div>
-          ) : (
-            <div className="flex flex-row gap-x-3 py-2">
-              {bookingItem.status === 'pending' ? (
-                <>
+          ) : 
+            bookingItem.status !== 'finish' ? (
+              <div className="flex flex-row gap-x-3 py-2">
               <button
                 className="block rounded-md bg-sky-600 hover:bg-sky-700 px-3 py-2 transition shadow-sm text-white mx-3"
                 onClick={() => setEditing(!editing)}>
@@ -115,8 +114,8 @@ export default function Booking({
                   Remove Booking
                 </button>
               </Link>
-              </>
-              ) : bookingItem.status === 'finish' && !bookingItem.commented ? (
+              </div>
+              ) : !bookingItem.commented ? (
               <button className='block rounded-md bg-black px-3 py-2 hover:bg-gray-700 transition shadow-sm text-white mx-3'
                 onClick={()=>{
                   setPopUpBoolean(!popUpBoolean)
@@ -128,8 +127,6 @@ export default function Booking({
               <PopupCommentNRating visible={popUpBoolean} dentistId={bookingItem.dentist.id} bookingItem={bookingItem}></PopupCommentNRating>        
               </Context.Provider>
             </div>
-          )}
-      
       </div>
     </div>
   );
