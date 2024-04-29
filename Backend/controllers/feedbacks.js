@@ -25,7 +25,9 @@ exports.getFeedbacks = async (req, res, next) => {
 
     query = Feedback.find({ dentist: req.params.dentistId });
   } else {
-    query = Feedback.find();
+    if (req.query.booking)
+      query = Feedback.find({ booking: req.query.booking });
+    else query = Feedback.find();
   }
 
   // Pagination
@@ -60,7 +62,8 @@ exports.getFeedbacks = async (req, res, next) => {
       success: true,
       count: feedbacks.length,
       pagination,
-      averageRating: avgRating && avgRating[0] ? avgRating[0].averageRating : null, // Conditional check for avgRating
+      averageRating:
+        avgRating && avgRating[0] ? avgRating[0].averageRating : null, // Conditional check for avgRating
       data: feedbacks,
     });
   } catch (err) {
@@ -149,7 +152,7 @@ exports.updateFeedback = async (req, res, next) => {
       });
     }
 
-    feedback = await feedback.findByIdAndUpdate(
+    feedback = await Feedback.findByIdAndUpdate(
       req.params.feedbackId,
       req.body,
       {

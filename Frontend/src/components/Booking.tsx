@@ -7,7 +7,6 @@ import Link from 'next/link';
 import CircleIcon from '@mui/icons-material/Circle';
 import ButtonStatus from './ButtonStatus';
 import PopupCommentNRating from './PopupCommentNRating';
-import updateCommented from '@/libs/updateCommented';
 
 type ContextValueType = {
   popUpBoolean: boolean;
@@ -77,10 +76,10 @@ export default function Booking({
             <span className="text-lg">{bookingItem.symptom}</span>
           </div>
           <div>
-          <span className="text-lg font-semibold font-body text-cyan-900">
+            <span className="text-lg font-semibold font-body text-cyan-900">
               Type:{' '}
-          </span>
-              <span className="text-lg">{bookingItem.reqType}</span>
+            </span>
+            <span className="text-lg">{bookingItem.reqType}</span>
           </div>
           <div>
             <span className="text-lg font-semibold font-body  text-cyan-900">
@@ -134,7 +133,7 @@ export default function Booking({
               </button>
             </Link>
           </div>
-        ) : !bookingItem.commented ? (
+        ) : (
           <button
             className="block rounded-md bg-black px-3 py-2 hover:bg-gray-700 transition shadow-sm text-white mx-3"
             onClick={() => {
@@ -142,7 +141,7 @@ export default function Booking({
             }}>
             Comment
           </button>
-        ) : null}
+        )}
         <Context.Provider value={contextValue}>
           <PopupCommentNRating
             visible={popUpBoolean}

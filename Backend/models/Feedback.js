@@ -11,10 +11,15 @@ const FeedbackSchema = new mongoose.Schema({
     ref: 'User',
     required: true,
   },
+  booking: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Booking',
+    required: true,
+  },
   comment: {
     type: String,
     required: [true, 'Please add a comment'],
-    maxlength: [200, "Comment cannot be more than 200 characters"],
+    maxlength: [200, 'Comment cannot be more than 200 characters'],
   },
   rating: {
     type: Number,
