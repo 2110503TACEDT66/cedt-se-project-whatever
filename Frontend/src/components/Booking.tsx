@@ -2,10 +2,18 @@
 import { Backdrop, Button, CircularProgress, TextField } from '@mui/material';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
-import { useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import Link from 'next/link';
 import CircleIcon from '@mui/icons-material/Circle';
 import ButtonStatus from './ButtonStatus';
+import PopupCommentNRating from './PopupCommentNRating';
+import updateCommented from '@/libs/updateCommented';
+
+type ContextValueType = {
+  popUpBoolean: boolean;
+  setPopUpBoolean: React.Dispatch<React.SetStateAction<boolean>>;
+};
+export const Context = createContext<ContextValueType | undefined>(undefined);
 
 export default function Booking({
   bookingItem,
@@ -21,9 +29,14 @@ export default function Booking({
 
   const [editing, setEditing] = useState<boolean>(false);
   const [newSymptom, setNewSymptom] = useState<String | null>(null);
+  const [popUpBoolean, setPopUpBoolean] = useState(false)
+  const contextValue: ContextValueType = {
+    popUpBoolean,
+    setPopUpBoolean,
+  };
 
   return (
-    <div className='flex flex-col bg-slate-200 rounded-lg mx-4'>
+    <div className='flex flex-col bg-slate-100 rounded-lg mx-4'>
       <div className="px-5 pt-2 flex flex-row text-black">
         <Image
           src={bookingItem.dentist.picture}
@@ -34,26 +47,26 @@ export default function Booking({
           className="h-36 w-auto object-cover mr-4 my-4 rounded-lg"></Image>
         <div className='my-4'>
           <div>
-            <span className="text-xl font-bold font-mono text-cyan-900">Patient: </span>
+            <span className="text-lg font-semibold font-body  text-cyan-900">Patient: </span>
             <span className="text-lg">{bookingItem.user.name}</span>
           </div>
           <div>
-            <span className="text-xl font-bold font-mono text-cyan-900">Dentist: </span>
+            <span className="text-lg font-semibold font-body  text-cyan-900">Dentist: </span>
             <span className="text-lg">{bookingItem.dentist.name}</span>
           </div>
           <div>
-            <span className="text-xl font-bold font-mono text-cyan-900">Booking date: </span>
+            <span className="text-lg font-semibold font-body  text-cyan-900">Booking date: </span>
             <span className="text-lg">{new Date(bookingItem.startDate).toUTCString()}</span>
             <span className="text-lg">{' - '}</span>
             <span className="text-lg">{new Date(bookingItem.endDate).toUTCString()}</span>
           </div>
           <div>
-            <span className="text-xl font-bold font-mono text-cyan-900">Symptom: </span>
+            <span className="text-lg font-semibold font-body text-cyan-900">Symptom: </span>
             <span className="text-lg">{bookingItem.symptom}</span>
           </div>
           <div >
-            <span className="text-xl font-bold font-mono text-cyan-900">Status: </span>
-            <span className="text-lg">{bookingItem.status} </span>
+            <span className="text-lg font-semibold font-body  text-cyan-900">Status: </span>
+            <span className="text-lg italic">{bookingItem.status} </span>
             <ButtonStatus status={bookingItem.status} />
           </div>
         </div>
@@ -69,12 +82,12 @@ export default function Booking({
                 }}
               />
               <button
-                className="block rounded-md bg-red-600 hover:bg-red-700 px-3 py-2 shadow-sm text-white mx-3"
+                className="block rounded-md bg-red-600 hover:bg-red-700 transition px-3 py-2 shadow-sm text-white mx-3"
                 onClick={() => setEditing(!editing)}>
-                Cancel editing
+                Cancel Editing
               </button>
               <button
-                className="block rounded-md bg-green-600 hover:bg-green-700 px-3 py-2 shadow-sm text-white mx-3"
+                className="block rounded-md bg-green-600 hover:bg-green-700 transition px-3 py-2 shadow-sm text-white mx-3"
                 onClick={() => {
                   setEditing(!editing);
                   onUpdateBooking(
@@ -83,27 +96,37 @@ export default function Booking({
                     session.user.token
                   );
                 }}>
-                Confirm editing
+                Confirm Editing
               </button>
             </div>
           ) : 
             bookingItem.status !== 'finish' ? (
               <div className="flex flex-row gap-x-3 py-2">
               <button
-                className="block rounded-md bg-sky-600 hover:bg-sky-700 px-3 py-2 shadow-sm text-white mx-3"
+                className="block rounded-md bg-sky-600 hover:bg-sky-700 px-3 py-2 transition shadow-sm text-white mx-3"
                 onClick={() => setEditing(!editing)}>
                 Edit your symptom
               </button>
               <Link href={`mybookings/${bookingItem._id}`}>
                 <button
-                  className="block rounded-md bg-red-600 hover:bg-red-700 px-3 py-2
+                  className="block rounded-md bg-red-600 hover:bg-red-700 transition px-3 py-2
                             shadow-sm text-white mx-3">
                   Remove Booking
                 </button>
               </Link>
+              </div>
+              ) : !bookingItem.commented ? (
+              <button className='block rounded-md bg-black px-3 py-2 hover:bg-gray-700 transition shadow-sm text-white mx-3'
+                onClick={()=>{
+                  setPopUpBoolean(!popUpBoolean)
+                  }}>
+                Test comment
+              </button>
+              ) : null}
+              <Context.Provider value={contextValue}>
+              <PopupCommentNRating visible={popUpBoolean} dentistId={bookingItem.dentist.id} bookingItem={bookingItem}></PopupCommentNRating>        
+              </Context.Provider>
             </div>
-            )
-            : null}
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const BookingSchema = new mongoose.Schema({
   startDate: {
@@ -11,12 +11,12 @@ const BookingSchema = new mongoose.Schema({
   },
   user: {
     type: mongoose.Schema.ObjectId,
-    ref: 'User',
+    ref: "User",
     required: true,
   },
   dentist: {
     type: mongoose.Schema.ObjectId,
-    ref: 'Dentist',
+    ref: "Dentist",
     required: true,
   },
   symptom: {
@@ -25,13 +25,17 @@ const BookingSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ['pending', 'finish'],
+    enum: ["pending", "finish"],
     required: true,
-    default: 'pending',
+    default: "pending",
   },
   reqType: {
     type: String,
-    enum: ['checkup', 'cure'],
+    enum: ["checkup", "cure"],
+    required: true,
+  },
+  commented: {
+    type: Boolean,
     required: true,
   },
   createdAt: {
@@ -40,4 +44,4 @@ const BookingSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('Booking', BookingSchema);
+module.exports = mongoose.model("Booking", BookingSchema);

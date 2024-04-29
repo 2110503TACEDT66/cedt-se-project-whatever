@@ -9,7 +9,7 @@ import updateBooking from '@/libs/updateBooking';
 export default async function BookingList() {
   const session = await getServerSession(authOptions);
   if (!session || !session.user.token) return null;
-
+  
   const bookingItems = await getBookings(session?.user.token);
 
   return (
@@ -25,9 +25,12 @@ export default async function BookingList() {
           />
         ))
       ) : (
-        <h1 className="text-center text-6xl font-serif my-5 text-cyan-500 mt-24">
-          No Dentist Booking
-        </h1>
+        <div className=" top-24 z-20 text-center">
+       
+          <div className=" p-5 text-4xl font-body font-lg rounded-lg font-semibold text-cyan-800 inline-block ">
+          No Dentists Booked
+        </div>
+        </div>
       )}
     </div>
   );

@@ -2,10 +2,9 @@ import * as React from 'react';
 import {
   Unstable_NumberInput as BaseNumberInput,
   NumberInputProps,
+  numberInputClasses,
 } from '@mui/base/Unstable_NumberInput';
 import { styled } from '@mui/system';
-import RemoveIcon from '@mui/icons-material/Remove';
-import AddIcon from '@mui/icons-material/Add';
 
 const NumberInput = React.forwardRef(function CustomNumberInput(
   props: NumberInputProps,
@@ -15,17 +14,16 @@ const NumberInput = React.forwardRef(function CustomNumberInput(
     <BaseNumberInput
       slots={{
         root: StyledInputRoot,
-        input: StyledInput,
+        input: StyledInputElement,
         incrementButton: StyledButton,
         decrementButton: StyledButton,
       }}
       slotProps={{
         incrementButton: {
-          children: <AddIcon fontSize="small" />,
-          className: 'increment',
+          children: '▴',
         },
         decrementButton: {
-          children: <RemoveIcon fontSize="small" />,
+          children: '▾',
         },
       }}
       {...props}
@@ -35,18 +33,24 @@ const NumberInput = React.forwardRef(function CustomNumberInput(
 });
 
 export default function QuantityInput({experience,setExperience}:{experience:number,setExperience:Function}) {
-  return <NumberInput aria-label="Quantity Input" min={1} max={99} onChange={(event, newValue) =>setExperience(newValue)}/>;
+  return (
+    <NumberInput
+      aria-label="Demo number input"
+      placeholder="Type a number…"
+      value={experience}
+      onChange={(event, newValue) =>setExperience(newValue)}
+      min={0}
+      max={60}
+    />
+  );
 }
 
 const blue = {
-  100: '#daecff',
-  200: '#b6daff',
-  300: '#66b2ff',
-  400: '#3399ff',
-  500: '#007fff',
-  600: '#0072e5',
-  700: '#0059B2',
-  800: '#004c99',
+  100: '#DAECFF',
+  200: '#80BFFF',
+  400: '#3399FF',
+  500: '#007FFF',
+  600: '#0072E5',
 };
 
 const grey = {
@@ -66,83 +70,114 @@ const StyledInputRoot = styled('div')(
   ({ theme }) => `
   font-family: 'IBM Plex Sans', sans-serif;
   font-weight: 400;
-  color: ${theme.palette.mode === 'dark' ? grey[300] : grey[500]};
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
-  align-items: center;
-`,
-);
-
-const StyledInput = styled('input')(
-  ({ theme }) => `
-  font-size: 0.875rem;
-  font-family: inherit;
-  font-weight: 400;
-  line-height: 1.375;
-  color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
-  background: ${theme.palette.mode === 'dark' ? grey[900] : '#f1f5f9'};
-  border: 1px solid ${theme.palette.mode === 'dark' ? grey[700] : grey[200]};
-  box-shadow: 0px 2px 4px ${
-    theme.palette.mode === 'dark' ? 'rgba(0,0,0, 0.5)' : 'rgba(0,0,0, 0.05)'
-  };
   border-radius: 8px;
-  margin: 0 8px;
-  padding: 10px 12px;
-  outline: 0;
-  min-width: 0;
-  width: 4rem;
-  text-align: center;
+  color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
+  background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
+  border: 1px solid ${theme.palette.mode === 'dark' ? grey[700] : grey[200]};
+  display: grid;
+  grid-template-columns: 1fr 19px;
+  grid-template-rows: 1fr 1fr;
+  overflow: hidden;
+  column-gap: 8px;
+  padding: 4px;
+  height: 40px;
+
+  &.${numberInputClasses.focused} {
+    border-color: ${blue[400]};
+    box-shadow: 0 0 0 3px ${theme.palette.mode === 'dark' ? blue[600] : blue[200]};
+  }
 
   &:hover {
     border-color: ${blue[400]};
   }
 
-  &:focus {
-    border-color: ${blue[400]};
-    box-shadow: 0 0 0 3px ${theme.palette.mode === 'dark' ? blue[700] : blue[200]};
-  }
-
+  // firefox
   &:focus-visible {
     outline: 0;
   }
+`,
+);
+
+const StyledInputElement = styled('input')(
+  ({ theme }) => `
+  font-size: 0.875rem;
+  font-family: inherit;
+  font-weight: 400;
+  line-height: 1.5;
+  grid-column: 1/2;
+  grid-row: 1/3;
+  color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
+  background: inherit;
+  border: none;
+  border-radius: inherit;
+  padding: 8px 12px;
+  outline: 0;
 `,
 );
 
 const StyledButton = styled('button')(
   ({ theme }) => `
-  font-family: 'IBM Plex Sans', sans-serif;
-  font-size: 0.875rem;
-  box-sizing: border-box;
-  line-height: 1.5;
-  border: 1px solid;
-  border-radius: 999px;
-  border-color: ${theme.palette.mode === 'dark' ? grey[800] : grey[200]};
-  background: ${theme.palette.mode === 'dark' ? grey[900] : grey[50]};
-  color: ${theme.palette.mode === 'dark' ? grey[200] : grey[900]};
-  width: 32px;
-  height: 32px;
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
+  appearance: none;
+  padding: 0;
+  width: 16px;
+  height: 16px;
+  font-family: system-ui, sans-serif;
+  font-size: 0.875rem;
+  line-height: 1;
+  box-sizing: border-box;
+  background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
+  border: 0;
+  color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 120ms;
 
   &:hover {
+    background: ${theme.palette.mode === 'dark' ? grey[800] : grey[50]};
+    border-color: ${theme.palette.mode === 'dark' ? grey[600] : grey[300]};
     cursor: pointer;
-    background: ${theme.palette.mode === 'dark' ? blue[700] : blue[500]};
-    border-color: ${theme.palette.mode === 'dark' ? blue[500] : blue[400]};
-    color: ${grey[50]};
   }
 
-  &:focus-visible {
-    outline: 0;
+  &.${numberInputClasses.incrementButton} {
+    grid-column: 2/3;
+    grid-row: 1/2;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border: 1px solid;
+    border-bottom: 0;
+    &:hover {
+      cursor: pointer;
+      background: ${blue[400]};
+      color: ${grey[50]};
+    }
+
+  border-color: ${theme.palette.mode === 'dark' ? grey[800] : grey[200]};
+  background: ${theme.palette.mode === 'dark' ? grey[900] : grey[50]};
+  color: ${theme.palette.mode === 'dark' ? grey[200] : grey[900]};
   }
 
-  &.increment {
-    order: 1;
+  &.${numberInputClasses.decrementButton} {
+    grid-column: 2/3;
+    grid-row: 2/3;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border: 1px solid;
+    &:hover {
+      cursor: pointer;
+      background: ${blue[400]};
+      color: ${grey[50]};
+    }
+
+  border-color: ${theme.palette.mode === 'dark' ? grey[800] : grey[200]};
+  background: ${theme.palette.mode === 'dark' ? grey[900] : grey[50]};
+  color: ${theme.palette.mode === 'dark' ? grey[200] : grey[900]};
+  }
+  & .arrow {
+    transform: translateY(-1px);
   }
 `,
 );

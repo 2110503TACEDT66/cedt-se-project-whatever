@@ -3,6 +3,9 @@ import getDentist from '@/libs/getDentist';
 import SymptomField from '@/components/symptomField';
 import createBooking from '@/libs/createBooking';
 import { redirect } from 'next/navigation';
+import { Rating } from '@mui/material';
+import ShowFeedback from '@/components/ShowFeedbacks';
+import getFeedbackForOne from '@/libs/getFeedbackForOne';
 
 export default async function DentistDetailPage({
   params,
@@ -25,37 +28,51 @@ export default async function DentistDetailPage({
     await createBooking(token, user, dentist, startDate, endDate, symptom);
     redirect('/mybookings');
   }
+  const feedbackDetail = await getFeedbackForOne(params.id,1);
+  
+  // console.log(feedbackDetail) ;
 
   return (
-    <main className="text-center p-5 mt-16">
-      <div className="flex flex-row">
-        <Image
-          src={dentistDetail.data.picture}
-          alt="Dentist Picture"
-          width={0}
-          height={0}
-          sizes="100vw"
-          className="rounded-lg w-[30%] bg-black"
-        />
-        <div className="mx-5 text-left">
-          <div>
-            <span className='text-2xl font-bold font-mono text-cyan-900'>Name: </span>
-            <span className='text-xl text-black'>{dentistDetail.data.name}</span>
+    <main className="p-16 mt-16 flex flex-row space-x-16 items-start">
+        <div className="flex flex-col space-y-8">
+          <div className='w-96 h-96 flex-0 relative'>
+            <Image
+              src={dentistDetail.data.picture}
+              alt="Dentist Picture"
+              fill           
+              className="rounded-full object-cover border border-cyan-500"
+            />
           </div>
-          <div>
-            <span className='text-2xl font-bold font-mono text-cyan-900'>Years of Experience: </span>
-            <span className='text-xl text-black'>{dentistDetail.data.experience}</span>
-          </div>
-          <div>
-            <span className='text-2xl font-bold font-mono text-cyan-900'>Area of expertise: </span>
-            <span className='text-xl text-black'>{dentistDetail.data.expertise}</span>
-          </div>
-          <SymptomField
+          
+          <div className="mx-5 text-left">
+            <div>
+              <span className='text-2xl font-bold font-body text-cyan-900'>Name: </span>
+              <span className='text-2xl text-black'>{dentistDetail.data.name}</span>
+            </div>
+            <div>
+              <span className='text-2xl font-bold font-body text-cyan-900'>Experience: </span>
+              <span className='text-2xl text-black'>{dentistDetail.data.experience}</span>
+              <span className='text-2xl text-black'> years</span>
+            </div>
+            <div>
+              <span className='text-2xl font-bold font-body text-cyan-900'>Expertise: </span>
+              <br></br>
+              <span className='text-2xl text-black'>{dentistDetail.data.expertise}</span>
+            </div>
+            <SymptomField
             dentist={params.id}
             onCreateBooking={handleCreateBooking}
           />
+          </div>
         </div>
-      </div>
-    </main>
+        
+        {/* { feedbackDetail.count == 0 ? null : */}
+        <div className="flex flex-col shrink space-y-4 bg-white w-full p-6 shadow-xl">
+
+          <ShowFeedback dentistId={params.id}  />
+
+        </div>
+        {/* } */}
+      </main>
   );
 }

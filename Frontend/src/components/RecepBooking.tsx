@@ -9,7 +9,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import createBooking from '@/libs/createCureBooking';
 import { DateTimePicker } from '@mui/x-date-pickers';
-
+import ButtonStatus from './ButtonStatus';
 
 export default function RecepBooking({
   bookingItem,
@@ -91,6 +91,7 @@ export default function RecepBooking({
               Status:{' '}
             </span>
             <span className="text-lg">{bookingItem.status}</span>
+            <ButtonStatus status={bookingItem.status} />
           </div>
         </div>
       </div>
