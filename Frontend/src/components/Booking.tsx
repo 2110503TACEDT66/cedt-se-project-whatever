@@ -121,7 +121,7 @@ export default function Booking({
                 onClick={()=>{
                   setPopUpBoolean(!popUpBoolean)
                   }}>
-                Test comment
+                Comment
               </button>
               ) : null}
               <Context.Provider value={contextValue}>
