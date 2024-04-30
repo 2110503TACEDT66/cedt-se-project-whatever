@@ -6,6 +6,8 @@ const nextConfig = {
   env: {
     FRONTEND_URL: process.env.FRONTEND_URL,
     BACKEND_URL: process.env.BACKEND_URL,
+    SMTP_PASSWORD: process.env.SMTP_PASSWORD,
+    SMTP_EMAIL: process.env.SMTP_EMAIL,
   },
   images: {
     domains: ['drive.google.com', 'source.unsplash.com'],

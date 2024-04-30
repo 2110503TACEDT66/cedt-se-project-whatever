@@ -30,38 +30,12 @@ exports.getFeedbacks = async (req, res, next) => {
     else query = Feedback.find();
   }
 
-  // Pagination
-  const page = parseInt(req.query.page, 10) || 1;
-  const limit = parseInt(req.query.limit, 10) || 4;
-  const startIndex = (page - 1) * limit;
-  const endIndex = page * limit;
-
   try {
-    const total = await Feedback.countDocuments();
-    query = query.skip(startIndex).limit(limit);
-
     const feedbacks = await query;
-
-    const pagination = {};
-
-    if (endIndex < total) {
-      pagination.next = {
-        page: page + 1,
-        limit,
-      };
-    }
-
-    if (startIndex > 0) {
-      pagination.prev = {
-        page: page - 1,
-        limit,
-      };
-    }
 
     res.status(200).json({
       success: true,
       count: feedbacks.length,
-      pagination,
       averageRating:
         avgRating && avgRating[0] ? avgRating[0].averageRating : null, // Conditional check for avgRating
       data: feedbacks,

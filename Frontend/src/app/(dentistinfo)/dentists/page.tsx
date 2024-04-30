@@ -20,20 +20,20 @@ export default async function Dentist() {
   }
 
   if (allowBook) {
-    const dentists = await getDentists();
+    const dentistJson = await getDentists();
+    const dentists = dentistJson.data;
+
     return (
       <main className="text-center p-5 my-20">
-        <BookingPagSon dentistJson={dentists} />
+        <BookingPagSon dentists={dentists} />
       </main>
     );
   } else {
     return (
       <div className=" top-24 z-20 text-center">
-       
-          <div className="text-center p-5 text-4xl font-body font-lg rounded-lg font-semibold text-cyan-800 mt-24 inline-block ">
-            You have already booked
-          </div>
-        
+        <div className="text-center p-5 text-4xl font-body font-lg rounded-lg font-semibold text-cyan-800 mt-24 inline-block ">
+          You have already booked
+        </div>
       </div>
     );
   }

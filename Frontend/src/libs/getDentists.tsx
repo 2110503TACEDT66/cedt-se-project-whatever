@@ -3,6 +3,5 @@ export default async function getDentists() {
   if (!response.ok) {
     throw new Error('Failed to fetch dentists');
   }
-  const dentistsjson: DentistJson = await response.json();
-  return dentistsjson;
+  return await response.json();
 }

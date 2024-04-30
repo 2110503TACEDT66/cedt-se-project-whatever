@@ -1,8 +1,5 @@
-/node_modules
-/.next
+**/node_modules
+**/.next
 
-.env.local
-next-env.d.ts
-
-docker-compose.yml
-
+*.*env*.*
+**/next-env.d.ts
