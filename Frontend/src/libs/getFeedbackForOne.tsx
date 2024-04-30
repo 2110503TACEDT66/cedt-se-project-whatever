@@ -1,9 +1,7 @@
-export default async function getFeedbackForOne(
-  dentistId: string,
-  page: number = 1
-) {
+export default async function getFeedbackForOne(dentistId: string) {
   const response = await fetch(
-    `${process.env.BACKEND_URL}/api/v1/dentists/${dentistId}/feedbacks/?page=${page}`
+    `${process.env.BACKEND_URL}/api/v1/dentists/${dentistId}/feedbacks`,
+    { next: { tags: ['feedback'] } }
   );
   if (!response.ok) {
     throw new Error(`Failed to fetch feedbacks`);

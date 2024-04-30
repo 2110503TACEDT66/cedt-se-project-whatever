@@ -63,15 +63,14 @@ export default function PopupCommentNRating({
                   showConfirmButton: false,
                   timer: 1500,
                 });
-              }
-              else if (rating === 0) {
+              } else if (rating === 0) {
                 Swal.fire({
                   icon: 'error',
                   title: 'Rating cannot be empty',
                   showConfirmButton: false,
                   timer: 1500,
-                }) ;}
-              else {
+                });
+              } else {
                 submitFeedback(
                   session.user.token,
                   comment,
@@ -104,5 +103,5 @@ export default function PopupCommentNRating({
         </div>
       </div>
     );
-  else return <div></div>;
+  else return null;
 }
