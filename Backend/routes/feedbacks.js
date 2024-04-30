@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require("express");
 
 const {
   getFeedbacks,
@@ -6,14 +6,14 @@ const {
   addFeedback,
   updateFeedback,
   deletefeedback,
-} = require('../controllers/feedbacks');
+} = require("../controllers/feedbacks");
 
 const router = express.Router({ mergeParams: true });
-const { protect } = require('../middleware/auth');
+const { protect } = require("../middleware/auth");
 
-router.route('/').get(getFeedbacks).post(protect, addFeedback);
+router.route("/").get(getFeedbacks).post(protect, addFeedback);
 router
-  .route('/:feedbackId')
+  .route("/:feedbackId")
   .get(getFeedback)
   .put(protect, updateFeedback)
   .delete(deletefeedback);
@@ -85,11 +85,28 @@ router
  *       200:
  *         description: The list of the feedbacks
  *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Feedback'
+ *          application/json: {
+ *            schema: {
+ *               $ref: '#/components/schemasFeedback'
+ *            },
+ *            examples: {
+                 feedbackExample : {
+                   value: {
+                     _id: 6630998da9c56ca4277c5d41,
+                     dentist: 6620b0d4efbbca938f669b71,
+                     user: {
+                         _id: 663098eea9c56ca4277c5ca4,
+                         name: AngryUser
+                     },
+                     booking: 66309913a9c56ca4277c5ce2,
+                     comment: PLEAASEEEEE don't make me more angry!!!!!,
+                     rating: 1,
+                     createdAt: 2024-04-30T07:11:09.626Z,
+                     __v: 0
+                   }
+                 }
+               }
+ *          }
  *       500:
  *         description: Cannot find Feedback.
  */
@@ -115,9 +132,28 @@ router
  *       200:
  *         description: The feedback description by id
  *         contents:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Feedback'
+ *          application/json: {
+ *            schema: {
+ *               $ref: '#/components/schemasFeedback'
+ *            },
+ *            examples: {
+                 feedbackExample : {
+                   value: {
+                     _id: 6630998da9c56ca4277c5d41,
+                     dentist: 6620b0d4efbbca938f669b71,
+                     user: {
+                         _id: 663098eea9c56ca4277c5ca4,
+                         name: AngryUser
+                     },
+                     booking: 66309913a9c56ca4277c5ce2,
+                     comment: PLEAASEEEEE don't make me more angry!!!!!,
+                     rating: 1,
+                     createdAt: 2024-04-30T07:11:09.626Z,
+                     __v: 0
+                   }
+                 }
+               }
+ *          }
  *       404:
  *         description: The feedback was not found
  *       500:
@@ -163,9 +199,28 @@ router
  *       201:
  *         description: The feedback was successfully created
  *         contents:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Feedback'
+ *          application/json: {
+ *            schema: {
+ *               $ref: '#/components/schemasFeedback'
+ *            },
+ *            examples: {
+                 feedbackExample : {
+                   value: {
+                     _id: 6630998da9c56ca4277c5d41,
+                     dentist: 6620b0d4efbbca938f669b71,
+                     user: {
+                         _id: 663098eea9c56ca4277c5ca4,
+                         name: AngryUser
+                     },
+                     booking: 66309913a9c56ca4277c5ce2,
+                     comment: PLEAASEEEEE don't make me more angry!!!!!,
+                     rating: 1,
+                     createdAt: 2024-04-30T07:11:09.626Z,
+                     __v: 0
+                   }
+                 }
+               }
+ *          }
  *       401:
  *         description: Not authorize to access this route
  *       404:
@@ -212,9 +267,28 @@ router
  *       200:
  *         description: The feedback was updated
  *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Feedback'
+ *          application/json: {
+ *            schema: {
+ *               $ref: '#/components/schemasFeedback'
+ *            },
+ *            examples: {
+                 feedbackExample : {
+                   value: {
+                     _id: 6630998da9c56ca4277c5d41,
+                     dentist: 6620b0d4efbbca938f669b71,
+                     user: {
+                         _id: 663098eea9c56ca4277c5ca4,
+                         name: AngryUser
+                     },
+                     booking: 66309913a9c56ca4277c5ce2,
+                     comment: PLEAASEEEEE don't make me more angry!!!!!,
+                     rating: 1,
+                     createdAt: 2024-04-30T07:11:09.626Z,
+                     __v: 0
+                   }
+                 }
+               }
+ *          }
  *       404:
  *         description: The feedback was not found
  *       500:
@@ -237,6 +311,11 @@ router
  *     responses:
  *       200:
  *         description: The feedback was deleted
+ *         content:
+ *          application/json:
+ *            schema:
+ *               type: object
+ *
  *       404:
  *         description: The feedback was not found
  *       500:

@@ -232,6 +232,10 @@ router
  *     responses:
  *       200:
  *         description: The dentist was deleted
+ *         content:
+ *          application/json:
+ *            schema:
+ *               type: object
  *       401:
  *         description: Not authorize to access this route
  *       403:
