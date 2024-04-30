@@ -1,31 +1,31 @@
-const express = require("express");
+const express = require('express');
 const {
   getDentists,
   getDentist,
   addDentist,
   updateDentist,
   deleteDentist,
-} = require("../controllers/dentists");
-const bookingRouter = require("./bookings");
-const feedbackRouter = require("./feedbacks");
+} = require('../controllers/dentists');
+const bookingRouter = require('./bookings');
+const feedbackRouter = require('./feedbacks');
 
 const router = express.Router();
 
-const { protect, authorize } = require("../middleware/auth");
+const { protect, authorize } = require('../middleware/auth');
 
 //Re-route into other resource routers
-router.use("/:dentistId/bookings/", bookingRouter);
-router.use("/:dentistId/feedbacks", feedbackRouter);
+router.use('/:dentistId/bookings/', bookingRouter);
+router.use('/:dentistId/feedbacks', feedbackRouter);
 
 router
-  .route("/")
+  .route('/')
   .get(getDentists)
-  .post(protect, authorize("admin"), addDentist);
+  .post(protect, authorize('admin'), addDentist);
 router
-  .route("/:id")
+  .route('/:id')
   .get(getDentist)
-  .put(protect, authorize("admin"), updateDentist)
-  .delete(protect, authorize("admin"), deleteDentist);
+  .put(protect, authorize('admin'), updateDentist)
+  .delete(protect, authorize('admin'), deleteDentist);
 
 /**
  * @swagger
@@ -108,7 +108,7 @@ router
  *     responses:
  *       200:
  *         description: The dentist description by id
- *         contents:
+ *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Dentist'
@@ -148,7 +148,7 @@ router
  *     responses:
  *       201:
  *         description: The dentist was successfully created
- *         contents:
+ *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Dentist'
@@ -232,6 +232,10 @@ router
  *     responses:
  *       200:
  *         description: The dentist was deleted
+ *         content:
+ *          application/json:
+ *            schema:
+ *               type: object
  *       401:
  *         description: Not authorize to access this route
  *       403:
