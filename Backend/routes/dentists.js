@@ -1,31 +1,31 @@
-const express = require("express");
+const express = require('express');
 const {
   getDentists,
   getDentist,
   addDentist,
   updateDentist,
   deleteDentist,
-} = require("../controllers/dentists");
-const bookingRouter = require("./bookings");
-const feedbackRouter = require("./feedbacks");
+} = require('../controllers/dentists');
+const bookingRouter = require('./bookings');
+const feedbackRouter = require('./feedbacks');
 
 const router = express.Router();
 
-const { protect, authorize } = require("../middleware/auth");
+const { protect, authorize } = require('../middleware/auth');
 
 //Re-route into other resource routers
-router.use("/:dentistId/bookings/", bookingRouter);
-router.use("/:dentistId/feedbacks", feedbackRouter);
+router.use('/:dentistId/bookings/', bookingRouter);
+router.use('/:dentistId/feedbacks', feedbackRouter);
 
 router
-  .route("/")
+  .route('/')
   .get(getDentists)
-  .post(protect, authorize("admin"), addDentist);
+  .post(protect, authorize('admin'), addDentist);
 router
-  .route("/:id")
+  .route('/:id')
   .get(getDentist)
-  .put(protect, authorize("admin"), updateDentist)
-  .delete(protect, authorize("admin"), deleteDentist);
+  .put(protect, authorize('admin'), updateDentist)
+  .delete(protect, authorize('admin'), deleteDentist);
 
 /**
  * @swagger
