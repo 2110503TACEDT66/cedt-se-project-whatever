@@ -5,6 +5,7 @@ import { Context } from './Booking';
 import { useState } from 'react';
 import submitFeedback from '@/libs/submitFeedback';
 import { useSession } from 'next-auth/react';
+import Swal from 'sweetalert2';
 
 export default function PopupCommentNRating({
   visible,
@@ -56,8 +57,21 @@ export default function PopupCommentNRating({
             className="bg-sky-600 hover:bg-sky-700 shadow-sm absolute bottom-5 right-5 rounded-2xl px-5 py-2"
             onClick={() => {
               if (comment.trim() === '') {
-                window.alert('Please enter your feedback before submit.');
-              } else {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Comment cannot be empty',
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+              }
+              else if (rating === 0) {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Rating cannot be empty',
+                  showConfirmButton: false,
+                  timer: 1500,
+                }) ;}
+              else {
                 submitFeedback(
                   session.user.token,
                   comment,
@@ -66,8 +80,15 @@ export default function PopupCommentNRating({
                   bookingItem._id
                 );
                 setPopUpBoolean(!popUpBoolean);
-                window.alert('Feedback submitted successfully!');
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Feedback submitted',
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
               }
+              setComment('');
+              setRating(0);
             }}>
             Submit
           </button>
@@ -75,6 +96,8 @@ export default function PopupCommentNRating({
             className="bg-sky-600 hover:bg-sky-700 shadow-sm absolute bottom-5 right-32 rounded-2xl px-5 py-2"
             onClick={() => {
               setPopUpBoolean(!popUpBoolean);
+              setComment('');
+              setRating(0);
             }}>
             Cancel
           </button>
