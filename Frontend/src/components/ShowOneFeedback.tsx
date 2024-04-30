@@ -10,7 +10,7 @@ export default function ShowOneFeedback({
   //console.log(bookingItem.reqType);
 
   return (
-    <div className='bg-slate-200 flex flex-col w-full a rounded-lg p-4 m-5'>
+    <div className='bg-slate-200 flex flex-col w-full a rounded-lg p-4 mb-3 mt-2'>
             <div className='font-bold text-xl text-black items-center flex gap-2'>
             {feedback.user.name}:
               <Rating
