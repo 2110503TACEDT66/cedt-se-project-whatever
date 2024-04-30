@@ -108,7 +108,7 @@ router
  *     responses:
  *       200:
  *         description: The dentist description by id
- *         contents:
+ *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Dentist'
@@ -148,7 +148,7 @@ router
  *     responses:
  *       201:
  *         description: The dentist was successfully created
- *         contents:
+ *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Dentist'

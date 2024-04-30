@@ -70,7 +70,7 @@ export default async function DentistDetailPage({
           />
         </div>
       </div>
-      <div className="flex flex-col shrink space-y-4 bg-white w-full p-6 shadow-xl">
+      <div className="flex flex-col shrink space-y-4 bg-white w-full p-6 shadow-xl rounded-lg">
         <FeedbackSection dentistId={params.id} />
       </div>
     </main>
