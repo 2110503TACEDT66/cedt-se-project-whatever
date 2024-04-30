@@ -19,7 +19,7 @@ export default function FeedbackNav({
   };
 
   return (
-    <div>
+    <div className='w-full'>
       <div className="flex flex-row items-center">
         {page > 1 ? (
           <button
