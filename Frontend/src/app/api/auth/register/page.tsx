@@ -3,6 +3,7 @@ import { dbConnect } from '@/db/dbConnect';
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
 import { TextField } from '@mui/material';
+import Swal from 'sweetalert2';
 
 export default async function registerPage() {
   const registerUser = async (registerUserForm: FormData) => {
@@ -27,7 +28,6 @@ export default async function registerPage() {
 
   const handleSubmit = async (registerUserForm: FormData) => {
     'use server';
-
     await registerUser(registerUserForm);
     redirect('/');
   };
@@ -54,7 +54,8 @@ export default async function registerPage() {
                   }
                 }}/>
             <TextField id="tel" name="tel" label="Tel" className="pl-3 pb-3" type="text" required
-                placeholder="012-345-6789" InputProps={{
+                placeholder="012-345-6789" 
+                InputProps={{
                   style: {
                     borderRadius: "16px",
                     width: "400px",
@@ -65,7 +66,11 @@ export default async function registerPage() {
                   style: {
                     padding: "0 0 0 12px"
                   }
-                }}/>
+                }}
+                inputProps={{
+                  minLength: 10 // Set your desired minimum input length here
+                }}
+                />
             <TextField id="email" name="email" label="Email" className="pl-3 pb-3" type='email' required
                 placeholder="Email@XXX.com" InputProps={{
                   style: {
@@ -98,6 +103,7 @@ export default async function registerPage() {
               Register
             </button>
           </form>
+          
         </div>
       </div>
     </div>
