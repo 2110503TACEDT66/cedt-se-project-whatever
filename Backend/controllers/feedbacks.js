@@ -149,7 +149,7 @@ exports.updateFeedback = async (req, res, next) => {
 //@access   Private
 exports.deletefeedback = async (req, res, next) => {
   try {
-    const feedback = await feedback.findById(req.params.feedbackId);
+    const feedback = await Feedback.findById(req.params.feedbackId);
 
     if (!feedback) {
       return res.status(404).json({

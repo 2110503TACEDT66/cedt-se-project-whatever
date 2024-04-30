@@ -116,7 +116,7 @@ router.get("/logout", protect, logout);
  *     responses:
  *       200:
  *         description: Logout and clear cookies successfully
- *         contents:
+ *         content:
  *           application/json: {
  *              schema: {
  *                  $ref: '#/components/schemas/User'

@@ -49,13 +49,11 @@ router
  *         user:
  *           type: string
  *           format: uuid
- *           description: Id of user that book
- *           example: d290f1ee-6c54-4b01-90e6-d701748f0851
+ *           description: Id of the user that book
  *         dentist:
  *           type: string
  *           format: uuid
- *           description: Id of booked dentisted
- *           example: d290f1ee-6c54-4b01-90e6-d701748f0851
+ *           description: Id of the booked dentisted
  *         symptom:
  *           type: string
  *           description: Symptom of booking's user
@@ -78,8 +76,20 @@ router
  *         _id: 662749820815e7ad98e3849f
  *         startDate: 2024-04-24T00:00:00.000Z
  *         endDate: 2024-04-24T01:00:00.000Z
- *         user: 6618dfc57b33fd268c95c3ac
- *         dentist: 6620b1a0efbbca938f669b76
+ *         user:
+ *            _id: 66251f2f8a1cd8e8bc178d81,
+ *            name: bobo
+ *         dentist: 
+ *            _id: 66309913a9c56ca4277c5ce2,
+ *            startDate: 2024-04-30T00:00:00.000Z,
+ *            endDate: 2024-04-30T01:00:00.000Z,
+ *            user: 663098eea9c56ca4277c5ca4,
+ *            dentist: 6620b0d4efbbca938f669b71,
+ *            symptom: Angry,
+ *            status: finish,
+ *            reqType: checkup,
+ *            createdAt: 2024-04-30T07:09:07.953Z,
+ *            __v: 0
  *         symptom: a
  *         status: pending
  *         reqType: checkup
@@ -141,7 +151,7 @@ router
  *     responses:
  *       200:
  *         description: The booking description by id
- *         contents:
+ *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Booking'
@@ -196,7 +206,7 @@ router
  *     responses:
  *       201:
  *         description: The booking was successfully created
- *         contents:
+ *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Booking'
@@ -248,7 +258,7 @@ router
  *     responses:
  *       201:
  *         description: The booking was successfully created
- *         contents:
+ *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Booking'
@@ -265,6 +275,11 @@ router
  *   put:
  *     summary: Update the booking by the id
  *     tags: [Bookings]
+ *     security: [
+ *         {
+ *             bearerToken: []
+ *         }
+ *     ]
  *     parameters:
  *       - in: path
  *         name: id
@@ -309,6 +324,11 @@ router
  *   delete:
  *     summary: Remove the booking by id
  *     tags: [Bookings]
+ *     security: [
+ *         {
+ *             bearerToken: []
+ *         }
+ *     ]
  *     parameters:
  *       - in: path
  *         name: id
