@@ -67,7 +67,7 @@ export default async function DentistDetailPage({
         </div>
         
         {/* { feedbackDetail.count == 0 ? null : */}
-        <div className="flex flex-col shrink space-y-4 bg-white w-full p-6 shadow-xl">
+        <div className="flex flex-col shrink space-y-4 bg-white w-full p-6 shadow-xl rounded-lg">
 
           <ShowFeedback dentistId={params.id}  />
 
