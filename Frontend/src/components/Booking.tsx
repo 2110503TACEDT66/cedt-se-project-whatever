@@ -135,7 +135,7 @@ export default function Booking({
           </div>
         ) : (
           <button
-            className="block rounded-md bg-black px-3 py-2 hover:bg-gray-700 transition shadow-sm text-white mx-3"
+            className="block rounded-md bg-sky-600 px-3 py-2 hover:bg-gray-700 transition shadow-sm text-white mx-3"
             onClick={() => {
               setPopUpBoolean(!popUpBoolean);
             }}>

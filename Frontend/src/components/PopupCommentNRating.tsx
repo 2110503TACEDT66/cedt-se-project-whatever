@@ -79,6 +79,8 @@ export default function PopupCommentNRating({
                   timer: 1500,
                 });
               }
+              setComment('');
+              setRating(0);
             }}>
             Submit
           </button>
@@ -86,6 +88,8 @@ export default function PopupCommentNRating({
             className="bg-sky-600 hover:bg-sky-700 shadow-sm absolute bottom-5 right-32 rounded-2xl px-5 py-2"
             onClick={() => {
               setPopUpBoolean(!popUpBoolean);
+              setComment('');
+              setRating(0);
             }}>
             Cancel
           </button>
