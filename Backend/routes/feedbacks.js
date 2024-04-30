@@ -16,7 +16,7 @@ router
   .route("/:feedbackId")
   .get(getFeedback)
   .put(protect, updateFeedback)
-  .delete(deletefeedback);
+  .delete(protect, deletefeedback);
 /**
  * @swagger
  * components:
@@ -28,6 +28,7 @@ router
  *         - dentist
  *         - rating
  *         - comment
+ *         - booking
  *       properties:
  *         _id:
  *           type: string
@@ -42,7 +43,7 @@ router
  *         dentist:
  *           type: string
  *           format: uuid
- *           description: Id of rated dentisted
+ *           description: Id of rated dentist
  *           example: d290f1ee-6c54-4b01-90e6-d701748f0851
  *         rating:
  *           type: number
@@ -52,6 +53,11 @@ router
  *         comment:
  *           type: string
  *           description: comment of the feedback
+ *         booking:
+ *           type: string
+ *           format: uuid
+ *           description: Id of rated booking
+ *           example: d290f1ee-6c54-4b01-90e6-d701748f0851
  *         createAt:
  *           type: date
  *           description: Feedback's creation date
@@ -64,6 +70,7 @@ router
  *         dentist: 6620b1a0efbbca938f669b76
  *         rating: 4
  *         comment: nono
+ *         booking: 6620b1a0efbbca938f669b76
  *         createdAt: 2024-04-23T05:39:14.907Z
  *         __v: 0
  *
@@ -131,7 +138,7 @@ router
  *     responses:
  *       200:
  *         description: The feedback description by id
- *         contents:
+ *         content:
  *          application/json: {
  *            schema: {
  *               $ref: '#/components/schemasFeedback'
@@ -188,7 +195,7 @@ router
                 createFeedbackRequestBody : {
                   description : Request body example for createFeedback,
                   value: {
-                    user: 6618dfc57b33fd268c95c3ac,
+                    booking: 6618dfc57b33fd268c95c3ac,
                     rating: 4,
                     comment: nono
                   }
@@ -198,7 +205,7 @@ router
  *     responses:
  *       201:
  *         description: The feedback was successfully created
- *         contents:
+ *         content:
  *          application/json: {
  *            schema: {
  *               $ref: '#/components/schemasFeedback'
@@ -300,6 +307,11 @@ router
  *   delete:
  *     summary: Remove the feedback by id
  *     tags: [Feedbacks]
+ *     security: [
+ *         {
+ *             bearerToken: []
+ *         }
+ *     ]
  *     parameters:
  *       - in: path
  *         name: id

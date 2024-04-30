@@ -169,7 +169,7 @@ router
  *     responses:
  *       200:
  *         description: The booking description by id
- *         contents:
+ *         content:
  *         application/json: {
  *           schema: {
  *              $ref: '#/components/schemas/Booking'
@@ -253,7 +253,7 @@ router
  *     responses:
  *       201:
  *         description: The booking was successfully created
- *         contents:
+ *         content:
  *         application/json: {
  *           schema: {
  *              $ref: '#/components/schemas/Booking'
@@ -334,7 +334,7 @@ router
  *     responses:
  *       201:
  *         description: The booking was successfully created
- *         contents:
+ *         content:
  *         application/json: {
  *           schema: {
  *              $ref: '#/components/schemas/Booking'
@@ -380,6 +380,11 @@ router
  *   put:
  *     summary: Update the booking by the id
  *     tags: [Bookings]
+ *     security: [
+ *         {
+ *             bearerToken: []
+ *         }
+ *     ]
  *     parameters:
  *       - in: path
  *         name: id
@@ -453,6 +458,11 @@ router
  *   delete:
  *     summary: Remove the booking by id
  *     tags: [Bookings]
+ *     security: [
+ *         {
+ *             bearerToken: []
+ *         }
+ *     ]
  *     parameters:
  *       - in: path
  *         name: id
