@@ -1,7 +1,7 @@
 'use server';
 import { revalidateTag } from 'next/cache';
 
-export default async function confirmStatusBooking(
+export default async function finishCheckupBooking(
   token: string,
   bookingId: string
 ) {
@@ -22,5 +22,6 @@ export default async function confirmStatusBooking(
     throw new Error(`Failed to update booking`);
   }
   revalidateTag('booking');
+  revalidateTag('onebooking');
   return await response.json();
 }

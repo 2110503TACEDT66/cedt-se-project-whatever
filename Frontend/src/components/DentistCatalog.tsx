@@ -41,6 +41,7 @@ export default function DentistCatalog({
                   (dentistItem.expertise === expertise || expertise === '') && // Check if dentist's expertise matches or is empty
                   (dentistItem.experience >= experience || experience === 0) ? ( // Check if dentist's experience meets the requirement or is 0
                     <Link
+                      key={dentistItem.id}
                       href={`/dentists/${dentistItem.id}`}
                       className="rounded-md overflow-hidden shadow-md 
       hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1">

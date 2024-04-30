@@ -109,11 +109,9 @@ export default function Booking({
               className="block rounded-md bg-green-600 hover:bg-green-700 transition px-3 py-2 shadow-sm text-white mx-3"
               onClick={() => {
                 setEditing(!editing);
-                onUpdateBooking(
-                  bookingItem._id,
-                  newSymptom,
-                  session.user.token
-                );
+                onUpdateBooking(bookingItem._id, session.user.token, {
+                  symptom: newSymptom,
+                });
               }}>
               Confirm Editing
             </button>
