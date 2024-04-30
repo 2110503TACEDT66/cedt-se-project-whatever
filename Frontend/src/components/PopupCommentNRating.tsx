@@ -5,6 +5,7 @@ import { Context } from './Booking';
 import { useState } from 'react';
 import submitFeedback from '@/libs/submitFeedback';
 import { useSession } from 'next-auth/react';
+import Swal from 'sweetalert2';
 
 export default function PopupCommentNRating({
   visible,
@@ -56,7 +57,12 @@ export default function PopupCommentNRating({
             className="bg-sky-600 hover:bg-sky-700 shadow-sm absolute bottom-5 right-5 rounded-2xl px-5 py-2"
             onClick={() => {
               if (comment.trim() === '') {
-                window.alert('Please enter your feedback before submit.');
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Comment cannot be empty',
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
               } else {
                 submitFeedback(
                   session.user.token,
@@ -66,7 +72,12 @@ export default function PopupCommentNRating({
                   bookingItem._id
                 );
                 setPopUpBoolean(!popUpBoolean);
-                window.alert('Feedback submitted successfully!');
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Feedback submitted',
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
               }
             }}>
             Submit

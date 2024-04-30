@@ -15,7 +15,6 @@ export default async function submitFeedback(
   const resReady = await res.json();
 
   let response;
-  console.log(resReady.data[0]._id);
   if (resReady.count === 1) {
     response = await fetch(
       `${process.env.BACKEND_URL}/api/v1/feedbacks/${resReady.data[0]._id}`,
