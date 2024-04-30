@@ -41,6 +41,7 @@ export default function QuantityInput({experience,setExperience}:{experience:num
       onChange={(event, newValue) =>setExperience(newValue)}
       min={0}
       max={60}
+      id='Sortexp'
     />
   );
 }
