@@ -23,13 +23,15 @@ export default async function RootLayout({
         <ReduxProvider>
           <NextAuthProvider session={nextAuthSession}>
             <TopMenu />
-            <Image
-              src="/img/dentistbg.png"
-              alt="cover"
-              fill={true}
-              sizes="100vw"
-              className="object-cover absolute top-0 left-0 w-full h-full -z-10 opacity-50 blur-[6px]"
-            />
+            <div className='flex flex-row fixed top-0 left-0 right-0 w-full h-full -z-10'>
+              <Image
+                src="/img/dentistbg.png"
+                alt="cover"
+                fill={true}
+                sizes="100vw"
+                className="object-cover w-full h-full opacity-50 blur-[6px]"
+              />              
+            </div>
             {/* <Context.Provider value={contextValue}> */}
             {children}
           </NextAuthProvider>
