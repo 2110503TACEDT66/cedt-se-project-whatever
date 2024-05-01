@@ -20,15 +20,15 @@ describe('US5', () => {
       .should('exist').should('have.css', 'color', `rgba(0, 0, 0, 0.87)`)
     });
 
-    // it('Select date and time in the future', () => {
-    //     cy.contains('My Booking').click()
-    //     cy.get('input[name="email"]').type('earn@gmail.com')
-    //     cy.get('input[name="password"]').type('12345678')
-    //     cy.contains('Sign in with Credentials').click()
-    //     cy.contains('Add new booking').click()
-    //     cy.get('#Bdate').click()
-    //     cy.contains('29').click()
-    //     cy.contains('OK').click()
-    //     expect('Simon Salmon').to.exist
-    // });
+    it('Select date and time in the future', () => {
+        cy.contains('My Booking').click()
+        cy.get('input[name="email"]').type('earn@gmail.com')
+        cy.get('input[name="password"]').type('12345678')
+        cy.contains('Sign in with Credentials').click()
+        cy.contains('Add new booking').click()
+        cy.get('#Bdate').click()
+        cy.contains('29').click()
+        cy.contains('OK').click()
+        expect('Simon Salmon').to.exist
+    });
 })
