@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 
 //@desc     Get all feedbacks
 //@route    GET /api/v1/feedbacks
-//@access   Private
+//@access   public
 exports.getFeedbacks = async (req, res, next) => {
   let query;
   let avgRating; // Declaring avgRating outside the if block
@@ -30,38 +30,19 @@ exports.getFeedbacks = async (req, res, next) => {
     else query = Feedback.find();
   }
 
-  // Pagination
-  const page = parseInt(req.query.page, 10) || 1;
-  const limit = parseInt(req.query.limit, 10) || 4;
-  const startIndex = (page - 1) * limit;
-  const endIndex = page * limit;
-
   try {
-    const total = await Feedback.countDocuments();
-    query = query.skip(startIndex).limit(limit);
-
     const feedbacks = await query;
-
-    const pagination = {};
-
-    if (endIndex < total) {
-      pagination.next = {
-        page: page + 1,
-        limit,
-      };
-    }
-
-    if (startIndex > 0) {
-      pagination.prev = {
-        page: page - 1,
-        limit,
-      };
-    }
+    console.log({
+      success: true,
+      count: feedbacks.length,
+      averageRating:
+        avgRating && avgRating[0] ? avgRating[0].averageRating : null, // Conditional check for avgRating
+      data: feedbacks,
+    });
 
     res.status(200).json({
       success: true,
       count: feedbacks.length,
-      pagination,
       averageRating:
         avgRating && avgRating[0] ? avgRating[0].averageRating : null, // Conditional check for avgRating
       data: feedbacks,

@@ -1,3 +1,6 @@
+'use server';
+import { revalidateTag } from 'next/cache';
+
 export default async function submitFeedback(
   token: string,
   comment: string,
@@ -50,5 +53,6 @@ export default async function submitFeedback(
   if (!response.ok) {
     throw new Error(`Failed to submit feedback`);
   }
+  revalidateTag('feedback');
   return await response.json();
 }

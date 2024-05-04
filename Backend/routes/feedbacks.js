@@ -68,9 +68,9 @@ router
  *         _id: 662749820815e7ad98e3849f
  *         user: 6618dfc57b33fd268c95c3ac
  *         dentist: 6620b1a0efbbca938f669b76
+ *         booking: 662749820815e7ad98e3849f
  *         rating: 4
  *         comment: nono
- *         booking: 6620b1a0efbbca938f669b76
  *         createdAt: 2024-04-23T05:39:14.907Z
  *         __v: 0
  *
@@ -94,7 +94,7 @@ router
  *         content:
  *          application/json: {
  *            schema: {
- *               $ref: '#/components/schemasFeedback'
+ *               $ref: '#/components/schemas/Feedback'
  *            },
  *            examples: {
                  feedbackExample : {
@@ -141,7 +141,7 @@ router
  *         content:
  *          application/json: {
  *            schema: {
- *               $ref: '#/components/schemasFeedback'
+ *               $ref: '#/components/schemas/Feedback'
  *            },
  *            examples: {
                  feedbackExample : {
@@ -197,7 +197,7 @@ router
                   value: {
                     booking: 6618dfc57b33fd268c95c3ac,
                     rating: 4,
-                    comment: nono
+                    comment: nono,
                   }
                 }
               }
@@ -208,7 +208,7 @@ router
  *         content:
  *          application/json: {
  *            schema: {
- *               $ref: '#/components/schemasFeedback'
+ *               $ref: '#/components/schemas/Feedback'
  *            },
  *            examples: {
                  feedbackExample : {

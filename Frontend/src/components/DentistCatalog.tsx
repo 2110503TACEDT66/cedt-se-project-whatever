@@ -1,30 +1,26 @@
 'use client';
 import Link from 'next/link';
 import Card from './Card';
-import dayjs, { Dayjs } from 'dayjs';
-import { useEffect, useState } from 'react';
 
 export default function DentistCatalog({
-  dentistsJson,
+  dentists,
   date,
   expertise,
   experience,
 }: {
-  dentistsJson: DentistJson;
+  dentists: DentistItem[];
   date: string;
   expertise: string;
   experience: number;
 }) {
-  const dentistJsonReady = dentistsJson;
-
   return (
     <div>
       <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {
           date !== '' // Check if 'date' is not empty
-            ? dentistJsonReady.data.map(
+            ? dentists.map(
                 (
-                  dentistItem: DentistItem // Map over the 'dentistJsonReady.data' array
+                  dentistItem: DentistItem // Map over the 'dentistJson.data' array
                 ) =>
                   !dentistItem.bookings?.some((bookdate: BookingItem) => {
                     // Check if no booking overlaps with the selected time
@@ -45,14 +41,11 @@ export default function DentistCatalog({
                   (dentistItem.expertise === expertise || expertise === '') && // Check if dentist's expertise matches or is empty
                   (dentistItem.experience >= experience || experience === 0) ? ( // Check if dentist's experience meets the requirement or is 0
                     <Link
+                      key={dentistItem.id}
                       href={`/dentists/${dentistItem.id}`}
                       className="rounded-md overflow-hidden shadow-md 
       hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1">
-                      <Card
-                        dentistName={dentistItem.name}
-                        imgSrc={dentistItem.picture}
-                        dentistId={dentistItem.id}
-                      />
+                      <Card dentist={dentistItem} />
                     </Link>
                   ) : null // If conditions are met, render a link to the dentist's profile, otherwise return null
               )

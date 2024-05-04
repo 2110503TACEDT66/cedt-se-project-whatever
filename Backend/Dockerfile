@@ -2,15 +2,13 @@
 FROM node:20.6.0
 
 # Set working directory in the container
-WORKDIR /app/Backend
+WORKDIR /app
 
 # Copy package.json and package-lock.json for npm install
-COPY package.json .
-COPY package-lock.json .
+COPY package*.json .
 
 # Install dependencies
-RUN cd /app/Backend; \
-    npm install --production
+RUN npm install
 
 # Copy rest of the backend application
 COPY . .
@@ -19,4 +17,4 @@ COPY . .
 EXPOSE 5000
 
 # Command to run the backend server
-CMD ["node", "server.js"]
+CMD ["npm","run","dev"]
