@@ -12,14 +12,14 @@ export default function SortDropDown({expertise,setExpertise}:{expertise:string,
         onChange={(e)=>(setExpertise(e.target.value))}
         >
                 <MenuItem value="">None</MenuItem> 
-                <MenuItem value="Orthodontics">Orthodontics</MenuItem>
-                <MenuItem value="Prosthetic Dentistry">Prosthetic Dentistry</MenuItem>
-                <MenuItem value="Dental occultion">Dental occultion</MenuItem>
-                <MenuItem value="Oral and maxillofacial surgery">Oral and maxillofacial surgery</MenuItem>
-                <MenuItem value="Endodontics">Endodontics</MenuItem>
-                <MenuItem value="Pediatric Dentistry">Pediatric Dentistry</MenuItem>
-                <MenuItem value="Operative Dentistry">Operative Dentistry</MenuItem>
-                <MenuItem value="Periodontics">Periodontics</MenuItem>
+                <MenuItem value="Orthodontics">Orthodontics (จัดฟัน)</MenuItem>
+                <MenuItem value="Prosthetic Dentistry">Prosthetic Dentistry (ทันตกรรมประดิษฐ์)</MenuItem>
+                <MenuItem value="Dental occlusion">Dental occlusion (ทันตกรรมบดเคี้ยว)</MenuItem>
+                <MenuItem value="Oral and maxillofacial surgery">Oral and maxillofacial surgery (ศัลยกรรมช่องปากและใบหน้าขากรรไกร)</MenuItem>
+                <MenuItem value="Endodontics">Endodontics (การรักษารากฟัน)</MenuItem>
+                <MenuItem value="Pediatric Dentistry">Pediatric Dentistry (ทันตกรรมสำหรับเด็ก)</MenuItem>
+                <MenuItem value="Operative Dentistry">Operative Dentistry (อุดฟัน)</MenuItem>
+                <MenuItem value="Periodontics">Periodontics (ทันตกรรมโรคเหงือก)</MenuItem>
             </Select>
     )
 }

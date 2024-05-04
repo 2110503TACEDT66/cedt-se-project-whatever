@@ -18,7 +18,7 @@ export default function Banner() {
         <Link href="/dentists" style={{textDecoration:'none', fontSize:'20px'}} className='flex items-center h-12 border-2 rounded-lg border-cyan-500 w-28 shadow-lg
         justify-center bg-cyan-500 text-white hover:bg-cyan-600 hover:border-cyan-600 w-36 transition ease-in-out
         delay-150 hover:-translate-y-1 hover:scale-110 duration-300'>
-            <div className='text-2xl '>
+            <div className='text-2xl ' id='BookNow'>
               Book Now
             </div>
           </Link>}

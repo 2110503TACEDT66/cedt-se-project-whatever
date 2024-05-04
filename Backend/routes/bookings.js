@@ -1,4 +1,4 @@
-const express = require("express");
+const express = require('express');
 
 const {
   getBookings,
@@ -6,17 +6,17 @@ const {
   getBooking,
   updateBooking,
   deleteBooking,
-} = require("../controllers/bookings");
+} = require('../controllers/bookings');
 
 const router = express.Router({ mergeParams: true });
 
-const { protect, authorize } = require("../middleware/auth");
+const { protect, authorize } = require('../middleware/auth');
 
-router.route("/").get(protect, getBookings).post(protect, addBooking);
+router.route('/').get(protect, getBookings).post(protect, addBooking);
 router
-  .route("/:bookingId")
-  .get(protect, authorize("admin", "receptionist"), getBooking)
-  .post(protect, authorize("admin", "receptionist"), addBooking)
+  .route('/:bookingId')
+  .get(protect, authorize('admin', 'receptionist'), getBooking)
+  .post(protect, authorize('admin', 'receptionist'), addBooking)
   .put(protect, updateBooking)
   .delete(protect, deleteBooking);
 /**
@@ -79,7 +79,7 @@ router
  *         user:
  *            _id: 66251f2f8a1cd8e8bc178d81,
  *            name: bobo
- *         dentist: 
+ *         dentist:
  *            _id: 66309913a9c56ca4277c5ce2,
  *            startDate: 2024-04-30T00:00:00.000Z,
  *            endDate: 2024-04-30T01:00:00.000Z,
@@ -93,6 +93,7 @@ router
  *         symptom: a
  *         status: pending
  *         reqType: checkup
+ *         commented: false
  *         createdAt: 2024-04-23T05:39:14.907Z
  *         __v: 0
  *
@@ -120,11 +121,38 @@ router
  *       200:
  *         description: The list of the bookings
  *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Booking'
+ *         application/json: {
+ *           schema: {
+ *              $ref: '#/components/schemas/Booking'
+ *           },
+ *           examples: {
+                bookingExample : {
+                  value: {
+                     _id: 6630f8714bc0079598e56797,
+                    startDate: 2024-04-24T00:00:00.000Z,
+                    endDate: 2024-04-24T01:00:00.000Z,
+                    user: {
+                      _id: 66251f2f8a1cd8e8bc178d81,
+                      name: bobo
+                    },
+                    dentist: {
+                      _id: 6620b0d4efbbca938f669b71,
+                      name: Albert Instin,
+                      experience: 10",
+                      expertise: Prosthetic Dentistry,
+                      picture: https://source.unsplash.com/7bMdiIqz_J4,
+                      id: 6620b0d4efbbca938f669b71
+                    },
+                    symptom: a,
+                    status: pending,
+                    reqType: checkup,
+                    commented: false,
+                    createdAt: 2024-04-30T13:56:01.848Z,
+                    __v: 0
+                  }
+                }
+              }
+ *         }
  *       401:
  *         description: Not authorize to access this route
  *       500:
@@ -152,9 +180,38 @@ router
  *       200:
  *         description: The booking description by id
  *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Booking'
+ *         application/json: {
+ *           schema: {
+ *              $ref: '#/components/schemas/Booking'
+ *           },
+ *           examples: {
+                bookingExample : {
+                  value: {
+                     _id: 6630f8714bc0079598e56797,
+                    startDate: 2024-04-24T00:00:00.000Z,
+                    endDate: 2024-04-24T01:00:00.000Z,
+                    user: {
+                      _id: 66251f2f8a1cd8e8bc178d81,
+                      name: bobo
+                    },
+                    dentist: {
+                      _id: 6620b0d4efbbca938f669b71,
+                      name: Albert Instin,
+                      experience: 10",
+                      expertise: Prosthetic Dentistry,
+                      picture: https://source.unsplash.com/7bMdiIqz_J4,
+                      id: 6620b0d4efbbca938f669b71
+                    },
+                    symptom: a,
+                    status: pending,
+                    reqType: checkup,
+                    commented: false,
+                    createdAt: 2024-04-30T13:56:01.848Z,
+                    __v: 0
+                  }
+                }
+              }
+ *         }
  *       401:
  *         description: Not authorize to access this route
  *       403:
@@ -207,9 +264,38 @@ router
  *       201:
  *         description: The booking was successfully created
  *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Booking'
+ *         application/json: {
+ *           schema: {
+ *              $ref: '#/components/schemas/Booking'
+ *           },
+ *           examples: {
+                bookingExample : {
+                  value: {
+                     _id: 6630f8714bc0079598e56797,
+                    startDate: 2024-04-24T00:00:00.000Z,
+                    endDate: 2024-04-24T01:00:00.000Z,
+                    user: {
+                      _id: 66251f2f8a1cd8e8bc178d81,
+                      name: bobo
+                    },
+                    dentist: {
+                      _id: 6620b0d4efbbca938f669b71,
+                      name: Albert Instin,
+                      experience: 10",
+                      expertise: Prosthetic Dentistry,
+                      picture: https://source.unsplash.com/7bMdiIqz_J4,
+                      id: 6620b0d4efbbca938f669b71
+                    },
+                    symptom: a,
+                    status: pending,
+                    reqType: checkup,
+                    commented: false,
+                    createdAt: 2024-04-30T13:56:01.848Z,
+                    __v: 0
+                  }
+                }
+              }
+ *         }
  *       400:
  *         description: The user with ID provided has already booked
  *       401:
@@ -259,9 +345,38 @@ router
  *       201:
  *         description: The booking was successfully created
  *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Booking'
+ *         application/json: {
+ *           schema: {
+ *              $ref: '#/components/schemas/Booking'
+ *           },
+ *           examples: {
+                bookingExample : {
+                  value: {
+                     _id: 6630f8714bc0079598e56797,
+                    startDate: 2024-04-24T00:00:00.000Z,
+                    endDate: 2024-04-24T01:00:00.000Z,
+                    user: {
+                      _id: 66251f2f8a1cd8e8bc178d81,
+                      name: bobo
+                    },
+                    dentist: {
+                      _id: 6620b0d4efbbca938f669b71,
+                      name: Albert Instin,
+                      experience: 10",
+                      expertise: Prosthetic Dentistry,
+                      picture: https://source.unsplash.com/7bMdiIqz_J4,
+                      id: 6620b0d4efbbca938f669b71
+                    },
+                    symptom: a,
+                    status: pending,
+                    reqType: checkup,
+                    commented: false,
+                    createdAt: 2024-04-30T13:56:01.848Z,
+                    __v: 0
+                  }
+                }
+              }
+ *         }
  *       401:
  *         description: Not authorize to access this route
  *       403:
@@ -308,9 +423,38 @@ router
  *       200:
  *         description: The booking was updated
  *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Booking'
+*         application/json: {
+ *           schema: {
+ *              $ref: '#/components/schemas/Booking'
+ *           },
+ *           examples: {
+                bookingExample : {
+                  value: {
+                     _id: 6630f8714bc0079598e56797,
+                    startDate: 2024-04-24T00:00:00.000Z,
+                    endDate: 2024-04-24T01:00:00.000Z,
+                    user: {
+                      _id: 66251f2f8a1cd8e8bc178d81,
+                      name: bobo
+                    },
+                    dentist: {
+                      _id: 6620b0d4efbbca938f669b71,
+                      name: Albert Instin,
+                      experience: 10",
+                      expertise: Prosthetic Dentistry,
+                      picture: https://source.unsplash.com/7bMdiIqz_J4,
+                      id: 6620b0d4efbbca938f669b71
+                    },
+                    symptom: a,
+                    status: pending,
+                    reqType: checkup,
+                    commented: false,
+                    createdAt: 2024-04-30T13:56:01.848Z,
+                    __v: 0
+                  }
+                }
+              }
+ *         }
  *       401:
  *         description: Not authorize to access this route
  *       404:
@@ -340,6 +484,10 @@ router
  *     responses:
  *       200:
  *         description: The booking was deleted
+ *         content:
+ *          application/json:
+ *            schema:
+ *               type: object
  *       401:
  *         description: Not authorize to access this route
  *       404:
