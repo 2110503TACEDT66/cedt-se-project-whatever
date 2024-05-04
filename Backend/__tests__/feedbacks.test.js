@@ -2,6 +2,8 @@ const {
   getFeedbacks,
   getFeedback,
   addFeedback,
+  updateFeedback,
+  deletefeedback
 } = require('../controllers/feedbacks');
 const Feedback = require('../models/Feedback');
 const Dentist = require('../models/Dentist');
@@ -18,7 +20,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  jest.restoreAllMocks();
+  jest.clearAllMocks();
 });
 
 describe('getFeedbacks', () => {
@@ -45,7 +47,7 @@ describe('getFeedbacks', () => {
   });
 
   it('should return a feedback with the bookingId provided in the query', async () => {
-    req.query = { bookingId: '420' };
+    req.query = { booking: '420' };
 
     Feedback.find.mockResolvedValue([
       {
@@ -214,3 +216,182 @@ describe('addFeeedback', () => {
     });
   });
 });
+
+describe('updateFeedback function', () => {
+
+  it('shold update feedback', async () => {
+
+    Feedback.findById.mockResolvedValue({
+      _id : "111",
+      comment : "I want to be free",
+      user : "112",
+      rating : 5
+    })
+
+    Feedback.findByIdAndUpdate.mockResolvedValue({
+      _id : "111",
+      comment : "Nah forget it",
+      user : "112",
+      rating : 1
+    })
+
+    await updateFeedback(req,res,next);
+
+    expect(res.status).toBeCalledWith(200) ;
+    expect(res.json).toBeCalledWith({
+      success : true ,
+      data : {
+        _id : "111",
+        comment : "Nah forget it",
+        user : "112",
+        rating : 1
+      }
+    }) ;
+  });
+
+  it('shold response with 404 when feedback not found', async () => {
+    req.params = { feedbackId : "that will fail" } ;
+    req.user = { id : "555"}
+    Feedback.findById.mockResolvedValue(null)
+
+    Feedback.findByIdAndUpdate.mockResolvedValue({
+      _id : "111",
+      comment : "Nah forget it",
+      user : "112",
+      rating : 1
+    })
+
+    await updateFeedback(req,res,next);
+
+    expect(res.status).toBeCalledWith(404) ;
+    expect(res.json).toBeCalledWith({
+      success: false,
+      message: `No feedback with the id of ${req.params.feedbackId}`,
+    })
+  });
+
+  it('shold response with 401 when role is not user', async () => {
+    req.user = { role : "user" , id : "107"}
+    Feedback.findById.mockResolvedValue({
+      _id : "111",
+      comment : "I want to be free",
+      user : "112",
+      rating : 5
+    })
+
+    Feedback.findByIdAndUpdate.mockResolvedValue({
+      _id : "111",
+      comment : "Nah forget it",
+      user : "112",
+      rating : 1
+    })
+
+    await updateFeedback(req,res,next);
+
+    expect(res.status).toBeCalledWith(401) ;
+    expect(res.json).toBeCalledWith({
+      success: false,
+      message: `User ${req.user.id} is not authorized to update this feedback session`,
+    })
+  });
+
+  it('shold response with 500 req is missing', async () => {
+    Feedback.findById.mockResolvedValue([{
+      _id : "111",
+      comment : "I want to kk",
+      user : "112",
+      rating : 5
+    }])
+
+  
+    await updateFeedback(req,res,next);
+
+    expect(res.status).toBeCalledWith(500) ;
+    expect(res.json).toBeCalledWith({
+      success : false ,
+      message: 'Cannot update feedback Session'
+    })
+  });
+})
+
+describe('deleteFeedback function', () => {
+  it('shold delete feedback', async () => {
+    req.user = {
+      id : "12345678"
+    }
+    Feedback.findById.mockResolvedValue({
+      _id : "1987",
+      comment : "Are ya winning son",
+      user : "12345678",
+      rating : 5 ,
+      deleteOne : jest.fn().mockResolvedValue({})
+    })
+
+    await deletefeedback(req,res,next);
+
+    expect(res.status).toBeCalledWith(200) ;
+    expect(res.json).toBeCalledWith({
+      success : true ,
+      data : {}
+    }) ;
+  });
+
+  it('shold response with 404 when feedback not found', async () => {
+    req.params = { feedbackId : "Greatwall"}
+    
+    req.user = {
+      id : "12345678"
+    }
+    Feedback.findById.mockResolvedValue(null)
+    
+    await deletefeedback(req,res,next);
+
+    expect(res.status).toBeCalledWith(404) ;
+    expect(res.json).toBeCalledWith({
+      success: false,
+      message: `No feedback with the id of ${req.params.feedbackId}`
+    }) ;
+  });
+
+  it('shold response with 500 when something was missing', async () => {
+    req.user = {
+      id : "1112",
+      role : "Titan"
+    }
+    Feedback.findById.mockResolvedValue({
+      _id : "1987",
+      comment : "Are ya winning son",
+      user : "12345678",
+      rating : 5 ,
+      deleteOne : jest.fn().mockResolvedValue({})
+    })
+
+    await deletefeedback(req,res,next);
+
+    expect(res.status).toBeCalledWith(401) ;
+    expect(res.json).toBeCalledWith({
+      success: false,
+      message: `User ${req.user.id} is not authorized to delete this feedback`
+    }) ;
+  });
+
+  it('shold delete feedback', async () => {
+    req.user = {
+      id : "12345678"
+    }
+    Feedback.findById.mockResolvedValue({
+      _id : "1987",
+      comment : "Are ya winning son",
+      user : "12345678",
+      rating : 5 ,
+    })
+
+    await deletefeedback(req,res,next);
+
+    expect(res.status).toBeCalledWith(500) ;
+    expect(res.json).toBeCalledWith({
+      success: false, 
+      message: 'Cannot delete feedback'
+    }) ;
+  });
+})

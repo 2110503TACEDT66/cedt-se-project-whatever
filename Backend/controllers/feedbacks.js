@@ -66,6 +66,7 @@ exports.getFeedback = async (req, res, next) => {
       data: feedback,
     });
   } catch (error) {
+    console.log(error);
     return res
       .status(500)
       .json({ success: false, message: 'Cannot find feedback' });
@@ -136,6 +137,7 @@ exports.updateFeedback = async (req, res, next) => {
 
     res.status(200).json({ success: true, data: feedback });
   } catch (error) {
+    console.log(error);
     res
       .status(500)
       .json({ success: false, message: 'Cannot update feedback Session' });
@@ -172,6 +174,7 @@ exports.deletefeedback = async (req, res, next) => {
 
     res.status(200).json({ success: true, data: {} });
   } catch (error) {
+    console.log(error);
     return res
       .status(500)
       .json({ success: false, message: 'Cannot delete feedback' });
