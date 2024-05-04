@@ -1,7 +1,13 @@
-const { getFeedbacks, getFeedback } = require('../controllers/feedbacks');
+const {
+  getFeedbacks,
+  getFeedback,
+  addFeedback,
+} = require('../controllers/feedbacks');
 const Feedback = require('../models/Feedback');
+const Dentist = require('../models/Dentist');
 
 jest.mock('../models/Feedback');
+jest.mock('../models/Dentist');
 
 let req;
 const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
@@ -136,6 +142,75 @@ describe('getFeeedback', () => {
     expect(res.json).toBeCalledWith({
       success: false,
       message: 'Cannot find feedback',
+    });
+  });
+});
+
+describe('addFeeedback', () => {
+  it('should return a created feedback', async () => {
+    req.params = { dentistId: '112' };
+    req.user = { id: '000999abf345612388765432', name: 'Icegoo141' };
+    Dentist.findById.mockResolvedValue([
+      {
+        _id: '112',
+        name: 'Sans the Skeleton',
+      },
+    ]);
+    Feedback.create.mockResolvedValue({
+      _id: 500,
+      dentist: '112',
+      user: '000999abf345612388765432',
+      symptom: 'help doc',
+      status: 'pending',
+      reqType: 'checkup',
+    });
+
+    await addFeedback(req, res, next);
+
+    expect(res.status).toBeCalledWith(200);
+    expect(res.json).toBeCalledWith({
+      success: true,
+      data: {
+        _id: 500,
+        dentist: '112',
+        user: '000999abf345612388765432',
+        symptom: 'help doc',
+        status: 'pending',
+        reqType: 'checkup',
+      },
+    });
+  });
+
+  it('should response with status code 404 when there is no dentist with the id provided', async () => {
+    req.params = { dentistId: '123' };
+    Dentist.findById.mockResolvedValue(null);
+
+    await addFeedback(req, res, next);
+
+    expect(res.status).toBeCalledWith(404);
+    expect(res.json).toBeCalledWith({
+      success: false,
+      message: 'No dentist with the id of 123',
+    });
+  });
+
+  it('should response with status code 500 when something goes wrong', async () => {
+    req.params = { dentistId: '112' };
+    req.user = { id: '000999abf345612388765432', name: 'Icegoo141' };
+    Dentist.findById.mockResolvedValue([
+      {
+        _id: '112',
+        name: 'Sans the Skeleton',
+      },
+    ]);
+    Feedback.create.mockRejectedValue(new Error('Server down'));
+
+    await addFeedback(req, res, next);
+
+    expect(res.status).toBeCalledWith(500);
+    expect(res.json).toBeCalledWith({
+      success: false,
+      message: 'Cannot add feedback',
     });
   });
 });
