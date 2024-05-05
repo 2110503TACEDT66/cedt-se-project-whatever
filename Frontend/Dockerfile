@@ -2,15 +2,13 @@
 FROM node:20.6.0
 
 # Set working directory in the container
-WORKDIR /app/Frontend
+WORKDIR /app
 
 # Copy package.json and package-lock.json for npm install
-COPY package.json .
-COPY package-lock.json .
+COPY package*.json .
 
 # Install dependencies
-RUN cd /app/Frontend; \
-    npm install --production
+RUN npm install
 
 # Copy the rest of the frontend application
 COPY . .

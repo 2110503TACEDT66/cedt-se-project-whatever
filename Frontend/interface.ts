@@ -5,6 +5,7 @@ interface DentistItem {
   experience: number;
   expertise: string;
   bookings: BookingItem[];
+  averageRating: number;
 }
 
 interface OneDentistJson {

@@ -3,8 +3,17 @@ import { revalidateTag } from 'next/cache';
 
 export default async function updateBooking(
   id: string,
-  symptom: string,
-  token: string
+  token: string,
+  body: {
+    startDate?: string;
+    endDate?: string;
+    user?: string;
+    dentist?: string;
+    symptom?: string;
+    status?: string;
+    reqType?: string;
+    createdAt?: string;
+  }
 ) {
   const response = await fetch(
     `${process.env.BACKEND_URL}/api/v1/bookings/${id}`,
@@ -14,14 +23,11 @@ export default async function updateBooking(
         authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        symptom : symptom,
-      }),
+      body: JSON.stringify(body),
     }
   );
   if (!response.ok) {
     throw new Error('Failed to update booking');
-    console.log(response)
   }
   revalidateTag('booking');
   return await response.json();

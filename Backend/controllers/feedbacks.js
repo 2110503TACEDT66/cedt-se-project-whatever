@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 //@desc     Get all feedbacks
 //@route    GET /api/v1/feedbacks
-//@access   Private
+//@access   public
 exports.getFeedbacks = async (req, res, next) => {
   let query;
   let avgRating; // Declaring avgRating outside the if block

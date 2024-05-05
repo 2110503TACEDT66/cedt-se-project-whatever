@@ -1,4 +1,5 @@
-const Dentist = require("../models/Dentist");
+const Dentist = require('../models/Dentist');
+const Feedback = require('../models/Feedback');
 
 //@desc     Get all dentists
 //@route    GET /api/v1/dentists
@@ -10,7 +11,7 @@ exports.getDentists = async (req, res, next) => {
   const reqQuery = { ...req.query };
 
   //Fields to exclude
-  const removeFields = ["select", "sort", "page", "limit"];
+  const removeFields = ['select', 'sort', 'page', 'limit'];
 
   //Loop over remove fields and delete them from reqQuery
   removeFields.forEach((param) => delete reqQuery[param]);
@@ -24,19 +25,19 @@ exports.getDentists = async (req, res, next) => {
   );
 
   //finding resource
-  query = Dentist.find(JSON.parse(queryStr)).populate("bookings");
+  query = Dentist.find(JSON.parse(queryStr)).populate('bookings');
 
   //Select Fields
   if (req.query.select) {
-    const fields = req.query.select.split(",").join(" ");
+    const fields = req.query.select.split(',').join(' ');
     query = query.select(fields);
   }
   //Sort
   if (req.query.sort) {
-    const sortBy = req.query.sort.split(",").join(" ");
+    const sortBy = req.query.sort.split(',').join(' ');
     query = query.sort(sortBy);
   } else {
-    query = query.sort("name");
+    query = query.sort('name');
   }
 
   //Pagination
@@ -51,6 +52,41 @@ exports.getDentists = async (req, res, next) => {
 
     //Executing query
     const dentists = await query;
+    // Fetch average ratings for each dentist
+    const dentistIds = dentists.map((dentist) => dentist._id);
+    const avgRatings = await Promise.all(
+      dentistIds.map(async (dentistId) => {
+        const avgRating = await Feedback.aggregate([
+          {
+            $match: { dentist: dentistId },
+          },
+          {
+            $group: {
+              _id: null,
+              averageRating: { $avg: '$rating' },
+            },
+          },
+        ]);
+        return {
+          dentistId,
+          averageRating:
+            avgRating && avgRating[0] ? avgRating[0].averageRating : null,
+        };
+      })
+    );
+
+    // Create a map of dentistId to average rating for quick lookup
+    const avgRatingsMap = avgRatings.reduce((acc, curr) => {
+      acc[curr.dentistId] = curr.averageRating;
+      return acc;
+    }, {});
+
+    // Attach average rating to each dentist
+    const dentistsWithAvgRating = dentists.map((dentist) => ({
+      ...dentist.toObject(),
+      averageRating: avgRatingsMap[dentist._id], // =====
+    }));
+
     //Pagination result
     const pagination = {};
 
@@ -70,9 +106,9 @@ exports.getDentists = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      count: dentists.length,
+      count: dentistsWithAvgRating.length,
       pagination,
-      data: dentists,
+      data: dentistsWithAvgRating,
     });
   } catch (err) {
     res.status(400).json({ success: false });
