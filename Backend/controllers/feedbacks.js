@@ -1,6 +1,6 @@
-const Dentist = require("../models/Dentist");
-const Feedback = require("../models/Feedback");
-const mongoose = require("mongoose");
+const Dentist = require('../models/Dentist');
+const Feedback = require('../models/Feedback');
+const mongoose = require('mongoose');
 
 //@desc     Get all feedbacks
 //@route    GET /api/v1/feedbacks
@@ -18,7 +18,7 @@ exports.getFeedbacks = async (req, res, next) => {
       {
         $group: {
           _id: null,
-          averageRating: { $avg: "$rating" },
+          averageRating: { $avg: '$rating' },
         },
       },
     ]);
@@ -32,13 +32,6 @@ exports.getFeedbacks = async (req, res, next) => {
 
   try {
     const feedbacks = await query;
-    console.log({
-      success: true,
-      count: feedbacks.length,
-      averageRating:
-        avgRating && avgRating[0] ? avgRating[0].averageRating : null, // Conditional check for avgRating
-      data: feedbacks,
-    });
 
     res.status(200).json({
       success: true,
@@ -50,7 +43,7 @@ exports.getFeedbacks = async (req, res, next) => {
   } catch (err) {
     return res
       .status(500)
-      .json({ success: false, message: "Cannot find feedbacks" });
+      .json({ success: false, message: 'Cannot find feedbacks' });
   }
 };
 
@@ -76,7 +69,7 @@ exports.getFeedback = async (req, res, next) => {
     console.log(error);
     return res
       .status(500)
-      .json({ success: false, message: "Cannot find feedback" });
+      .json({ success: false, message: 'Cannot find feedback' });
   }
 };
 
@@ -107,7 +100,7 @@ exports.addFeedback = async (req, res, next) => {
   } catch (error) {
     return res
       .status(500)
-      .json({ success: false, message: "Cannot add feedback" });
+      .json({ success: false, message: 'Cannot add feedback' });
   }
 };
 
@@ -126,7 +119,7 @@ exports.updateFeedback = async (req, res, next) => {
     }
 
     //Make sure user is the feedback owner
-    if (feedback.user.toString() !== req.user.id && req.user.role === "user") {
+    if (feedback.user.toString() !== req.user.id && req.user.role === 'user') {
       return res.status(401).json({
         success: false,
         message: `User ${req.user.id} is not authorized to update this feedback session`,
@@ -147,7 +140,7 @@ exports.updateFeedback = async (req, res, next) => {
     console.log(error);
     res
       .status(500)
-      .json({ success: false, message: "Cannot update feedback Session" });
+      .json({ success: false, message: 'Cannot update feedback Session' });
   }
 };
 
@@ -168,8 +161,8 @@ exports.deletefeedback = async (req, res, next) => {
     //Make sure user is the feedback owner
     if (
       feedback.user.toString() !== req.user.id &&
-      req.user.role !== "admin" &&
-      req.user.role !== "receptionist"
+      req.user.role !== 'admin' &&
+      req.user.role !== 'receptionist'
     ) {
       return res.status(401).json({
         success: false,
@@ -184,6 +177,6 @@ exports.deletefeedback = async (req, res, next) => {
     console.log(error);
     return res
       .status(500)
-      .json({ success: false, message: "Cannot delete feedback" });
+      .json({ success: false, message: 'Cannot delete feedback' });
   }
 };
